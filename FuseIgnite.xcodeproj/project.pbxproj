@@ -285,6 +285,7 @@
 				TargetAttributes = {
 					656F44681BB20F1A00CB671C = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = CK7MZ3BMX3;
 					};
 					656F447C1BB20F1A00CB671C = {
 						CreatedOnToolsVersion = 7.0;
@@ -492,6 +493,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FuseIgnite",
@@ -508,6 +510,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FuseIgnite",
