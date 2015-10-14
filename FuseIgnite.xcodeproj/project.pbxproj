@@ -36,6 +36,7 @@
 		657705EF1BBEFCF500F84456 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 657705EE1BBEFCF500F84456 /* libsqlite3.tbd */; };
 		657705F11BBEFD0000F84456 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657705F01BBEFD0000F84456 /* Accounts.framework */; };
 		657705F31BBEFD0A00F84456 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657705F21BBEFD0A00F84456 /* Social.framework */; };
+		65795FDC1BCEFE9C0062C651 /* EventHomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65795FDB1BCEFE9C0062C651 /* EventHomeTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		657705EE1BBEFCF500F84456 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		657705F01BBEFD0000F84456 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		657705F21BBEFD0A00F84456 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		65795FDB1BCEFE9C0062C651 /* EventHomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHomeTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,15 +189,12 @@
 		656F446B1BB20F1A00CB671C /* FuseIgnite */ = {
 			isa = PBXGroup;
 			children = (
+				65795FDF1BCF014B0062C651 /* Model */,
+				65795FDE1BCF00C10062C651 /* Controller */,
+				65795FDD1BCF00B20062C651 /* View */,
 				656F446C1BB20F1A00CB671C /* AppDelegate.swift */,
-				656F446E1BB20F1A00CB671C /* ViewController.swift */,
-				656F44701BB20F1A00CB671C /* Main.storyboard */,
 				656F44731BB20F1A00CB671C /* Assets.xcassets */,
-				656F44751BB20F1A00CB671C /* LaunchScreen.storyboard */,
 				656F44781BB20F1A00CB671C /* Info.plist */,
-				657705CE1BBEFB2F00F84456 /* LoginController.swift */,
-				656439031BC5A1FF00D0B6FB /* RegisterController.swift */,
-				656439051BC5AD6000D0B6FB /* EventHomeController.swift */,
 			);
 			path = FuseIgnite;
 			sourceTree = "<group>";
@@ -216,6 +215,34 @@
 				656F448E1BB20F1A00CB671C /* Info.plist */,
 			);
 			path = FuseIgniteUITests;
+			sourceTree = "<group>";
+		};
+		65795FDD1BCF00B20062C651 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				656F44751BB20F1A00CB671C /* LaunchScreen.storyboard */,
+				656F44701BB20F1A00CB671C /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		65795FDE1BCF00C10062C651 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				656F446E1BB20F1A00CB671C /* ViewController.swift */,
+				656439051BC5AD6000D0B6FB /* EventHomeController.swift */,
+				657705CE1BBEFB2F00F84456 /* LoginController.swift */,
+				656439031BC5A1FF00D0B6FB /* RegisterController.swift */,
+				65795FDB1BCEFE9C0062C651 /* EventHomeTableViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		65795FDF1BCF014B0062C651 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,6 +379,7 @@
 				656439041BC5A1FF00D0B6FB /* RegisterController.swift in Sources */,
 				656F446F1BB20F1A00CB671C /* ViewController.swift in Sources */,
 				656F446D1BB20F1A00CB671C /* AppDelegate.swift in Sources */,
+				65795FDC1BCEFE9C0062C651 /* EventHomeTableViewController.swift in Sources */,
 				657705CF1BBEFB2F00F84456 /* LoginController.swift in Sources */,
 				656439061BC5AD6000D0B6FB /* EventHomeController.swift in Sources */,
 			);

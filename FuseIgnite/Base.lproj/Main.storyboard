@@ -395,7 +395,6 @@
         <!--Home-->
         <scene sceneID="gO2-2v-Bye">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pQP-8m-FBg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="Home" id="6Ge-sY-OUD" customClass="EventHomeController" customModule="FuseIgnite" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Bxf-0W-bUO"/>
@@ -532,6 +531,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedTopBarMetrics"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pQP-8m-FBg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="521" y="16"/>
         </scene>
