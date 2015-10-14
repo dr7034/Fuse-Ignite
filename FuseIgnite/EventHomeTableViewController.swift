@@ -11,17 +11,5 @@ import Parse
 
 class EventHomeTableViewController: PFQueryTableViewController {
     
-    // Initialise the PFQueryTable tableview
-    override init!(style: UITableViewStyle, className: String!) {
-        super.init(style: style, className: className)
-    }
-    
-    required init(coder aDecoder:NSCoder) {
-        super.init(coder: aDecoder)
-        
-        //Configure the PFQueryTableView
-        self.parseClassName = "EventHomeController"
-        
-    })
     
 }
