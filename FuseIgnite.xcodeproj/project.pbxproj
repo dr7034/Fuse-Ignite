@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		656438FC1BC5A00E00D0B6FB /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656438F51BC5A00E00D0B6FB /* Bolts.framework */; };
-		656438FD1BC5A00E00D0B6FB /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656438F61BC5A00E00D0B6FB /* Parse.framework */; };
-		656438FE1BC5A00E00D0B6FB /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656438F71BC5A00E00D0B6FB /* ParseCrashReporting.framework */; };
-		656438FF1BC5A00E00D0B6FB /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656438F81BC5A00E00D0B6FB /* ParseFacebookUtils.framework */; };
-		656439001BC5A00E00D0B6FB /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656438F91BC5A00E00D0B6FB /* ParseFacebookUtilsV4.framework */; };
-		656439011BC5A00E00D0B6FB /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656438FA1BC5A00E00D0B6FB /* ParseTwitterUtils.framework */; };
-		656439021BC5A00E00D0B6FB /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656438FB1BC5A00E00D0B6FB /* ParseUI.framework */; };
+		656397931BE0250200E01A90 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6563978C1BE0250200E01A90 /* Bolts.framework */; };
+		656397941BE0250200E01A90 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6563978D1BE0250200E01A90 /* Parse.framework */; };
+		656397951BE0250200E01A90 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6563978E1BE0250200E01A90 /* ParseCrashReporting.framework */; };
+		656397961BE0250200E01A90 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6563978F1BE0250200E01A90 /* ParseFacebookUtils.framework */; };
+		656397971BE0250200E01A90 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656397901BE0250200E01A90 /* ParseFacebookUtilsV4.framework */; };
+		656397981BE0250200E01A90 /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656397911BE0250200E01A90 /* ParseTwitterUtils.framework */; };
+		656397991BE0250200E01A90 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656397921BE0250200E01A90 /* ParseUI.framework */; };
 		656439041BC5A1FF00D0B6FB /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656439031BC5A1FF00D0B6FB /* RegisterController.swift */; settings = {ASSET_TAGS = (); }; };
 		656439061BC5AD6000D0B6FB /* EventHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656439051BC5AD6000D0B6FB /* EventHomeController.swift */; settings = {ASSET_TAGS = (); }; };
 		656F446D1BB20F1A00CB671C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F446C1BB20F1A00CB671C /* AppDelegate.swift */; };
@@ -36,7 +36,6 @@
 		657705EF1BBEFCF500F84456 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 657705EE1BBEFCF500F84456 /* libsqlite3.tbd */; };
 		657705F11BBEFD0000F84456 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657705F01BBEFD0000F84456 /* Accounts.framework */; };
 		657705F31BBEFD0A00F84456 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657705F21BBEFD0A00F84456 /* Social.framework */; };
-		65795FDC1BCEFE9C0062C651 /* EventHomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65795FDB1BCEFE9C0062C651 /* EventHomeTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,13 +56,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		656438F51BC5A00E00D0B6FB /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
-		656438F61BC5A00E00D0B6FB /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Frameworks/Parse.framework; sourceTree = "<group>"; };
-		656438F71BC5A00E00D0B6FB /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = Frameworks/ParseCrashReporting.framework; sourceTree = "<group>"; };
-		656438F81BC5A00E00D0B6FB /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = Frameworks/ParseFacebookUtils.framework; sourceTree = "<group>"; };
-		656438F91BC5A00E00D0B6FB /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtilsV4.framework; path = Frameworks/ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
-		656438FA1BC5A00E00D0B6FB /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseTwitterUtils.framework; path = Frameworks/ParseTwitterUtils.framework; sourceTree = "<group>"; };
-		656438FB1BC5A00E00D0B6FB /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = Frameworks/ParseUI.framework; sourceTree = "<group>"; };
+		6563978C1BE0250200E01A90 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = FuseIgnite/Frameworks/Bolts.framework; sourceTree = "<group>"; };
+		6563978D1BE0250200E01A90 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = FuseIgnite/Frameworks/Parse.framework; sourceTree = "<group>"; };
+		6563978E1BE0250200E01A90 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = FuseIgnite/Frameworks/ParseCrashReporting.framework; sourceTree = "<group>"; };
+		6563978F1BE0250200E01A90 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = FuseIgnite/Frameworks/ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		656397901BE0250200E01A90 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtilsV4.framework; path = FuseIgnite/Frameworks/ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
+		656397911BE0250200E01A90 /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseTwitterUtils.framework; path = FuseIgnite/Frameworks/ParseTwitterUtils.framework; sourceTree = "<group>"; };
+		656397921BE0250200E01A90 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = FuseIgnite/Frameworks/ParseUI.framework; sourceTree = "<group>"; };
 		656439031BC5A1FF00D0B6FB /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		656439051BC5AD6000D0B6FB /* EventHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHomeController.swift; sourceTree = "<group>"; };
 		656F44691BB20F1A00CB671C /* FuseIgnite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FuseIgnite.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,7 +91,6 @@
 		657705EE1BBEFCF500F84456 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		657705F01BBEFD0000F84456 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		657705F21BBEFD0A00F84456 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		65795FDB1BCEFE9C0062C651 /* EventHomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHomeTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,13 +98,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				656438FC1BC5A00E00D0B6FB /* Bolts.framework in Frameworks */,
-				656438FD1BC5A00E00D0B6FB /* Parse.framework in Frameworks */,
-				656438FE1BC5A00E00D0B6FB /* ParseCrashReporting.framework in Frameworks */,
-				656438FF1BC5A00E00D0B6FB /* ParseFacebookUtils.framework in Frameworks */,
-				656439001BC5A00E00D0B6FB /* ParseFacebookUtilsV4.framework in Frameworks */,
-				656439011BC5A00E00D0B6FB /* ParseTwitterUtils.framework in Frameworks */,
-				656439021BC5A00E00D0B6FB /* ParseUI.framework in Frameworks */,
+				656397931BE0250200E01A90 /* Bolts.framework in Frameworks */,
+				656397941BE0250200E01A90 /* Parse.framework in Frameworks */,
+				656397951BE0250200E01A90 /* ParseCrashReporting.framework in Frameworks */,
+				656397961BE0250200E01A90 /* ParseFacebookUtils.framework in Frameworks */,
+				656397971BE0250200E01A90 /* ParseFacebookUtilsV4.framework in Frameworks */,
+				656397981BE0250200E01A90 /* ParseTwitterUtils.framework in Frameworks */,
+				656397991BE0250200E01A90 /* ParseUI.framework in Frameworks */,
 				657705F31BBEFD0A00F84456 /* Social.framework in Frameworks */,
 				657705F11BBEFD0000F84456 /* Accounts.framework in Frameworks */,
 				657705EF1BBEFCF500F84456 /* libsqlite3.tbd in Frameworks */,
@@ -142,13 +140,13 @@
 		656438F41BC59E3B00D0B6FB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				656438F51BC5A00E00D0B6FB /* Bolts.framework */,
-				656438F61BC5A00E00D0B6FB /* Parse.framework */,
-				656438F71BC5A00E00D0B6FB /* ParseCrashReporting.framework */,
-				656438F81BC5A00E00D0B6FB /* ParseFacebookUtils.framework */,
-				656438F91BC5A00E00D0B6FB /* ParseFacebookUtilsV4.framework */,
-				656438FA1BC5A00E00D0B6FB /* ParseTwitterUtils.framework */,
-				656438FB1BC5A00E00D0B6FB /* ParseUI.framework */,
+				6563978C1BE0250200E01A90 /* Bolts.framework */,
+				6563978D1BE0250200E01A90 /* Parse.framework */,
+				6563978E1BE0250200E01A90 /* ParseCrashReporting.framework */,
+				6563978F1BE0250200E01A90 /* ParseFacebookUtils.framework */,
+				656397901BE0250200E01A90 /* ParseFacebookUtilsV4.framework */,
+				656397911BE0250200E01A90 /* ParseTwitterUtils.framework */,
+				656397921BE0250200E01A90 /* ParseUI.framework */,
 				657705EC1BBEFCDC00F84456 /* libz.tbd */,
 				657705EA1BBEFCCB00F84456 /* SystemConfiguration.framework */,
 				657705E81BBEFCBF00F84456 /* StoreKit.framework */,
@@ -233,7 +231,6 @@
 				656439051BC5AD6000D0B6FB /* EventHomeController.swift */,
 				657705CE1BBEFB2F00F84456 /* LoginController.swift */,
 				656439031BC5A1FF00D0B6FB /* RegisterController.swift */,
-				65795FDB1BCEFE9C0062C651 /* EventHomeTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -379,7 +376,6 @@
 				656439041BC5A1FF00D0B6FB /* RegisterController.swift in Sources */,
 				656F446F1BB20F1A00CB671C /* ViewController.swift in Sources */,
 				656F446D1BB20F1A00CB671C /* AppDelegate.swift in Sources */,
-				65795FDC1BCEFE9C0062C651 /* EventHomeTableViewController.swift in Sources */,
 				657705CF1BBEFB2F00F84456 /* LoginController.swift in Sources */,
 				656439061BC5AD6000D0B6FB /* EventHomeController.swift in Sources */,
 			);
@@ -526,6 +522,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FuseIgnite",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/FuseIgnite/Frameworks",
 				);
 				INFOPLIST_FILE = FuseIgnite/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -543,6 +540,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FuseIgnite",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/FuseIgnite/Frameworks",
 				);
 				INFOPLIST_FILE = FuseIgnite/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
