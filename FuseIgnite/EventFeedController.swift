@@ -10,7 +10,7 @@ import Foundation
 import Parse
 import UIKit
 
-class EventHomeController: UIViewController {
+class HomeController: UIViewController {
 
     
     

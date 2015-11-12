@@ -15,7 +15,7 @@
 		656397981BE0250200E01A90 /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656397911BE0250200E01A90 /* ParseTwitterUtils.framework */; };
 		656397991BE0250200E01A90 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656397921BE0250200E01A90 /* ParseUI.framework */; };
 		656439041BC5A1FF00D0B6FB /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656439031BC5A1FF00D0B6FB /* RegisterController.swift */; settings = {ASSET_TAGS = (); }; };
-		656439061BC5AD6000D0B6FB /* EventHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656439051BC5AD6000D0B6FB /* EventHomeController.swift */; settings = {ASSET_TAGS = (); }; };
+		656439061BC5AD6000D0B6FB /* EventFeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656439051BC5AD6000D0B6FB /* EventFeedController.swift */; settings = {ASSET_TAGS = (); }; };
 		656F446D1BB20F1A00CB671C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F446C1BB20F1A00CB671C /* AppDelegate.swift */; };
 		656F446F1BB20F1A00CB671C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F446E1BB20F1A00CB671C /* ViewController.swift */; };
 		656F44721BB20F1A00CB671C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 656F44701BB20F1A00CB671C /* Main.storyboard */; };
@@ -64,7 +64,7 @@
 		656397911BE0250200E01A90 /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseTwitterUtils.framework; path = FuseIgnite/Frameworks/ParseTwitterUtils.framework; sourceTree = "<group>"; };
 		656397921BE0250200E01A90 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = FuseIgnite/Frameworks/ParseUI.framework; sourceTree = "<group>"; };
 		656439031BC5A1FF00D0B6FB /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
-		656439051BC5AD6000D0B6FB /* EventHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHomeController.swift; sourceTree = "<group>"; };
+		656439051BC5AD6000D0B6FB /* EventFeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFeedController.swift; sourceTree = "<group>"; };
 		656F44691BB20F1A00CB671C /* FuseIgnite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FuseIgnite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		656F446C1BB20F1A00CB671C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		656F446E1BB20F1A00CB671C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -228,7 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				656F446E1BB20F1A00CB671C /* ViewController.swift */,
-				656439051BC5AD6000D0B6FB /* EventHomeController.swift */,
+				656439051BC5AD6000D0B6FB /* EventFeedController.swift */,
 				657705CE1BBEFB2F00F84456 /* LoginController.swift */,
 				656439031BC5A1FF00D0B6FB /* RegisterController.swift */,
 			);
@@ -377,7 +377,7 @@
 				656F446F1BB20F1A00CB671C /* ViewController.swift in Sources */,
 				656F446D1BB20F1A00CB671C /* AppDelegate.swift in Sources */,
 				657705CF1BBEFB2F00F84456 /* LoginController.swift in Sources */,
-				656439061BC5AD6000D0B6FB /* EventHomeController.swift in Sources */,
+				656439061BC5AD6000D0B6FB /* EventFeedController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
