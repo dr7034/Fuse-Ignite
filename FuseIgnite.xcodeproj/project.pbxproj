@@ -38,6 +38,7 @@
 		65800D891C189905008A7595 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65800D821C189905008A7595 /* ParseUI.framework */; };
 		65800D8F1C18A264008A7595 /* EstimoteSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65800D8C1C18A264008A7595 /* EstimoteSDK.framework */; };
 		65800D901C18A264008A7595 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65800D8E1C18A264008A7595 /* SWRevealViewController.m */; };
+		65800D921C18B00E008A7595 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65800D911C18B00E008A7595 /* MenuController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		65800D8C1C18A264008A7595 /* EstimoteSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EstimoteSDK.framework; path = Frameworks/EstimoteSDK.framework; sourceTree = SOURCE_ROOT; };
 		65800D8D1C18A264008A7595 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = Frameworks/SWRevealViewController.h; sourceTree = SOURCE_ROOT; };
 		65800D8E1C18A264008A7595 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = Frameworks/SWRevealViewController.m; sourceTree = SOURCE_ROOT; };
+		65800D911C18B00E008A7595 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 				656439051BC5AD6000D0B6FB /* EventFeedViewController.swift */,
 				657705CE1BBEFB2F00F84456 /* LoginController.swift */,
 				656439031BC5A1FF00D0B6FB /* RegisterController.swift */,
+				65800D911C18B00E008A7595 /* MenuController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65800D901C18A264008A7595 /* SWRevealViewController.m in Sources */,
+				65800D921C18B00E008A7595 /* MenuController.swift in Sources */,
 				656439041BC5A1FF00D0B6FB /* RegisterController.swift in Sources */,
 				656F446F1BB20F1A00CB671C /* ViewController.swift in Sources */,
 				656F446D1BB20F1A00CB671C /* AppDelegate.swift in Sources */,
