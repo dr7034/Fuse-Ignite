@@ -2293,7 +2293,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headerContacts" translatesAutoresizingMaskIntoConstraints="NO" id="fah-Cl-iRY">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contactsHeader" translatesAutoresizingMaskIntoConstraints="NO" id="fah-Cl-iRY">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="218"/>
                                 <animations/>
                             </imageView>
@@ -3081,12 +3081,12 @@
         <image name="add" width="124" height="124"/>
         <image name="avatar" width="200" height="200"/>
         <image name="button" width="650" height="110"/>
+        <image name="contactsHeader" width="750" height="386"/>
         <image name="createheader" width="750" height="332"/>
         <image name="eventheader" width="750" height="375"/>
         <image name="fi" width="356" height="395"/>
         <image name="header" width="750" height="486"/>
         <image name="header bg" width="750" height="488"/>
-        <image name="headerContacts" width="750" height="386"/>
         <image name="headercal" width="750" height="799"/>
         <image name="leftwhite" width="12" height="22"/>
         <image name="line" width="652" height="2"/>
