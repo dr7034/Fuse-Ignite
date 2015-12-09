@@ -549,7 +549,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FuseIgnite",
 					"$(PROJECT_DIR)/Frameworks",
-					"$(PROJECT_DIR)/FuseIgnite/Frameworks",
 				);
 				INFOPLIST_FILE = FuseIgnite/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -571,7 +570,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FuseIgnite",
 					"$(PROJECT_DIR)/Frameworks",
-					"$(PROJECT_DIR)/FuseIgnite/Frameworks",
 				);
 				INFOPLIST_FILE = FuseIgnite/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
