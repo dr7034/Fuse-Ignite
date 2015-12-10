@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        func ParseAppID() {
+        
         // Override point for customization after application launch.
         Parse.enableLocalDatastore()
         
@@ -27,7 +30,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // [Optional] Track statistics around application opens.
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
-        
+    }
+    
+        func NavigationDrawer() -> Bool {
+            
+            var centerContainer: MMDrawerController?
+            
+                // Override point for customization after application launch.
+                _ = self.window!.rootViewController
+                
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                
+                let centerViewController = mainStoryboard.instantiateViewControllerWithIdentifier("EventFeedViewController") as! ViewController
+                
+                let leftViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LeftSideViewController")as! LeftSideViewController
+                
+                
+                let leftSideNav = UINavigationController(rootViewController: leftViewController)
+                let centerNav = UINavigationController(rootViewController: centerViewController)
+                
+                centerContainer = MMDrawerController(centerViewController: centerNav, leftDrawerViewController: leftSideNav)
+                
+                centerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView;
+                centerContainer!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView;
+                
+                window!.rootViewController = centerContainer
+                window!.makeKeyAndVisible()
+                
+                return true
+            }
         return true
     }
 

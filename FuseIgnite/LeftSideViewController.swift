@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MenuController: UITableViewController {
+class LeftSideViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
