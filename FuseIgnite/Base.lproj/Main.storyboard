@@ -503,7 +503,7 @@
         <!--Table View Controller-->
         <scene sceneID="YMd-db-icc">
             <objects>
-                <tableViewController id="2ej-nI-628" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SideDrawerController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2ej-nI-628" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="z3u-39-Iqb">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -682,7 +682,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cLs-ex-IwA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2746" y="-2363"/>
+            <point key="canvasLocation" x="-2756" y="-2364"/>
         </scene>
         <!--Events Near Me-->
         <scene sceneID="nnE-Qc-utu">
@@ -858,7 +858,7 @@
         <!--Navigation Controller-->
         <scene sceneID="9qr-37-u21">
             <objects>
-                <navigationController id="j9F-dj-oSk" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FourthTopViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="j9F-dj-oSk" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4r1-qD-ysM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -969,7 +969,7 @@
         <!--Navigation Controller-->
         <scene sceneID="G8i-zT-Onh">
             <objects>
-                <navigationController id="t1h-L6-itU" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SecondTopViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="t1h-L6-itU" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LCy-7J-acF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -982,7 +982,7 @@
         <!--Navigation Controller-->
         <scene sceneID="uJn-p9-idV">
             <objects>
-                <navigationController id="TvV-Y9-YsU" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ThirdTopViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TvV-Y9-YsU" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gta-GX-RdS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2057,7 +2057,7 @@
         <!--Navigation Controller-->
         <scene sceneID="w7C-W7-0dh">
             <objects>
-                <navigationController id="VVU-ca-P2B" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FifthTopViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VVU-ca-P2B" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xzu-Zh-XSA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2070,7 +2070,7 @@
         <!--Navigation Controller-->
         <scene sceneID="LFa-hB-QGa">
             <objects>
-                <navigationController id="bFT-dh-bUx" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SixthTopViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bFT-dh-bUx" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kLl-xL-dH8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2272,7 +2272,7 @@
         <!--Navigation Controller-->
         <scene sceneID="K3S-Oa-sat">
             <objects>
-                <navigationController id="dBf-Jp-N1s" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SeventhTopViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dBf-Jp-N1s" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1j7-tI-aV8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2285,7 +2285,7 @@
         <!--Navigation Controller-->
         <scene sceneID="LLT-k2-nfB">
             <objects>
-                <navigationController id="wgB-Wr-I1M" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="EighthTopViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wgB-Wr-I1M" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aG8-zg-100">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2902,7 +2902,7 @@
         <!--Navigation Controller-->
         <scene sceneID="GIa-t3-CUr">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fwS-r4-p6U" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FirstTopViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fwS-r4-p6U" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1DA-kW-D03">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
