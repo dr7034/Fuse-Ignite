@@ -115,14 +115,15 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             let profileImageFile = PFFile(data: profileImageData!)
                 myUser.setObject(profileImageFile, forKey: "profile_picture")
             }
+            
         
             myUser.signUpInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
                 
-                var userMessage = "Registration is sucessful. Thank you!"
+                var userMessage = "Registration was sucessful. Thank you!"
                 
                 if(!success)
                 {
-//                    userMessage = "Could not register at this time, please try again later."
+
                     userMessage = error!.localizedDescription
                 }
                 

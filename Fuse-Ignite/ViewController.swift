@@ -38,6 +38,7 @@ class ViewController: UIViewController {
         //Perform Log In with Parse
         
         PFUser.logInWithUsernameInBackground(userEmail!, password: userPassword!) { (user: PFUser?, error: NSError?) -> Void in
+            
             var userMessage = "Welcome!"
             
             if(user != nil)
@@ -50,15 +51,10 @@ class ViewController: UIViewController {
                 
                 
                 //Navigate to Protected Page
-                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                
-                var mainPage:MainPageViewController = mainStoryboard.instantiateViewControllerWithIdentifier("MainPageViewController") as! MainPageViewController
-                
-                var mainPageNav = UINavigationController(rootViewController: mainPage)
                 
                 var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 
-                appDelegate.window?.rootViewController = mainPageNav
+                appDelegate.buildUserInterface()
                 
             } else {
                 

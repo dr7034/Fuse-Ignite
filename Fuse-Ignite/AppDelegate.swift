@@ -14,6 +14,7 @@ import Bolts
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var drawerContainer: MMDrawerController?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -27,24 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //[Optional] Track statistics around application opens
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
-        
-        let userName:String? = NSUserDefaults.standardUserDefaults().stringForKey("user_name")
-        
-        if(userName != nil)
-        {
-        
-        //Navigate to Protected Page
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        var mainPage:MainPageViewController = mainStoryboard.instantiateViewControllerWithIdentifier("MainPageViewController") as! MainPageViewController
-        
-        var mainPageNav = UINavigationController(rootViewController: mainPage)
-        
-        var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        appDelegate.window?.rootViewController = mainPageNav
-            
-        }
+        buildUserInterface()
         
         return true
     }
@@ -71,6 +55,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func buildUserInterface()
+    {
+        let userName:String? = NSUserDefaults.standardUserDefaults().stringForKey("user_name")
+        
+        if(userName != nil)
+        {
+            
+            //Navigate to Protected Page
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            //Create View Controllers
+            var mainPage:MainPageViewController = mainStoryboard.instantiateViewControllerWithIdentifier("MainPageViewController") as! MainPageViewController
+            
+            var leftSideMenu:LeftSideViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LeftSideViewController") as! LeftSideViewController
+            
+            var rightSideMenu:RightSideViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RightSideViewController") as! RightSideViewController
+            
+            //Wrap into navigation controllers
+            var mainPageNav = UINavigationController(rootViewController: mainPage)
+            var leftSideMenuNav = UINavigationController(rootViewController: leftSideMenu)
+            var rightSideMenuNav = UINavigationController(rootViewController: rightSideMenu)
+            
+            drawerContainer = MMDrawerController(centerViewController: mainPageNav, leftDrawerViewController: leftSideMenuNav, rightDrawerViewController: rightSideMenuNav)
+            
+            drawerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView
+            drawerContainer!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView
+            
+            var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            appDelegate.window?.rootViewController = drawerContainer
+        }
+
+    }
 
 }
 
