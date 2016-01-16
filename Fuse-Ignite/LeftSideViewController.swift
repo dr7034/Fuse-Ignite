@@ -22,19 +22,7 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
 
         // Do any additional setup after loading the view.
         
-        let userFirstName = PFUser.currentUser()?.objectForKey("first_name") as! String
-        let userLastName = PFUser.currentUser()?.objectForKey("last_name") as! String
-        
-        userFullNameLabel.text = userFirstName + " " + userLastName
-        
-        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
-        
-        profilePictureObject.getDataInBackgroundWithBlock { (imageData: NSData?, error:NSError?) -> Void in
-            if(imageData != nil)
-            {
-                self.userProfilePicture.image = UIImage(data: imageData!)
-            }
-        }
+        loadUserDetails()
         
     }
 
@@ -123,8 +111,6 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
                     appDelegate.window?.rootViewController = signInPageNav
                 })
                 
-                
-                
             break
                 
             default:
@@ -133,4 +119,30 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
             
     }
     
+    @IBAction func editProfileButtonTapped(sender: AnyObject) {
+        
+        var editProfile = self.storyboard?.instantiateViewControllerWithIdentifier("EditProfileViewController") as! EditProfileViewController
+        editProfile.opener = self
+        
+        let editProfileNav = UINavigationController(rootViewController: editProfile)
+        
+        self.presentViewController(editProfileNav, animated: true, completion: nil)
+    }
+    
+    func loadUserDetails(){
+        
+        let userFirstName = PFUser.currentUser()?.objectForKey("first_name") as! String
+        let userLastName = PFUser.currentUser()?.objectForKey("last_name") as! String
+        
+        userFullNameLabel.text = userFirstName + " " + userLastName
+        
+        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
+        
+        profilePictureObject.getDataInBackgroundWithBlock { (imageData: NSData?, error:NSError?) -> Void in
+            if(imageData != nil)
+            {
+                self.userProfilePicture.image = UIImage(data: imageData!)
+            }
+        }
+    }
 }

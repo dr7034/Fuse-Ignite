@@ -40,6 +40,7 @@
 		65B0CF901C49AC9400829D6D /* RightSideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B0CF8F1C49AC9400829D6D /* RightSideViewController.swift */; };
 		65B0CF921C49C52A00829D6D /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B0CF911C49C52A00829D6D /* AboutViewController.swift */; };
 		65B0CF941C49E07800829D6D /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B0CF931C49E07800829D6D /* PasswordResetViewController.swift */; };
+		65B0CF961C4A933C00829D6D /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B0CF951C4A933C00829D6D /* EditProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		65B0CF8F1C49AC9400829D6D /* RightSideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightSideViewController.swift; sourceTree = "<group>"; };
 		65B0CF911C49C52A00829D6D /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		65B0CF931C49E07800829D6D /* PasswordResetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
+		65B0CF951C4A933C00829D6D /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 				65B0CF8F1C49AC9400829D6D /* RightSideViewController.swift */,
 				65B0CF911C49C52A00829D6D /* AboutViewController.swift */,
 				65B0CF931C49E07800829D6D /* PasswordResetViewController.swift */,
+				65B0CF951C4A933C00829D6D /* EditProfileViewController.swift */,
 			);
 			path = "Fuse-Ignite";
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				65B0CF851C49A21600829D6D /* UIViewController+MMDrawerController.m in Sources */,
 				65B0CF891C49A30700829D6D /* MBProgressHUD.m in Sources */,
 				653DC32F1C44A54A00EEAECD /* ViewController.swift in Sources */,
+				65B0CF961C4A933C00829D6D /* EditProfileViewController.swift in Sources */,
 				65B0CF921C49C52A00829D6D /* AboutViewController.swift in Sources */,
 				65B0CF941C49E07800829D6D /* PasswordResetViewController.swift in Sources */,
 				65B0CF831C49A21600829D6D /* MMDrawerController.m in Sources */,
