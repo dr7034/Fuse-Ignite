@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import Bolts
+import ParseFacebookUtilsV4
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,12 +26,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Init Parse
         Parse.setApplicationId("d5LFK2as7ay0obVjQ2pMMRQkkMaBbPixMSJwo2dc", clientKey: "sTfq0xw8w0SoxNwZP0gn1ZWHL3f6anQORVV95BfU")
         
+        //Init PFFacebookUtils
+        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+        
         //[Optional] Track statistics around application opens
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
-        buildUserInterface()
+//        let userNotificationTypes = (UIUserNotificationType.Alert |  UIUserNotificationType.Badge |  UIUserNotificationType.Sound);
+//        
+//        let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+//        application.registerUserNotificationSettings(settings)
+//        
+//        application.registerForRemoteNotifications()
         
-        return true
+        
+        buildUserInterface()
+
+        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        
+        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        // Store the deviceToken in the current Installation and save it to Parse
+        let installation = PFInstallation.currentInstallation()
+        installation.setDeviceTokenFromData(deviceToken)
+        installation.saveInBackgroundWithBlock { (success:Bool, error: NSError?) -> Void in
+            print("Registration successful? \(success)")
+        }
+        
+    }
+    
+    func application(application: UIApplication, didRecieveRemoteNotification userInfo:[NSObject : AnyObject], fetchCompletionHandler:(UIBackgroundFetchResult) -> Void) {
+        
+        PFPush.handlePush(userInfo)
+        fetchCompletionHandler(UIBackgroundFetchResult.NewData)
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("Failed to register \(error.localizedDescription)")
+    }
+    
+    func application(application: UIApplication,  didReceiveRemoteNotification userInfo: [NSObject : AnyObject],  fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        
+        
+        PFPush.handlePush(userInfo)
+        completionHandler(UIBackgroundFetchResult.NewData)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -49,6 +93,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        FBSDKAppEvents.activateApp()
+        
+        
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -57,34 +104,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func buildUserInterface()
     {
-        let userName:String? = NSUserDefaults.standardUserDefaults().stringForKey("user_name")
+        
+        
+        let userName:String? =  NSUserDefaults.standardUserDefaults().stringForKey("user_name")
         
         if(userName != nil)
         {
+            // Navigate to Protected page
+            let mainStoryBoard:UIStoryboard = UIStoryboard(name:"Main", bundle:nil)
             
-            //Navigate to Protected Page
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            // Create View Controllers
+            var mainPage:MainPageViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("MainPageViewController") as! MainPageViewController
             
-            //Create View Controllers
-            var mainPage:MainPageViewController = mainStoryboard.instantiateViewControllerWithIdentifier("MainPageViewController") as! MainPageViewController
+            var leftSideMenu:LeftSideViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("LeftSideViewController") as! LeftSideViewController
             
-            var leftSideMenu:LeftSideViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LeftSideViewController") as! LeftSideViewController
+            var rightSideMenu:RightSideViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("RightSideViewController") as! RightSideViewController
             
-            var rightSideMenu:RightSideViewController = mainStoryboard.instantiateViewControllerWithIdentifier("RightSideViewController") as! RightSideViewController
             
-            //Wrap into navigation controllers
-            var mainPageNav = UINavigationController(rootViewController: mainPage)
-            var leftSideMenuNav = UINavigationController(rootViewController: leftSideMenu)
-            var rightSideMenuNav = UINavigationController(rootViewController: rightSideMenu)
+            
+            // Wrap into Navigation controllers
+            var mainPageNav = UINavigationController(rootViewController:mainPage)
+            var leftSideMenuNav = UINavigationController(rootViewController:leftSideMenu)
+            var rightSideMenuNav = UINavigationController(rootViewController:rightSideMenu)
+            
             
             drawerContainer = MMDrawerController(centerViewController: mainPageNav, leftDrawerViewController: leftSideMenuNav, rightDrawerViewController: rightSideMenuNav)
             
             drawerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView
             drawerContainer!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView
             
-            var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             
-            appDelegate.window?.rootViewController = drawerContainer
+            window?.rootViewController = drawerContainer
         }
 
     }

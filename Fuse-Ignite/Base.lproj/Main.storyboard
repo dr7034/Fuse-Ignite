@@ -24,7 +24,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZa-7g-Qev">
-                                <rect key="frame" x="107" y="212" width="106" height="30"/>
+                                <rect key="frame" x="75" y="212" width="170" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Sign In"/>
@@ -33,7 +33,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tiD-wy-mat">
-                                <rect key="frame" x="107" y="250" width="106" height="30"/>
+                                <rect key="frame" x="75" y="250" width="170" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Sign Up"/>
@@ -52,6 +52,16 @@
                                 <state key="normal" title="Forgot Password?"/>
                                 <connections>
                                     <segue destination="w8X-Ug-cta" kind="presentation" id="D8S-RZ-UhM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ltw-Yh-ooK">
+                                <rect key="frame" x="75" y="288" width="170" height="30"/>
+                                <color key="backgroundColor" red="0.27450980392156865" green="0.35686274509803922" blue="0.62745098039215685" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Sign In with Facebook"/>
+                                <connections>
+                                    <action selector="facebookLoginButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4SH-DO-Btm"/>
                                 </connections>
                             </button>
                         </subviews>

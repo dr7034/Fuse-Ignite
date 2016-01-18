@@ -41,6 +41,10 @@
 		65B0CF921C49C52A00829D6D /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B0CF911C49C52A00829D6D /* AboutViewController.swift */; };
 		65B0CF941C49E07800829D6D /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B0CF931C49E07800829D6D /* PasswordResetViewController.swift */; };
 		65B0CF961C4A933C00829D6D /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B0CF951C4A933C00829D6D /* EditProfileViewController.swift */; };
+		65B0CF981C4C667D00829D6D /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B0CF971C4C667D00829D6D /* FBSDKCoreKit.framework */; };
+		65B0CF9A1C4C669000829D6D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B0CF991C4C669000829D6D /* FBSDKLoginKit.framework */; };
+		65B0CF9C1C4C669F00829D6D /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B0CF9B1C4C669F00829D6D /* FBSDKShareKit.framework */; };
+		65B0CF9E1C4C6E5300829D6D /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B0CF9D1C4C6E5300829D6D /* ParseFacebookUtilsV4.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +112,10 @@
 		65B0CF911C49C52A00829D6D /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		65B0CF931C49E07800829D6D /* PasswordResetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
 		65B0CF951C4A933C00829D6D /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		65B0CF971C4C667D00829D6D /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		65B0CF991C4C669000829D6D /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		65B0CF9B1C4C669F00829D6D /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		65B0CF9D1C4C6E5300829D6D /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +123,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65B0CF9A1C4C669000829D6D /* FBSDKLoginKit.framework in Frameworks */,
 				653DC3771C44A9C000EEAECD /* Social.framework in Frameworks */,
+				65B0CF9E1C4C6E5300829D6D /* ParseFacebookUtilsV4.framework in Frameworks */,
 				653DC3751C44A9B600EEAECD /* Accounts.framework in Frameworks */,
 				653DC3731C44A99900EEAECD /* libsqlite3.tbd in Frameworks */,
 				653DC3711C44A98F00EEAECD /* libz.tbd in Frameworks */,
@@ -128,6 +138,8 @@
 				653DC3631C44A95A00EEAECD /* CoreGraphics.framework in Frameworks */,
 				653DC3611C44A94F00EEAECD /* CFNetwork.framework in Frameworks */,
 				653DC35F1C44A94900EEAECD /* AudioToolbox.framework in Frameworks */,
+				65B0CF9C1C4C669F00829D6D /* FBSDKShareKit.framework in Frameworks */,
+				65B0CF981C4C667D00829D6D /* FBSDKCoreKit.framework in Frameworks */,
 				653DC35D1C44A91600EEAECD /* Parse.framework in Frameworks */,
 				653DC35C1C44A91600EEAECD /* Bolts.framework in Frameworks */,
 			);
@@ -215,10 +227,14 @@
 		653DC3781C44A9E900EEAECD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65B0CF9D1C4C6E5300829D6D /* ParseFacebookUtilsV4.framework */,
+				65B0CF991C4C669000829D6D /* FBSDKLoginKit.framework */,
+				65B0CF971C4C667D00829D6D /* FBSDKCoreKit.framework */,
 				653DC3761C44A9C000EEAECD /* Social.framework */,
 				653DC3741C44A9B600EEAECD /* Accounts.framework */,
 				653DC3721C44A99800EEAECD /* libsqlite3.tbd */,
 				653DC3701C44A98F00EEAECD /* libz.tbd */,
+				65B0CF9B1C4C669F00829D6D /* FBSDKShareKit.framework */,
 				653DC36E1C44A98900EEAECD /* SystemConfiguration.framework */,
 				653DC36C1C44A98000EEAECD /* StoreKit.framework */,
 				653DC36A1C44A97700EEAECD /* Security.framework */,
