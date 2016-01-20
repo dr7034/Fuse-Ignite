@@ -1,3 +1,5 @@
+
+
 //
 //  AppDelegate.swift
 //  Fuse-Ignite
@@ -28,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Init PFFacebookUtils
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
-        
+    
         //[Optional] Track statistics around application opens
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         

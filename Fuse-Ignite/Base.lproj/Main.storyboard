@@ -64,12 +64,6 @@
                                     <action selector="facebookLoginButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4SH-DO-Btm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bm-jZ-snP">
-                                <rect key="frame" x="75" y="326" width="170" height="30"/>
-                                <color key="backgroundColor" red="0.20000000000000001" green="0.61176470589999998" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Sign In with Twitter"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -724,7 +718,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="UserIcon" width="128" height="128"/>
+        <image name="UserIcon" width="356" height="395"/>
         <image name="menu" width="22" height="22"/>
         <image name="search" width="22" height="22"/>
     </resources>
