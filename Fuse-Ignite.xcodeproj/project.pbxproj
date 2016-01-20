@@ -348,6 +348,11 @@
 					653DC3281C44A54900EEAECD = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = CK7MZ3BMX3;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					653DC33C1C44A54A00EEAECD = {
 						CreatedOnToolsVersion = 7.2;
@@ -575,7 +580,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ftech.Fuse-Ignite";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "be8294e2-4fab-42a5-83c5-71061cb26510";
 				SWIFT_OBJC_BRIDGING_HEADER = "Fuse-Ignite/Fuse-Ignite-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -596,7 +601,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ftech.Fuse-Ignite";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "be8294e2-4fab-42a5-83c5-71061cb26510";
 				SWIFT_OBJC_BRIDGING_HEADER = "Fuse-Ignite/Fuse-Ignite-Bridging-Header.h";
 			};
 			name = Release;
