@@ -34,12 +34,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //[Optional] Track statistics around application opens
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
-//        let userNotificationTypes = (UIUserNotificationType.Alert |  UIUserNotificationType.Badge |  UIUserNotificationType.Sound);
-//        
-//        let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
-//        application.registerUserNotificationSettings(settings)
-//        
-//        application.registerForRemoteNotifications()
+        
+        //Register for Push Notifications through Parse
+        let userNotificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
+        
+        let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
+
         
         
         buildUserInterface()
@@ -47,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
@@ -116,18 +118,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let mainStoryBoard:UIStoryboard = UIStoryboard(name:"Main", bundle:nil)
             
             // Create View Controllers
-            var mainPage:MainPageViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("MainPageViewController") as! MainPageViewController
+            let mainPage:MainPageViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("MainPageViewController") as! MainPageViewController
             
-            var leftSideMenu:LeftSideViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("LeftSideViewController") as! LeftSideViewController
+            let leftSideMenu:LeftSideViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("LeftSideViewController") as! LeftSideViewController
             
-            var rightSideMenu:RightSideViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("RightSideViewController") as! RightSideViewController
+            let rightSideMenu:RightSideViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("RightSideViewController") as! RightSideViewController
             
             
             
             // Wrap into Navigation controllers
-            var mainPageNav = UINavigationController(rootViewController:mainPage)
-            var leftSideMenuNav = UINavigationController(rootViewController:leftSideMenu)
-            var rightSideMenuNav = UINavigationController(rootViewController:rightSideMenu)
+            let mainPageNav = UINavigationController(rootViewController:mainPage)
+            let leftSideMenuNav = UINavigationController(rootViewController:leftSideMenu)
+            let rightSideMenuNav = UINavigationController(rootViewController:rightSideMenu)
             
             
             drawerContainer = MMDrawerController(centerViewController: mainPageNav, leftDrawerViewController: leftSideMenuNav, rightDrawerViewController: rightSideMenuNav)

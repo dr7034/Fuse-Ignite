@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import Parse
 
 class MainPageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        // Clears Badges on Page open
+            let currentInstallation = PFInstallation.currentInstallation()
+                currentInstallation.badge = 0
     }
 
     override func didReceiveMemoryWarning() {
