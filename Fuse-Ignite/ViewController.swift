@@ -60,26 +60,14 @@ class ViewController: UIViewController {
                 
                 //Navigate to Protected Page
                 
-                var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 
                 appDelegate.buildUserInterface()
                 
             } else {
                 
                 userMessage = error!.localizedDescription
-                
-                
-                //Create Alert
-                var myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-                
-                //Create Alert Action Button
-                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-                
-                //Add Action button to Alert
-                myAlert.addAction(okAction)
-                
-                self.presentViewController(myAlert, animated: true, completion: nil)
-                
+                self.displayMessage(userMessage)
             }
         }
     }
@@ -93,16 +81,7 @@ class ViewController: UIViewController {
             if(error != nil) {
                 //display an error message
                 let userMessage = error!.localizedDescription
-                //Create Alert
-                var myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-                
-                //Create Alert Action Button
-                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-                
-                //Add Action button to Alert
-                myAlert.addAction(okAction)
-                
-                self.presentViewController(myAlert, animated: true, completion: nil)
+                self.displayMessage(userMessage)
                 
                 return
                 
@@ -123,7 +102,7 @@ class ViewController: UIViewController {
         activityIndicator.detailsLabelText = "Please Wait"
         
         // Define fields we would like to read from Facebook User object
-        var requestParameters = ["fields": "id, email, first_name, last_name, name"]
+        let requestParameters = ["fields": "id, email, first_name, last_name, name"]
         
         // /me
         let userDetails = FBSDKGraphRequest(graphPath: "me", parameters: requestParameters)
@@ -138,17 +117,7 @@ class ViewController: UIViewController {
                 
                 //display an error message
                 let userMessage = error!.localizedDescription
-                
-                //Create Alert
-                var myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-                
-                //Create Alert Action Button
-                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-                
-                //Add Action button to Alert
-                myAlert.addAction(okAction)
-                
-                self.presentViewController(myAlert, animated: true, completion: nil)
+                self.displayMessage(userMessage)
                 
                 //If Error, Log User Out of Application
                 PFUser.logOut()
@@ -158,13 +127,13 @@ class ViewController: UIViewController {
             
             //Extract user fields
             let userId:String = result["id"] as! String
-            let userFullName:String = result["name"] as! String
-            var userEmail:String? = result["email"] as? String
+//            let userFullName:String = result["name"] as! String
+            let userEmail:String? = result["email"] as? String
             let userFirstName:String?  = result["first_name"] as? String
             let userLastName:String? = result["last_name"] as? String
             
             //Get Facebook Profile Picture
-            var userProfile = "https://graph.facebook.com/" + userId + "/picture?type=large"
+            let userProfile = "https://graph.facebook.com/" + userId + "/picture?type=large"
             
             let profilePictureUrl = NSURL(string: userProfile)
             
@@ -199,18 +168,10 @@ class ViewController: UIViewController {
                 if(error != nil)
                 {
                 //display an error message
-                let userMessage = error!.localizedDescription
-                //Create Alert
-                var myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-                
-                //Create Alert Action Button
-                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-                
-                //Add Action button to Alert
-                myAlert.addAction(okAction)
-                
-                self.presentViewController(myAlert, animated: true, completion: nil)
+                    let userMessage = error!.localizedDescription
                     
+                    //shows alert
+                    self.displayMessage(userMessage)
                     PFUser.logOut()
                     
                     return
@@ -225,13 +186,31 @@ class ViewController: UIViewController {
                         
                         //Take user to Main Page through the Segue in AppDelegate asyncronously
                         dispatch_async(dispatch_get_main_queue()) {
-                            var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                            let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                             appDelegate.buildUserInterface()
+                            
+                            }
                         }
                     }
-                }
+                })
             })
-        })
+        }
+        
+    func displayMessage(userMessage:String)
+    {
+        //Create Alert
+        let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        //Create Alert Action Button
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default)
+        {
+            action in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        //Add Action button to Alert
+        alert.addAction(okAction)
+        self.presentViewController(alert, animated: true, completion: nil)
+        
     }
 }
-

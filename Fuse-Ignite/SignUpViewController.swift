@@ -37,11 +37,11 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     @IBAction func selectProfilePhotoButtonTapped(sender: AnyObject) {
         
-        var myPickerController = UIImagePickerController()
-        myPickerController.delegate = self
-        myPickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         
-        self.presentViewController(myPickerController, animated: true, completion: nil)
+        self.presentViewController(imagePickerController, animated: true, completion: nil)
         
     }
     
@@ -72,29 +72,15 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         
       if(userName!.isEmpty || userPassword!.isEmpty || userPasswordRepeat!.isEmpty || userFirstName!.isEmpty || userLastName!.isEmpty)
       {
-        var myAlert = UIAlertController(title: "Alert", message: "All fields are required to fill in", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-        
-        myAlert.addAction(okAction)
-        
-        self.presentViewController(myAlert, animated: true, completion: nil)
-        
-        return
+            let userMessage = "All fields are required to fill in"
+            self.displayMessage(userMessage)
         
         }
         
         if(userPassword != userPasswordRepeat)
         {
-            var myAlert = UIAlertController(title: "Alert", message: "Passwords do not match, please try again.", preferredStyle: UIAlertControllerStyle.Alert)
-            
-            let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-            
-            myAlert.addAction(okAction)
-            
-            self.presentViewController(myAlert, animated: true, completion: nil)
-        return
-            
+            let userMessage = "Passwords do not match, please try again."
+            self.displayMessage(userMessage)
         }
         
         let myUser:PFUser = PFUser()
@@ -123,29 +109,26 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
                 
                 if(!success)
                 {
-
                     userMessage = error!.localizedDescription
                 }
-                
-                var myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-                
-                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) {action in
-                    
-                    if(success)
-                    {
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                    }
-                }
-                myAlert.addAction(okAction)
-                
-                self.presentViewController(myAlert, animated: true, completion: nil)
-                
-                return
-                
+                self.displayMessage(userMessage)
             }
             
         }
         
+    }
+    
+    func displayMessage(userMessage:String)
+    {
+        let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+            action in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        alert.addAction(okAction)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
 }

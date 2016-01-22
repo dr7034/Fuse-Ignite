@@ -38,7 +38,7 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var myCell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! UITableViewCell
+        let myCell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) 
         
         myCell.textLabel?.text = menuItems[indexPath.row]
         
@@ -53,12 +53,12 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
             case 0:
             //open main Page
                
-                var mainPageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MainPageViewController") as! MainPageViewController
+                let mainPageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MainPageViewController") as! MainPageViewController
                 
-                var mainPageNav = UINavigationController(rootViewController: mainPageViewController)
+                let mainPageNav = UINavigationController(rootViewController: mainPageViewController)
                 
                 //access AppDelegate to access drawerContainer function
-                var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 
                 //use drawerContainer class to access main page
                 appDelegate.drawerContainer!.centerViewController = mainPageNav
@@ -71,12 +71,12 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
             case 1:
             
             //open about page
-                var aboutViewController = self.storyboard?.instantiateViewControllerWithIdentifier("AboutViewController") as! AboutViewController
+                let aboutViewController = self.storyboard?.instantiateViewControllerWithIdentifier("AboutViewController") as! AboutViewController
                 
-                var aboutPageNav = UINavigationController(rootViewController: aboutViewController)
+                let aboutPageNav = UINavigationController(rootViewController: aboutViewController)
                 
                 //access AppDelegate to access drawerContainer function
-                var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 
                 //use drawerContainer class to access main page
                 appDelegate.drawerContainer!.centerViewController = aboutPageNav
@@ -101,12 +101,12 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
                     
                     let mainStoryBoard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                     
-                    var signInPage:ViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("ViewController") as! ViewController
+                    let signInPage:ViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("ViewController") as! ViewController
                     
-                    var signInPageNav = UINavigationController(rootViewController:signInPage)
+                    let signInPageNav = UINavigationController(rootViewController:signInPage)
                     
                     //access AppDelegate to access signInPageNav
-                    var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     
                     appDelegate.window?.rootViewController = signInPageNav
                 })
@@ -121,7 +121,7 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBAction func editProfileButtonTapped(sender: AnyObject) {
         
-        var editProfile = self.storyboard?.instantiateViewControllerWithIdentifier("EditProfileViewController") as! EditProfileViewController
+        let editProfile = self.storyboard?.instantiateViewControllerWithIdentifier("EditProfileViewController") as! EditProfileViewController
         editProfile.opener = self
         
         let editProfileNav = UINavigationController(rootViewController: editProfile)

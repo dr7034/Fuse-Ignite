@@ -50,7 +50,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     @IBAction func changeProfilePictureButtonTapped(sender: AnyObject) {
         
-        var myPickerController = UIImagePickerController()
+        let myPickerController = UIImagePickerController()
         myPickerController.delegate = self;
         myPickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         
@@ -76,37 +76,22 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         //Check if all fields are empty
         if(userPasswordTextField.text!.isEmpty && userFirstNameTextField.text!.isEmpty && userLastNameTextField.text!.isEmpty && (profileImageData == nil))
         {
-            var myAlert = UIAlertController(title: "Alert", message: "All Fields cannot be empty", preferredStyle: UIAlertControllerStyle.Alert);
-            
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-            myAlert.addAction(okAction);
-            self.presentViewController(myAlert, animated: true, completion: nil);
-            
-            return
+            let userMessage = "All Fields cannot be empty"
+            self.displayMessage(userMessage)
         }
         
         //Check if Passwords Match
         if(userPasswordTextField.text != userPasswordRepeatTextField.text)
         {
-            var myAlert = UIAlertController(title: "Alert", message: "Passwords Must Match", preferredStyle: UIAlertControllerStyle.Alert);
-            
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-            myAlert.addAction(okAction);
-            self.presentViewController(myAlert, animated: true, completion: nil);
-            
-            return
+            let userMessage =  "Passwords Must Match"
+            self.displayMessage(userMessage)
         }
         
         //Check if First name or Last name are not empty
         if(userFirstNameTextField.text!.isEmpty || userLastNameTextField.text!.isEmpty)
         {
-            var myAlert = UIAlertController(title: "Alert", message: "First Name and Last Name Fields are Required", preferredStyle: UIAlertControllerStyle.Alert);
-            
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-            myAlert.addAction(okAction);
-            self.presentViewController(myAlert, animated: true, completion: nil);
-            
-            return
+            let userMessage = "First Name and Last Name Fields are Required"
+            self.displayMessage(userMessage)
         }
         
         //Set New Values for First and Last Name
@@ -144,30 +129,15 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             
             if(error != nil)
             {
-                var myAlert = UIAlertController(title: "Alert", message: error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert);
-                
-                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-                myAlert.addAction(okAction);
-                self.presentViewController(myAlert, animated: true, completion: nil);
-                
-                return
+                let userMessage = error!.localizedDescription
+                self.displayMessage(userMessage)
             }
             
             if(success)
             {
-                var userMessage = "Profile details successfully updated"
+                let userMessage = "Profile details successfully updated"
+                self.displayMessage(userMessage)
                 
-                var myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert);
-                
-                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
-                    self.dismissViewControllerAnimated(true, completion: { () -> Void in
-                        self.opener.loadUserDetails()
-                    })
-                })
-                
-                myAlert.addAction(okAction);
-                self.presentViewController(myAlert, animated: true, completion: nil)
-                return
             }
         }
     }
@@ -177,6 +147,19 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         self.dismissViewControllerAnimated(true, completion: nil)
         
+    }
+    
+    func displayMessage(userMessage:String)
+    {
+        //Create Alert
+        let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        //Create Alert Action Button
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { action in self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        //Add Action button to Alert
+        alert.addAction(okAction)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 
 }
