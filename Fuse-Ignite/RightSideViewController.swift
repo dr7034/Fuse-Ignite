@@ -82,9 +82,8 @@ class RightSideViewController: UIViewController, UITableViewDataSource, UITableV
                     let eventName = object.objectForKey("eventName") as! String
                     let eventDescription = object.objectForKey("eventDescription") as! String
                     let eventLocation = object.objectForKey("eventLocation") as! String
-                    let eventNameAndDescription = eventName + " - " + eventLocation
-                    
-                    self.searchResults.append(eventNameAndDescription)
+
+                    self.searchResults.append(eventName)
                 }
                 
                 dispatch_async(dispatch_get_main_queue()) {
