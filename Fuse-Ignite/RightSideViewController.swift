@@ -60,40 +60,40 @@ class RightSideViewController: UIViewController, UITableViewDataSource, UITableV
     
         var query = PFQuery.orQueryWithSubqueries([eventNameQuery,eventDescriptionQuery,eventLocationQuery])
         
-//        query.findObjectsInBackgroundWithBlock { (results: [AnyObject]?, error: NSError?) -> Void in
-//            
-//            if(error != nil)
-//            {
-//                var myAlert = UIAlertController(title: "Alert", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
-//                
-//                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-//                
-//                myAlert.addAction(okAction)
-//                
-//                self.presentViewController(myAlert, animated: true, completion: nil)
-//                
-//                return
-//            }
-//            
-//            if let objects = results as? [PFObject] {
-//                self.searchResults.removeAll(keepCapacity: false)
-//                
-//                for object in objects {
-//                    let eventName = object.objectForKey("eventName") as! String
-//                    let eventDescription = object.objectForKey("eventDescription") as! String
-//                    let eventLocation = object.objectForKey("eventLocation") as! String
-//                    let eventNameAndDescription = eventName + " - " + eventLocation
-//                    
-//                    self.searchResults.append(eventNameAndDescription)
-//                }
-//                
-//                dispatch_group_async(dispatch_get_main_queue()) {
-//                    self.searchTable.reloadData()
-//                    self.searchBar.resignFirstResponder()
-//                }
-//            }
-//        
-//        }
+        query.findObjectsInBackgroundWithBlock { (results: [PFObject]?, error: NSError?) -> Void in
+            
+            if(error != nil)
+            {
+                let myAlert = UIAlertController(title: "Alert", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                
+                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
+                
+                myAlert.addAction(okAction)
+                
+                self.presentViewController(myAlert, animated: true, completion: nil)
+                
+                return
+            }
+            
+            if let objects = results {
+                self.searchResults.removeAll(keepCapacity: false)
+                
+                for object in objects {
+                    let eventName = object.objectForKey("eventName") as! String
+                    let eventDescription = object.objectForKey("eventDescription") as! String
+                    let eventLocation = object.objectForKey("eventLocation") as! String
+                    let eventNameAndDescription = eventName + " - " + eventLocation
+                    
+                    self.searchResults.append(eventNameAndDescription)
+                }
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.searchTable.reloadData()
+                    self.searchBar.resignFirstResponder()
+                    
+                }
+            }
+        }
     }
 
     
@@ -101,6 +101,15 @@ class RightSideViewController: UIViewController, UITableViewDataSource, UITableV
     {
         searchBar.resignFirstResponder()
         searchBar.text = ""
+    }
+   
+    @IBAction func refreshButtonTapped(sender: AnyObject) {
+        
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+        searchResults.removeAll(keepCapacity: false)
+        searchTable.reloadData()
+        
     }
     
     

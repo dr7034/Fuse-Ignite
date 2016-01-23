@@ -441,7 +441,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="v2b-RJ-Uqa">
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="D2u-0M-tCa"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="D2u-0M-tCa">
+                            <connections>
+                                <action selector="refreshButtonTapped:" destination="4DM-oS-xvB" id="f0g-VW-Uga"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
