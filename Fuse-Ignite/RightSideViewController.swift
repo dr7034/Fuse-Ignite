@@ -64,15 +64,8 @@ class RightSideViewController: UIViewController, UITableViewDataSource, UITableV
             
             if(error != nil)
             {
-                let myAlert = UIAlertController(title: "Alert", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
-                
-                let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil)
-                
-                myAlert.addAction(okAction)
-                
-                self.presentViewController(myAlert, animated: true, completion: nil)
-                
-                return
+                let userMessage:String = error!.localizedDescription
+                self.displayMessage(userMessage)
             }
             
             if let objects = results {
@@ -111,5 +104,18 @@ class RightSideViewController: UIViewController, UITableViewDataSource, UITableV
         
     }
     
+    func displayMessage(userMessage:String)
+    {
+        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+            action in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        myAlert.addAction(okAction)
+        self.presentViewController(myAlert, animated: true, completion: nil)
+    }
+
     
 }
