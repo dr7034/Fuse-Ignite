@@ -50,13 +50,13 @@ class RightSideViewController: UIViewController, UITableViewDataSource, UITableV
         searchBar.resignFirstResponder()
         
         let eventNameQuery = PFQuery(className: "EventObject")
-        eventNameQuery.whereKey("eventName", containsString: searchBar.text)
+        eventNameQuery.whereKey("eventName", matchesRegex: "(?i)\(searchBar.text)")
         
         let eventDescriptionQuery = PFQuery(className: "EventObject")
-        eventNameQuery.whereKey("eventDescription", containsString: searchBar.text)
+        eventNameQuery.whereKey("eventDescription", matchesRegex: "(?i)\(searchBar.text)")
         
         let eventLocationQuery = PFQuery(className: "EventObject")
-        eventNameQuery.whereKey("eventLocation", containsString: searchBar.text)
+        eventNameQuery.whereKey("eventLocation", matchesRegex: "(?i)\(searchBar.text)")
     
         var query = PFQuery.orQueryWithSubqueries([eventNameQuery,eventDescriptionQuery,eventLocationQuery])
         

@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let installation = PFInstallation.currentInstallation()
         installation.setDeviceTokenFromData(deviceToken)
         installation.saveInBackgroundWithBlock { (success:Bool, error: NSError?) -> Void in
-            print("Registration successful? \(success)")
+//            print("Registration successful? \(success)")
         }
         
     }
@@ -71,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        print("Failed to register \(error.localizedDescription)")
+//        print("Failed to register \(error.localizedDescription)")
     }
     
     func application(application: UIApplication,  didReceiveRemoteNotification userInfo: [NSObject : AnyObject],  fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
