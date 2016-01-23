@@ -23,8 +23,11 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
     }
+    
     
     override func viewDidLayoutSubviews() {
         self.edgesForExtendedLayout = UIRectEdge()
@@ -45,6 +48,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         
     }
     
+    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
         
@@ -55,11 +59,8 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     @IBAction func cancelButtonTapped(sender: AnyObject) {
-        
         self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
-    
     
     @IBAction func signUpButtonTapped(sender: AnyObject) {
         
@@ -129,6 +130,12 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         alert.addAction(okAction)
         self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
 }
