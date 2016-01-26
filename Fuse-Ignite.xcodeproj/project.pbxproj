@@ -46,7 +46,7 @@
 		65B0CF9C1C4C669F00829D6D /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B0CF9B1C4C669F00829D6D /* FBSDKShareKit.framework */; };
 		65B0CF9E1C4C6E5300829D6D /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B0CF9D1C4C6E5300829D6D /* ParseFacebookUtilsV4.framework */; };
 		65B137421C4EA52000B1DB67 /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B137411C4EA52000B1DB67 /* ParseTwitterUtils.framework */; };
-		65B60D161C56D37600A9F7C8 /* EventFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B60D151C56D37600A9F7C8 /* EventFeedTableViewCell.swift */; };
+		65B60D1A1C582AC200A9F7C8 /* EventFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B60D191C582AC200A9F7C8 /* EventFeedTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,7 +119,7 @@
 		65B0CF9B1C4C669F00829D6D /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		65B0CF9D1C4C6E5300829D6D /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		65B137411C4EA52000B1DB67 /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseTwitterUtils.framework; sourceTree = "<group>"; };
-		65B60D151C56D37600A9F7C8 /* EventFeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFeedTableViewCell.swift; sourceTree = "<group>"; };
+		65B60D191C582AC200A9F7C8 /* EventFeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFeedTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,7 +207,7 @@
 				65B0CF911C49C52A00829D6D /* AboutViewController.swift */,
 				65B0CF931C49E07800829D6D /* PasswordResetViewController.swift */,
 				65B0CF951C4A933C00829D6D /* EditProfileViewController.swift */,
-				65B60D151C56D37600A9F7C8 /* EventFeedTableViewCell.swift */,
+				65B60D191C582AC200A9F7C8 /* EventFeedTableViewController.swift */,
 			);
 			path = "Fuse-Ignite";
 			sourceTree = "<group>";
@@ -429,13 +429,13 @@
 				65B0CF891C49A30700829D6D /* MBProgressHUD.m in Sources */,
 				653DC32F1C44A54A00EEAECD /* ViewController.swift in Sources */,
 				65B0CF961C4A933C00829D6D /* EditProfileViewController.swift in Sources */,
-				65B60D161C56D37600A9F7C8 /* EventFeedTableViewCell.swift in Sources */,
 				65B0CF921C49C52A00829D6D /* AboutViewController.swift in Sources */,
 				65B0CF941C49E07800829D6D /* PasswordResetViewController.swift in Sources */,
 				65B0CF831C49A21600829D6D /* MMDrawerController.m in Sources */,
 				653DC32D1C44A54A00EEAECD /* AppDelegate.swift in Sources */,
 				65B0CF8E1C49A78C00829D6D /* LeftSideViewController.swift in Sources */,
 				65B0CF901C49AC9400829D6D /* RightSideViewController.swift in Sources */,
+				65B60D1A1C582AC200A9F7C8 /* EventFeedTableViewController.swift in Sources */,
 				65B0CF841C49A21600829D6D /* MMDrawerVisualState.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

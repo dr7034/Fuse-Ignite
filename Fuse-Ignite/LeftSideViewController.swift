@@ -15,7 +15,7 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var userFullNameLabel: UILabel!
     
     
-    var menuItems:[String] = ["Main","About","Sign Out"]
+    var menuItems:[String] = ["Home","Create an Event","Discover","Contacts","Profile","Sign Out"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +87,7 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
                 
             break
                 
-            case 2:
+            case 5:
             
             //perform sign out and take user to sign in page
                 

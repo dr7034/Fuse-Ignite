@@ -60,8 +60,17 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
         return userCell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("Row Tapped: \(indexPath.row)")
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let selectedUser: PFUser = users[indexPath.row]
+        
+        let eventFeedTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EventFeedTableViewController") as! EventFeedTableViewController
+        
+        eventFeedTableViewController.selectedUser = selectedUser
+        
+        self.navigationController?.pushViewController(eventFeedTableViewController, animated: true)
+        
+        
     }
     
     func loadUsers()
