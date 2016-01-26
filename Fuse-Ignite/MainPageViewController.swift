@@ -9,13 +9,20 @@
 import UIKit
 import Parse
 
-class MainPageViewController: UIViewController {
+class MainPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var eventFeedTable: UITableView!
+    
+    var users = [PFUser]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Clears Badges on Page open
             let currentInstallation = PFInstallation.currentInstallation()
                 currentInstallation.badge = 0
+        
+            loadUsers()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +44,39 @@ class MainPageViewController: UIViewController {
         
         appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
 
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       return users.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let userCell = tableView.dequeueReusableCellWithIdentifier("eventFeedTableViewCell0", forIndexPath: indexPath)
+        
+        let userObject: PFUser = users[indexPath.row]
+        
+        userCell.textLabel!.text = userObject.objectForKey("first_name") as? String
+        
+        return userCell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("Row Tapped: \(indexPath.row)")
+    }
+    
+    func loadUsers()
+    {
+        let userQuery = PFQuery(className: "_User")
+        userQuery.findObjectsInBackgroundWithBlock { (result: [PFObject]?, error: NSError?) -> Void in
+            
+            if let foundUsers = result as? [PFUser]
+            {
+                self.users = foundUsers
+                self.eventFeedTable.reloadData()
+            }
+            
+            
+        }
     }
     
     
