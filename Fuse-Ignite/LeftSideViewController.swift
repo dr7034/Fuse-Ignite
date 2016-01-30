@@ -144,5 +144,7 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.userProfilePicture.image = UIImage(data: imageData!)
             }
         }
+        self.userProfilePicture.layer.cornerRadius = self.userProfilePicture.frame.size.width / 2;
+        self.userProfilePicture.clipsToBounds = true;
     }
 }

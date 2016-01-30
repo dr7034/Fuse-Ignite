@@ -55,7 +55,10 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         profilePhotoImageView.image = info [UIImagePickerControllerOriginalImage] as? UIImage
         
         self.dismissViewControllerAnimated(true, completion: nil)
-            
+        
+        self.profilePhotoImageView.layer.cornerRadius = self.profilePhotoImageView.frame.size.width / 2;
+        self.profilePhotoImageView.clipsToBounds = true;
+        
     }
     
     @IBAction func cancelButtonTapped(sender: AnyObject) {

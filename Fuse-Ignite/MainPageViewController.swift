@@ -12,6 +12,9 @@ import Parse
 class MainPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var eventFeedTable: UITableView!
+    @IBOutlet weak var currentDateTime: UILabel!
+    @IBOutlet weak var userProfilePicture: UIImageView!
+    
     
     var users = [PFUser]()
     
@@ -23,6 +26,8 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
                 currentInstallation.badge = 0
         
             loadUsers()
+            loadUserDetails()
+            currentDate()
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,6 +93,32 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    func loadUserDetails(){
+        
+        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
+        
+        profilePictureObject.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+            
+            if(imageData != nil)
+            {
+                self.userProfilePicture.image = UIImage(data: imageData!)
+            }
+        }
+        self.userProfilePicture.layer.cornerRadius = self.userProfilePicture.frame.size.width / 2;
+        self.userProfilePicture.clipsToBounds = true;
+    }
+    
+    func currentDate(){
+        
+        let currentDate = NSDate()
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.locale = NSLocale.currentLocale()
+        dateFormatter.dateFormat = "EEEE, MMMM dd, yyyy"
+        let convertedDate = dateFormatter.stringFromDate(currentDate)
+        self.currentDateTime.text = convertedDate
+        
+        
+    }
     
     
 }

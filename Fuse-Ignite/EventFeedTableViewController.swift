@@ -63,15 +63,13 @@ class EventFeedTableViewController: UITableViewController {
     func loadEventFeed(selectedUser: PFUser)
     {
         let eventQuery = PFQuery(className: "EventObject")
-        eventQuery.whereKey("usersAttending", equalTo: selectedUser)
-        eventQuery.includeKey("usersAttending")
+        eventQuery.whereKey("eventCreator", equalTo: selectedUser)
+        eventQuery.includeKey("eventCreator")
         
         eventQuery.findObjectsInBackgroundWithBlock { (result: [PFObject]?, error: NSError?) -> Void in
             
             if let searchResults = result
             {
-                print("Found Records: \(searchResults.count)")
-                
                 self.eventFeedItems = searchResults
                 self.eventFeedTable.reloadData()
             }
