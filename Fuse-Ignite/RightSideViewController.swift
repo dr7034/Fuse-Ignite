@@ -58,7 +58,7 @@ class RightSideViewController: UIViewController, UITableViewDataSource, UITableV
         let eventLocationQuery = PFQuery(className: "EventObject")
         eventNameQuery.whereKey("eventLocation", matchesRegex: "(?i)\(searchBar.text)")
     
-        var query = PFQuery.orQueryWithSubqueries([eventNameQuery,eventDescriptionQuery,eventLocationQuery])
+        let query = PFQuery.orQueryWithSubqueries([eventNameQuery,eventDescriptionQuery,eventLocationQuery])
         
         query.findObjectsInBackgroundWithBlock { (results: [PFObject]?, error: NSError?) -> Void in
             

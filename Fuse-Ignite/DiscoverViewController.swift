@@ -1,5 +1,5 @@
 //
-//  AboutViewController.swift
+//  Discover ViewController.swift
 //  Fuse-Ignite
 //
 //  Created by Daniel Reilly on 16/01/2016.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AboutViewController: UIViewController {
+class DiscoverViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

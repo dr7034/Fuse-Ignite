@@ -15,7 +15,7 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var userFullNameLabel: UILabel!
     
     
-    var menuItems:[String] = ["Home","Create an Event","Discover","Contacts","Profile","Sign Out"]
+    var menuItems:[String] = ["Home","Discover","Create an Event","Contacts","Profile","Sign Out"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,16 +70,16 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
                 
             case 1:
             
-            //open about page
-                let aboutViewController = self.storyboard?.instantiateViewControllerWithIdentifier("AboutViewController") as! AboutViewController
+            //open discover page
+                let discoverViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DiscoverViewController") as! DiscoverViewController
                 
-                let aboutPageNav = UINavigationController(rootViewController: aboutViewController)
+                let discoverPageNav = UINavigationController(rootViewController: discoverViewController)
                 
                 //access AppDelegate to access drawerContainer function
                 let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 
                 //use drawerContainer class to access main page
-                appDelegate.drawerContainer!.centerViewController = aboutPageNav
+                appDelegate.drawerContainer!.centerViewController = discoverPageNav
                 
                 //Close drawer on open
                 appDelegate.drawerContainer!.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
