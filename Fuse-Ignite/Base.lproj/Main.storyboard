@@ -733,7 +733,7 @@
         <!--Contacts-->
         <scene sceneID="esH-Dk-Ofh">
             <objects>
-                <viewController id="gTM-fo-jCA" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContactsViewController" id="gTM-fo-jCA" customClass="ContactsViewController" customModule="Fuse_Ignite" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qgh-Zc-Ono"/>
                         <viewControllerLayoutGuide type="bottom" id="ZeC-OB-48V"/>
@@ -746,12 +746,12 @@
                     <navigationItem key="navigationItem" title="Contacts" id="v9I-2O-JIf">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="943-5h-TzI">
                             <connections>
-                                <action selector="leftSideButtonTapped:" destination="onf-zw-wRX" id="BPL-JW-SIb"/>
+                                <action selector="leftSideButtonTapped:" destination="gTM-fo-jCA" id="vlf-Qm-Yee"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="search" id="IhE-vi-wRj">
                             <connections>
-                                <action selector="rightSideButtonTapped:" destination="onf-zw-wRX" id="uze-sH-7uU"/>
+                                <action selector="rightSideButtonTapped:" destination="gTM-fo-jCA" id="5oE-Vv-uJ3"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -764,7 +764,7 @@
         <!--Profile-->
         <scene sceneID="I0P-Uo-HU8">
             <objects>
-                <viewController id="sQM-YY-0hd" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" id="sQM-YY-0hd" customClass="ProfileViewController" customModule="Fuse_Ignite" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vEI-Xy-RRF"/>
                         <viewControllerLayoutGuide type="bottom" id="06O-nI-7Bm"/>
@@ -777,12 +777,12 @@
                     <navigationItem key="navigationItem" title="Profile" id="p3Z-OU-neC">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="lAx-dp-ete">
                             <connections>
-                                <action selector="leftSideButtonTapped:" destination="onf-zw-wRX" id="DzH-QS-rmi"/>
+                                <action selector="leftSideButtonTapped:" destination="sQM-YY-0hd" id="6DW-hR-Tfm"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="search" id="Tmt-20-EKe">
                             <connections>
-                                <action selector="rightSideButtonTapped:" destination="onf-zw-wRX" id="0RW-FO-kfg"/>
+                                <action selector="rightSideButtonTapped:" destination="sQM-YY-0hd" id="1tb-jt-AFv"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -804,7 +804,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Full Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sda-C4-6qR">
-                                <rect key="frame" x="113" y="36" width="117" height="24"/>
+                                <rect key="frame" x="113" y="36" width="179" height="24"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -848,17 +848,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Hvw-WA-XCT" firstAttribute="top" secondItem="yog-cp-7Uk" secondAttribute="bottom" constant="8" symbolic="YES" id="09I-E0-xEo"/>
+                            <constraint firstItem="sda-C4-6qR" firstAttribute="leading" secondItem="jnx-C3-1LU" secondAttribute="leading" id="0qV-kX-hl2"/>
+                            <constraint firstItem="sda-C4-6qR" firstAttribute="top" secondItem="yog-cp-7Uk" secondAttribute="bottom" constant="16" id="29W-Zd-AvH"/>
                             <constraint firstItem="jnx-C3-1LU" firstAttribute="leading" secondItem="Hvw-WA-XCT" secondAttribute="trailing" constant="24" id="ETb-U4-vUf"/>
-                            <constraint firstItem="sda-C4-6qR" firstAttribute="top" secondItem="yog-cp-7Uk" secondAttribute="bottom" constant="16" id="HmQ-fz-hQK"/>
                             <constraint firstItem="FZa-0E-vyF" firstAttribute="top" secondItem="jnx-C3-1LU" secondAttribute="bottom" constant="8" symbolic="YES" id="OZf-cA-V9L"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="sda-C4-6qR" secondAttribute="trailing" constant="74" id="QXM-LN-Hm1"/>
                             <constraint firstItem="FZa-0E-vyF" firstAttribute="leading" secondItem="0iq-oR-E5X" secondAttribute="leading" id="VB6-aB-xPA"/>
                             <constraint firstItem="FZa-0E-vyF" firstAttribute="top" secondItem="Hvw-WA-XCT" secondAttribute="bottom" constant="7" id="WDH-IZ-0XK"/>
                             <constraint firstAttribute="trailing" secondItem="FZa-0E-vyF" secondAttribute="trailing" id="Xq0-Au-vy1"/>
                             <constraint firstItem="Hvw-WA-XCT" firstAttribute="leading" secondItem="0iq-oR-E5X" secondAttribute="leadingMargin" constant="13" id="gFQ-JC-6A2"/>
-                            <constraint firstItem="sda-C4-6qR" firstAttribute="leading" secondItem="jnx-C3-1LU" secondAttribute="leading" id="kU0-3m-M10"/>
                             <constraint firstItem="FZa-0E-vyF" firstAttribute="bottom" secondItem="Ayb-k0-LtI" secondAttribute="top" id="p3d-7s-rhV"/>
-                            <constraint firstItem="FZa-0E-vyF" firstAttribute="top" secondItem="sda-C4-6qR" secondAttribute="bottom" constant="35" id="uEw-BS-n4i"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sda-C4-6qR" secondAttribute="trailing" constant="12" id="yLu-JZ-Jap"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="PC7-UM-HTC"/>
@@ -1072,7 +1071,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6T6-Ln-A3G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4668" y="1853"/>
+            <point key="canvasLocation" x="4330" y="1834"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2Cj-Ii-b6s">
@@ -1259,7 +1258,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fa9-Jj-T43" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4259" y="1853"/>
+            <point key="canvasLocation" x="3856" y="1768"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lVK-E4-JXN">

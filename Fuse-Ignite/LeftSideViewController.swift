@@ -89,7 +89,7 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
                 
             case 2:
                 
-                //open discover page
+                //open create an event page
                 let createViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CreateViewController") as! CreateViewController
                 
                 let createPageNav = UINavigationController(rootViewController: createViewController)
@@ -104,6 +104,60 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
                 appDelegate.drawerContainer!.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
             
             break
+                
+            case 3:
+                
+                //open my events page
+                let myEventsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MyEventsViewController") as! MyEventsViewController
+                
+                let myEventsPageNav = UINavigationController(rootViewController: myEventsViewController)
+                
+                //access AppDelegate to access drawerContainer function
+                let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                
+                //use drawerContainer class to access main page
+                appDelegate.drawerContainer!.centerViewController = myEventsPageNav
+                
+                //Close drawer on open
+                appDelegate.drawerContainer!.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+                
+                break
+                
+            case 4:
+                
+                //open contacts page
+                let contactsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ContactsViewController") as! ContactsViewController
+                
+                let contactsPageNav = UINavigationController(rootViewController: contactsViewController)
+                
+                //access AppDelegate to access drawerContainer function
+                let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                
+                //use drawerContainer class to access main page
+                appDelegate.drawerContainer!.centerViewController = contactsPageNav
+                
+                //Close drawer on open
+                appDelegate.drawerContainer!.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+                
+                break
+                
+            case 5:
+                
+                //open profile page
+                let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+                
+                let profilePageNav = UINavigationController(rootViewController: profileViewController)
+                
+                //access AppDelegate to access drawerContainer function
+                let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                
+                //use drawerContainer class to access main page
+                appDelegate.drawerContainer!.centerViewController = profilePageNav
+                
+                //Close drawer on open
+                appDelegate.drawerContainer!.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+                
+                break
                 
             case 6:
             

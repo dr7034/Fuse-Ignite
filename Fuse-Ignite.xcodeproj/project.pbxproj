@@ -50,6 +50,8 @@
 		65B60D1A1C582AC200A9F7C8 /* EventFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B60D191C582AC200A9F7C8 /* EventFeedTableViewController.swift */; };
 		65F742431C73532A00F4B3A0 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F742421C73532A00F4B3A0 /* CreateViewController.swift */; };
 		65F742451C735C7900F4B3A0 /* MyEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F742441C735C7900F4B3A0 /* MyEventsViewController.swift */; };
+		65F7424B1C73657B00F4B3A0 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7424A1C73657B00F4B3A0 /* ContactsViewController.swift */; };
+		65F7424D1C73659900F4B3A0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7424C1C73659900F4B3A0 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +128,8 @@
 		65B60D191C582AC200A9F7C8 /* EventFeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFeedTableViewController.swift; sourceTree = "<group>"; };
 		65F742421C73532A00F4B3A0 /* CreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		65F742441C735C7900F4B3A0 /* MyEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyEventsViewController.swift; sourceTree = "<group>"; };
+		65F7424A1C73657B00F4B3A0 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		65F7424C1C73659900F4B3A0 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,17 +284,18 @@
 		65F742461C7364D600F4B3A0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				65F7424E1C73670A00F4B3A0 /* Menu Controllers */,
 				653DC32E1C44A54A00EEAECD /* ViewController.swift */,
 				653DC3791C44AB5900EEAECD /* SignUpViewController.swift */,
 				65B0CF761C48888800829D6D /* MainPageViewController.swift */,
-				65B0CF8D1C49A78C00829D6D /* LeftSideViewController.swift */,
-				65B0CF8F1C49AC9400829D6D /* RightSideViewController.swift */,
 				65B0CF911C49C52A00829D6D /* DiscoverViewController.swift */,
 				65B0CF931C49E07800829D6D /* PasswordResetViewController.swift */,
 				65B0CF951C4A933C00829D6D /* EditProfileViewController.swift */,
 				65B60D191C582AC200A9F7C8 /* EventFeedTableViewController.swift */,
 				65F742421C73532A00F4B3A0 /* CreateViewController.swift */,
 				65F742441C735C7900F4B3A0 /* MyEventsViewController.swift */,
+				65F7424A1C73657B00F4B3A0 /* ContactsViewController.swift */,
+				65F7424C1C73659900F4B3A0 /* ProfileViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -321,6 +326,15 @@
 				65B0CF781C49A21500829D6D /* Fuse-Ignite-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		65F7424E1C73670A00F4B3A0 /* Menu Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				65B0CF8D1C49A78C00829D6D /* LeftSideViewController.swift */,
+				65B0CF8F1C49AC9400829D6D /* RightSideViewController.swift */,
+			);
+			name = "Menu Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -465,7 +479,9 @@
 			files = (
 				65B0CF771C48888800829D6D /* MainPageViewController.swift in Sources */,
 				653DC37A1C44AB5900EEAECD /* SignUpViewController.swift in Sources */,
+				65F7424D1C73659900F4B3A0 /* ProfileViewController.swift in Sources */,
 				65B0CF821C49A21600829D6D /* MMDrawerBarButtonItem.m in Sources */,
+				65F7424B1C73657B00F4B3A0 /* ContactsViewController.swift in Sources */,
 				65F742431C73532A00F4B3A0 /* CreateViewController.swift in Sources */,
 				65B0CF851C49A21600829D6D /* UIViewController+MMDrawerController.m in Sources */,
 				65B0CF891C49A30700829D6D /* MBProgressHUD.m in Sources */,
