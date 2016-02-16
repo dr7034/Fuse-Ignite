@@ -38,6 +38,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 if(imageData != nil)
                 {
                 self.profilePictureImageView.image = UIImage(data: imageData!)
+                self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width / 2;
+                self.profilePictureImageView.clipsToBounds = true;
                 }
             })
         }
