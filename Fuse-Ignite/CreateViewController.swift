@@ -1,14 +1,14 @@
 //
-//  Discover ViewController.swift
+//  CreateViewController.swift
 //  Fuse-Ignite
 //
-//  Created by Daniel Reilly on 16/01/2016.
+//  Created by Daniel Reilly on 16/02/2016.
 //  Copyright © 2016 Fuse Technology. All rights reserved.
 //
 
 import UIKit
 
-class DiscoverViewController: UIViewController {
+class CreateViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class DiscoverViewController: UIViewController {
         appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
         
     }
-
+    
     @IBAction func rightSideButtonTapped(sender: AnyObject) {
         
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -37,6 +37,6 @@ class DiscoverViewController: UIViewController {
         
     }
     
-    
 
+    
 }

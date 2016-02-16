@@ -15,7 +15,7 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var userFullNameLabel: UILabel!
     
     
-    var menuItems:[String] = ["Home","Discover","Create an Event","Contacts","Profile","Sign Out"]
+    var menuItems:[String] = ["Home","Discover","Create an Event","My Events","Contacts","Profile","Sign Out"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +87,25 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
                 
             break
                 
-            case 5:
+            case 2:
+                
+                //open discover page
+                let createViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CreateViewController") as! CreateViewController
+                
+                let createPageNav = UINavigationController(rootViewController: createViewController)
+                
+                //access AppDelegate to access drawerContainer function
+                let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                
+                //use drawerContainer class to access main page
+                appDelegate.drawerContainer!.centerViewController = createPageNav
+                
+                //Close drawer on open
+                appDelegate.drawerContainer!.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+            
+            break
+                
+            case 6:
             
             //perform sign out and take user to sign in page
                 
