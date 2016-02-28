@@ -71,9 +71,9 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
             case 1:
             
             //open discover page
-                let discoverViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DiscoverViewController") as! DiscoverViewController
+                let discoverTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DiscoverTableViewController") as! DiscoverTableViewController
                 
-                let discoverPageNav = UINavigationController(rootViewController: discoverViewController)
+                let discoverPageNav = UINavigationController(rootViewController: discoverTableViewController)
                 
                 //access AppDelegate to access drawerContainer function
                 let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

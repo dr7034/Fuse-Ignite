@@ -7,20 +7,18 @@
 //
 
 import UIKit
+import Parse
 
-class MyEventsViewController: UIViewController {
+class MyEventsViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     @IBAction func leftSideButtonTapped(sender: AnyObject) {
         
@@ -37,5 +35,4 @@ class MyEventsViewController: UIViewController {
         appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
         
     }
-
 }

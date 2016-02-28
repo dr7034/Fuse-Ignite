@@ -30,33 +30,12 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
             currentDate()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func leftSideButtonTapped(sender: AnyObject) {
-        
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
-
-    }
-
-    @IBAction func rightSideButtonTapped(sender: AnyObject) {
-        
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
-
-    }
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return users.count
+        return users.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let userCell = tableView.dequeueReusableCellWithIdentifier("eventFeedTableViewCell0", forIndexPath: indexPath)
+        let userCell = tableView.dequeueReusableCellWithIdentifier("eventFeedTableViewCell", forIndexPath: indexPath)
         
         let userObject: PFUser = users[indexPath.row]
         
@@ -119,6 +98,21 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
         
         
     }
+
     
-    
+    @IBAction func leftSideButtonTapped(sender: AnyObject) {
+        
+        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+
+    }
+
+    @IBAction func rightSideButtonTapped(sender: AnyObject) {
+        
+        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
+
+    }
 }
