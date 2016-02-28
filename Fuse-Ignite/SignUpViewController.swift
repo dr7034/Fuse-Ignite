@@ -109,7 +109,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         
             myUser.signUpInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
                 
-                var userMessage = "Registration was sucessful. Thank you!"
+                var userMessage = "Registration was successful. Thank you!"
                 
                 if(!success)
                 {
