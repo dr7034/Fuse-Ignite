@@ -20,17 +20,9 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        
         loadUserDetails()
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menuItems.count
@@ -53,15 +45,15 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
             case 0:
             //open main Page
                
-                let mainPageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MainPageViewController") as! MainPageViewController
+                let eventFeedTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EventFeedTableViewController") as! EventFeedTableViewController
                 
-                let mainPageNav = UINavigationController(rootViewController: mainPageViewController)
+                let eventFeedPageNav = UINavigationController(rootViewController: eventFeedTableViewController)
                 
                 //access AppDelegate to access drawerContainer function
                 let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 
                 //use drawerContainer class to access main page
-                appDelegate.drawerContainer!.centerViewController = mainPageNav
+                appDelegate.drawerContainer!.centerViewController = eventFeedPageNav
                 
                 //Close drawer on open
                 appDelegate.drawerContainer!.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
@@ -108,9 +100,9 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
             case 3:
                 
                 //open my events page
-                let myEventsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MyEventsViewController") as! MyEventsViewController
+                let myEventsTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MyEventsTableViewController") as! MyEventsTableViewController
                 
-                let myEventsPageNav = UINavigationController(rootViewController: myEventsViewController)
+                let myEventsPageNav = UINavigationController(rootViewController: myEventsTableViewController)
                 
                 //access AppDelegate to access drawerContainer function
                 let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -126,9 +118,9 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
             case 4:
                 
                 //open contacts page
-                let contactsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ContactsViewController") as! ContactsViewController
+                let contactsTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ContactsTableViewController") as! ContactsTableViewController
                 
-                let contactsPageNav = UINavigationController(rootViewController: contactsViewController)
+                let contactsPageNav = UINavigationController(rootViewController: contactsTableViewController)
                 
                 //access AppDelegate to access drawerContainer function
                 let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

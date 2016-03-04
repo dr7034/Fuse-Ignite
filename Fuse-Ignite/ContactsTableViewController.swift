@@ -1,5 +1,5 @@
 //
-//  EventFeedTableViewController.swift
+//  ContactsTableViewController.swift
 //  Fuse-Ignite
 //
 //  Created by Daniel Reilly on 03/03/2016.
@@ -10,20 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 
-class EventFeedTableViewController: PFQueryTableViewController {
-    
-    @IBOutlet weak var userProfilePicture: UIImageView!
-    @IBOutlet weak var currentDateTime: UILabel!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Clears Badges on Page open
-        let currentInstallation = PFInstallation.currentInstallation()
-        currentInstallation.badge = 0
-        
-        loadUserDetails()
-        currentDate()
-    }
+class ContactsTableViewController: PFQueryTableViewController {
 
     // Initialise the PFQueryTable tableview
     override init(style: UITableViewStyle, className: String!) {
@@ -34,24 +21,24 @@ class EventFeedTableViewController: PFQueryTableViewController {
         super.init(coder: aDecoder)!
         
         // Configure the PFQueryTableView
-        self.parseClassName = "EventObject"
-        self.textKey = "eventName"
+        self.parseClassName = "User"
+        self.textKey = "fullName"
         self.pullToRefreshEnabled = true
         self.paginationEnabled = false
     }
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
-        let query = PFQuery(className: "EventObject")
-        query.orderByAscending("eventName")
+        let query = PFQuery(className: "User")
+        query.orderByAscending("fullName")
         return query
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("discoverCell") as! PFTableViewCell!
+        var cell = tableView.dequeueReusableCellWithIdentifier("contactsCell") as! PFTableViewCell!
         if cell == nil {
-            cell = PFTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "discoverCell")
+            cell = PFTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "contactsCell")
         }
         
         // Extract values from the PFObject to display in the table cell
@@ -64,7 +51,7 @@ class EventFeedTableViewController: PFQueryTableViewController {
         
         return cell
     }
-    
+
     @IBAction func leftSideButtonTapped(sender: AnyObject) {
         
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -80,34 +67,5 @@ class EventFeedTableViewController: PFQueryTableViewController {
         appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
         
     }
-    
-    func loadUserDetails(){
-        
-        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
-        
-        profilePictureObject.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-            
-            if(imageData != nil)
-            {
-                self.userProfilePicture.image = UIImage(data: imageData!)
-            }
-        }
-        self.userProfilePicture.layer.cornerRadius = self.userProfilePicture.frame.size.width / 2;
-        self.userProfilePicture.clipsToBounds = true;
-    }
-    
-    func currentDate(){
-        
-        let currentDate = NSDate()
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale.currentLocale()
-        dateFormatter.dateFormat = "EEEE, MMMM dd, yyyy"
-        let convertedDate = dateFormatter.stringFromDate(currentDate)
-        self.currentDateTime.text = convertedDate
-        
-        
-    }
-
-
 
 }

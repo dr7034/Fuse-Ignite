@@ -18,10 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var drawerContainer: MMDrawerController?
-
-
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
         
         Parse.enableLocalDatastore()
         
@@ -118,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let mainStoryBoard:UIStoryboard = UIStoryboard(name:"Main", bundle:nil)
             
             // Create View Controllers
-            let mainPage:MainPageViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("MainPageViewController") as! MainPageViewController
+            let eventFeedPage:EventFeedTableViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("EventFeedTableViewController") as! EventFeedTableViewController
             
             let leftSideMenu:LeftSideViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("LeftSideViewController") as! LeftSideViewController
             
@@ -127,12 +125,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             
             // Wrap into Navigation controllers
-            let mainPageNav = UINavigationController(rootViewController:mainPage)
+            let eventFeedPageNav = UINavigationController(rootViewController:eventFeedPage)
             let leftSideMenuNav = UINavigationController(rootViewController:leftSideMenu)
             let rightSideMenuNav = UINavigationController(rootViewController:rightSideMenu)
             
             
-            drawerContainer = MMDrawerController(centerViewController: mainPageNav, leftDrawerViewController: leftSideMenuNav, rightDrawerViewController: rightSideMenuNav)
+            drawerContainer = MMDrawerController(centerViewController: eventFeedPageNav, leftDrawerViewController: leftSideMenuNav, rightDrawerViewController: rightSideMenuNav)
             
             drawerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView
             drawerContainer!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView
