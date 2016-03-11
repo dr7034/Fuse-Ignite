@@ -21,7 +21,7 @@ class EventFeedTableViewController: PFQueryTableViewController {
         let currentInstallation = PFInstallation.currentInstallation()
         currentInstallation.badge = 0
         
-        loadUserDetails()
+        loadProfilePicture()
         currentDate()
     }
 
@@ -81,7 +81,7 @@ class EventFeedTableViewController: PFQueryTableViewController {
         
     }
     
-    func loadUserDetails(){
+    func loadProfilePicture(){
         
         let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
         

@@ -52,6 +52,22 @@ class DiscoverTableViewController: PFQueryTableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("showEvent", sender: tableView)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        let nav = segue.destinationViewController as! UINavigationController
+        let eventViewController = nav.topViewController as! EventHomeViewController
+        
+        if let indexPath = self.tableView.indexPathForSelectedRow {
+            let row = Int(indexPath.row)
+            eventViewController.currentObject = (objects?[row])
+        }
+        
+    }
+    
     @IBAction func leftSideButtonTapped(sender: AnyObject) {
         
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

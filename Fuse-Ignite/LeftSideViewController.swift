@@ -15,7 +15,7 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var userFullNameLabel: UILabel!
     
     
-    var menuItems:[String] = ["Home","Discover","Create an Event","My Events","Contacts","Profile","Sign Out"]
+    var menuItems:[String] = ["Home","Discover","Create an Event","My Events","Contacts","Profile","Beacon Testing Ground","Sign Out"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -152,6 +152,24 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
                 break
                 
             case 6:
+                
+                //open profile page
+                let beaconTestViewController = self.storyboard?.instantiateViewControllerWithIdentifier("BeaconTestViewController") as! BeaconTestViewController
+                
+                let beaconTestPageNav = UINavigationController(rootViewController: beaconTestViewController)
+                
+                //access AppDelegate to access drawerContainer function
+                let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                
+                //use drawerContainer class to access main page
+                appDelegate.drawerContainer!.centerViewController = beaconTestPageNav
+                
+                //Close drawer on open
+                appDelegate.drawerContainer!.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+                
+                break
+                
+            case 7:
             
             //perform sign out and take user to sign in page
                 

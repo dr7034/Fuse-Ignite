@@ -12,14 +12,16 @@ import UIKit
 import Parse
 import Bolts
 import ParseFacebookUtilsV4
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     var drawerContainer: MMDrawerController?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
         
         Parse.enableLocalDatastore()
         
@@ -39,10 +41,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
-
-        
-        
-        buildUserInterface()
+            
+            buildUserInterface()
+            
+        UIApplication.sharedApplication().registerUserNotificationSettings(
+            UIUserNotificationSettings(forTypes: .Alert, categories: nil))
 
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -140,6 +143,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
     }
-
 }
 

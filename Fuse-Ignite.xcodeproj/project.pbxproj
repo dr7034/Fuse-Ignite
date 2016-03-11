@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6502E1D41C8E4334004B4158 /* EventHomeSocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6502E1D31C8E4334004B4158 /* EventHomeSocialViewController.swift */; };
 		650FFE501C887FF0003CAA1C /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650FFE4F1C887FF0003CAA1C /* ContactsTableViewController.swift */; };
 		650FFE561C88A982003CAA1C /* EventFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650FFE551C88A982003CAA1C /* EventFeedTableViewController.swift */; };
-		650FFE581C88B26B003CAA1C /* EstimoteSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650FFE571C88B26B003CAA1C /* EstimoteSDK.framework */; };
 		653DC32D1C44A54A00EEAECD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653DC32C1C44A54A00EEAECD /* AppDelegate.swift */; };
 		653DC32F1C44A54A00EEAECD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653DC32E1C44A54A00EEAECD /* ViewController.swift */; };
 		653DC3321C44A54A00EEAECD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 653DC3301C44A54A00EEAECD /* Main.storyboard */; };
@@ -35,6 +35,10 @@
 		653DC37A1C44AB5900EEAECD /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653DC3791C44AB5900EEAECD /* SignUpViewController.swift */; };
 		655D49961C7F5100007DC051 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 655D49951C7F5100007DC051 /* ParseUI.framework */; };
 		655D49A41C822896007DC051 /* DiscoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655D49A31C822896007DC051 /* DiscoverTableViewController.swift */; };
+		65603C4B1C9047CA006AA32F /* BeaconID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65603C4A1C9047CA006AA32F /* BeaconID.swift */; };
+		65603C4D1C9047ED006AA32F /* BeaconNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65603C4C1C9047ED006AA32F /* BeaconNotificationsManager.swift */; };
+		658DCD7E1C902B3800D5FCD5 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658DCD7D1C902B3800D5FCD5 /* CoreBluetooth.framework */; };
+		658DCD801C9034D200D5FCD5 /* EstimoteSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658DCD7F1C9034D200D5FCD5 /* EstimoteSDK.framework */; };
 		65B0CF821C49A21600829D6D /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B0CF7A1C49A21600829D6D /* MMDrawerBarButtonItem.m */; };
 		65B0CF831C49A21600829D6D /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B0CF7C1C49A21600829D6D /* MMDrawerController.m */; };
 		65B0CF841C49A21600829D6D /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B0CF7F1C49A21600829D6D /* MMDrawerVisualState.m */; };
@@ -49,6 +53,8 @@
 		65B0CF9C1C4C669F00829D6D /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B0CF9B1C4C669F00829D6D /* FBSDKShareKit.framework */; };
 		65B0CF9E1C4C6E5300829D6D /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B0CF9D1C4C6E5300829D6D /* ParseFacebookUtilsV4.framework */; };
 		65B137421C4EA52000B1DB67 /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B137411C4EA52000B1DB67 /* ParseTwitterUtils.framework */; };
+		65C76FE91C9181AE005D934B /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C76FE81C9181AE005D934B /* ContactsTableViewCell.swift */; };
+		65C76FEB1C919F26005D934B /* BeaconTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C76FEA1C919F26005D934B /* BeaconTestViewController.swift */; };
 		65DFF1471C86107F00147F44 /* MyEventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DFF1461C86107F00147F44 /* MyEventsTableViewController.swift */; };
 		65F742431C73532A00F4B3A0 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F742421C73532A00F4B3A0 /* CreateViewController.swift */; };
 		65F7424D1C73659900F4B3A0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7424C1C73659900F4B3A0 /* ProfileViewController.swift */; };
@@ -72,9 +78,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6502E1D31C8E4334004B4158 /* EventHomeSocialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHomeSocialViewController.swift; sourceTree = "<group>"; };
 		650FFE4F1C887FF0003CAA1C /* ContactsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		650FFE551C88A982003CAA1C /* EventFeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFeedTableViewController.swift; sourceTree = "<group>"; };
-		650FFE571C88B26B003CAA1C /* EstimoteSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = EstimoteSDK.framework; sourceTree = "<group>"; };
 		653DC3291C44A54900EEAECD /* Fuse-Ignite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fuse-Ignite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		653DC32C1C44A54A00EEAECD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		653DC32E1C44A54A00EEAECD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +112,10 @@
 		653DC3791C44AB5900EEAECD /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		655D49951C7F5100007DC051 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		655D49A31C822896007DC051 /* DiscoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewController.swift; sourceTree = "<group>"; };
+		65603C4A1C9047CA006AA32F /* BeaconID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconID.swift; sourceTree = "<group>"; };
+		65603C4C1C9047ED006AA32F /* BeaconNotificationsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconNotificationsManager.swift; sourceTree = "<group>"; };
+		658DCD7D1C902B3800D5FCD5 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		658DCD7F1C9034D200D5FCD5 /* EstimoteSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = EstimoteSDK.framework; sourceTree = "<group>"; };
 		65B0CF781C49A21500829D6D /* Fuse-Ignite-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fuse-Ignite-Bridging-Header.h"; sourceTree = "<group>"; };
 		65B0CF791C49A21600829D6D /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		65B0CF7A1C49A21600829D6D /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
@@ -127,6 +137,8 @@
 		65B0CF9B1C4C669F00829D6D /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		65B0CF9D1C4C6E5300829D6D /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		65B137411C4EA52000B1DB67 /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseTwitterUtils.framework; sourceTree = "<group>"; };
+		65C76FE81C9181AE005D934B /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
+		65C76FEA1C919F26005D934B /* BeaconTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconTestViewController.swift; sourceTree = "<group>"; };
 		65DFF1461C86107F00147F44 /* MyEventsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyEventsTableViewController.swift; sourceTree = "<group>"; };
 		65F742421C73532A00F4B3A0 /* CreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		65F7424C1C73659900F4B3A0 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -137,21 +149,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				653DC36F1C44A98900EEAECD /* SystemConfiguration.framework in Frameworks */,
+				653DC3651C44A96200EEAECD /* CoreLocation.framework in Frameworks */,
+				658DCD7E1C902B3800D5FCD5 /* CoreBluetooth.framework in Frameworks */,
 				65B0CF9A1C4C669000829D6D /* FBSDKLoginKit.framework in Frameworks */,
-				650FFE581C88B26B003CAA1C /* EstimoteSDK.framework in Frameworks */,
 				653DC3771C44A9C000EEAECD /* Social.framework in Frameworks */,
 				65B0CF9E1C4C6E5300829D6D /* ParseFacebookUtilsV4.framework in Frameworks */,
 				653DC3751C44A9B600EEAECD /* Accounts.framework in Frameworks */,
 				653DC3731C44A99900EEAECD /* libsqlite3.tbd in Frameworks */,
 				653DC3711C44A98F00EEAECD /* libz.tbd in Frameworks */,
-				653DC36F1C44A98900EEAECD /* SystemConfiguration.framework in Frameworks */,
 				653DC36D1C44A98000EEAECD /* StoreKit.framework in Frameworks */,
 				653DC36B1C44A97700EEAECD /* Security.framework in Frameworks */,
 				655D49961C7F5100007DC051 /* ParseUI.framework in Frameworks */,
 				653DC3691C44A97200EEAECD /* QuartzCore.framework in Frameworks */,
 				653DC3671C44A96B00EEAECD /* MobileCoreServices.framework in Frameworks */,
-				653DC3651C44A96200EEAECD /* CoreLocation.framework in Frameworks */,
 				653DC3631C44A95A00EEAECD /* CoreGraphics.framework in Frameworks */,
+				658DCD801C9034D200D5FCD5 /* EstimoteSDK.framework in Frameworks */,
 				653DC3611C44A94F00EEAECD /* CFNetwork.framework in Frameworks */,
 				65B137421C4EA52000B1DB67 /* ParseTwitterUtils.framework in Frameworks */,
 				653DC35F1C44A94900EEAECD /* AudioToolbox.framework in Frameworks */,
@@ -203,6 +216,7 @@
 		653DC32B1C44A54900EEAECD /* Fuse-Ignite */ = {
 			isa = PBXGroup;
 			children = (
+				65603C491C904762006AA32F /* Beacons */,
 				65B0CF8A1C49A31400829D6D /* MBProgressHUD */,
 				65B0CF861C49A22800829D6D /* MMDrawer */,
 				65F742461C7364D600F4B3A0 /* Controller */,
@@ -234,7 +248,8 @@
 		653DC3781C44A9E900EEAECD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				650FFE571C88B26B003CAA1C /* EstimoteSDK.framework */,
+				658DCD7F1C9034D200D5FCD5 /* EstimoteSDK.framework */,
+				658DCD7D1C902B3800D5FCD5 /* CoreBluetooth.framework */,
 				655D49951C7F5100007DC051 /* ParseUI.framework */,
 				65B137411C4EA52000B1DB67 /* ParseTwitterUtils.framework */,
 				65B0CF9D1C4C6E5300829D6D /* ParseFacebookUtilsV4.framework */,
@@ -258,6 +273,15 @@
 				653DC35B1C44A91600EEAECD /* Parse.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		65603C491C904762006AA32F /* Beacons */ = {
+			isa = PBXGroup;
+			children = (
+				65603C4A1C9047CA006AA32F /* BeaconID.swift */,
+				65603C4C1C9047ED006AA32F /* BeaconNotificationsManager.swift */,
+			);
+			name = Beacons;
 			sourceTree = "<group>";
 		};
 		65B0CF861C49A22800829D6D /* MMDrawer */ = {
@@ -299,6 +323,8 @@
 				65DFF1461C86107F00147F44 /* MyEventsTableViewController.swift */,
 				650FFE4F1C887FF0003CAA1C /* ContactsTableViewController.swift */,
 				650FFE551C88A982003CAA1C /* EventFeedTableViewController.swift */,
+				6502E1D31C8E4334004B4158 /* EventHomeSocialViewController.swift */,
+				65C76FEA1C919F26005D934B /* BeaconTestViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -306,6 +332,7 @@
 		65F742471C7364E000F4B3A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				65C76FE81C9181AE005D934B /* ContactsTableViewCell.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -479,12 +506,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65C76FE91C9181AE005D934B /* ContactsTableViewCell.swift in Sources */,
 				653DC37A1C44AB5900EEAECD /* SignUpViewController.swift in Sources */,
 				650FFE561C88A982003CAA1C /* EventFeedTableViewController.swift in Sources */,
 				650FFE501C887FF0003CAA1C /* ContactsTableViewController.swift in Sources */,
+				65603C4D1C9047ED006AA32F /* BeaconNotificationsManager.swift in Sources */,
 				65F7424D1C73659900F4B3A0 /* ProfileViewController.swift in Sources */,
 				65B0CF821C49A21600829D6D /* MMDrawerBarButtonItem.m in Sources */,
 				65F742431C73532A00F4B3A0 /* CreateViewController.swift in Sources */,
+				65603C4B1C9047CA006AA32F /* BeaconID.swift in Sources */,
+				65C76FEB1C919F26005D934B /* BeaconTestViewController.swift in Sources */,
 				65B0CF851C49A21600829D6D /* UIViewController+MMDrawerController.m in Sources */,
 				65B0CF891C49A30700829D6D /* MBProgressHUD.m in Sources */,
 				653DC32F1C44A54A00EEAECD /* ViewController.swift in Sources */,
@@ -493,6 +524,7 @@
 				65B0CF941C49E07800829D6D /* PasswordResetViewController.swift in Sources */,
 				65B0CF831C49A21600829D6D /* MMDrawerController.m in Sources */,
 				653DC32D1C44A54A00EEAECD /* AppDelegate.swift in Sources */,
+				6502E1D41C8E4334004B4158 /* EventHomeSocialViewController.swift in Sources */,
 				65B0CF8E1C49A78C00829D6D /* LeftSideViewController.swift in Sources */,
 				65B0CF901C49AC9400829D6D /* RightSideViewController.swift in Sources */,
 				655D49A41C822896007DC051 /* DiscoverTableViewController.swift in Sources */,
@@ -596,6 +628,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -723,6 +756,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -744,6 +778,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

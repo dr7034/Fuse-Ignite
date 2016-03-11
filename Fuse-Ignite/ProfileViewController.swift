@@ -17,33 +17,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var userCompanyLabel: UILabel!
     @IBOutlet weak var profilePictureImageView: UIImageView!
     
+    // Container to store the view table selected object
+    var currentObject : PFObject?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        loadUserDetails()
-
-            if(PFUser.currentUser()?.objectForKey("profile_picture") != nil)
-            {
-                let userImageFile:PFFile = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
-                
-                userImageFile.getDataInBackgroundWithBlock({ (imageData:NSData?, error:NSError?) -> Void in
-                    
-                    if(imageData != nil)
-                    {
-                        self.profilePictureImageView.image = UIImage(data: imageData!)
-                        self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width / 2;
-                        self.profilePictureImageView.clipsToBounds = true;
-                    }
-                })
-            }
-        }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
-    {
-        profilePictureImageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        loadProfilePicture()
         
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
+        }
     
     @IBAction func leftSideButtonTapped(sender: AnyObject) {
         
@@ -61,18 +43,20 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
     }
     
-    func loadUserDetails()
-    {
-//        // Load User Details
-//        let userFullName = PFUser.currentUser()?.objectForKey("fullName") as! String
-//        let userCompanyName = PFUser.currentUser()?.objectForKey("companyName") as! String
-//        let userJobTitle = PFUser.currentUser()?.objectForKey("jobTitle") as! String
-//        
-//        userFullNameLabel.text = userFullName
-//        userCompanyLabel.text = userCompanyName
-//        userJobTitleLabel.text = userJobTitle
-//        
+    func loadProfilePicture(){
+        
+        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
+        
+        profilePictureObject.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+            
+            if(imageData != nil)
+            {
+                self.profilePictureImageView.image = UIImage(data: imageData!)
+            }
+        }
+        self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width / 2;
+        self.profilePictureImageView.clipsToBounds = true;
     }
-
+    
 
 }

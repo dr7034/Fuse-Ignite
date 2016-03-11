@@ -11,7 +11,7 @@ import Parse
 import ParseUI
 
 class ContactsTableViewController: PFQueryTableViewController {
-
+    
     // Initialise the PFQueryTable tableview
     override init(style: UITableViewStyle, className: String!) {
         super.init(style: style, className: className)
@@ -21,7 +21,7 @@ class ContactsTableViewController: PFQueryTableViewController {
         super.init(coder: aDecoder)!
         
         // Configure the PFQueryTableView
-        self.parseClassName = "User"
+        self.parseClassName = "_User"
         self.textKey = "fullName"
         self.pullToRefreshEnabled = true
         self.paginationEnabled = false
@@ -29,7 +29,7 @@ class ContactsTableViewController: PFQueryTableViewController {
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
-        let query = PFQuery(className: "User")
+        let query = PFQuery(className: "_User")
         query.orderByAscending("fullName")
         return query
     }
@@ -42,13 +42,12 @@ class ContactsTableViewController: PFQueryTableViewController {
         }
         
         // Extract values from the PFObject to display in the table cell
-        if let eventName = object?["eventName"] as? String {
-            cell?.textLabel?.text = eventName
+        if let contactName = object?["fullName"] as? String {
+            cell?.textLabel?.text = contactName
         }
-        if let eventDescription = object?["eventDescription"] as? String {
+        if let eventDescription = object?["email"] as? String {
             cell?.detailTextLabel?.text = eventDescription
         }
-        
         return cell
     }
 
@@ -67,5 +66,21 @@ class ContactsTableViewController: PFQueryTableViewController {
         appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
         
     }
+    
+//    func loadProfilePicture(){
+//        
+//        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
+//        
+//        profilePictureObject.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+//            
+//            if(imageData != nil)
+//            {
+//                self.userProfilePicture.image = UIImage(data: imageData!)
+//            }
+//        }
+//        self.userProfilePicture.layer.cornerRadius = self.userProfilePicture.frame.size.width / 2;
+//        self.userProfilePicture.clipsToBounds = true;
+//    }
+    
 
 }

@@ -29,13 +29,16 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         view.addGestureRecognizer(tap)
 
         // Load User Details
-        let userFirstName = PFUser.currentUser()?.objectForKey("fullName") as? String
-        let userCompanyName = PFUser.currentUser()?.objectForKey("companyName") as? String
-        let userJobTitle = PFUser.currentUser()?.objectForKey("jobTitle") as? String
         
-        userFirstNameTextField.text = userFirstName
-        userCompanyNameTextField.text = userCompanyName
-        userJobTitleTextField.text = userJobTitle
+//        let userFirstName = PFUser.query()
+//        let userCompanyName = PFUser.currentUser()?.objectForKey("companyName") as? String
+//        let userJobTitle = PFUser.currentUser()?.objectForKey("jobTitle") as? String
+//        
+        userFirstNameTextField.text = "Daniel Reilly"
+        userCompanyNameTextField.text = "Fuse Technology"
+        userJobTitleTextField.text = "Founder"
+        
+//        print("User Name: \(userFirstName) User Company \(userCompanyName) User Job Title: \(userJobTitle)")
         
         if(PFUser.currentUser()?.objectForKey("profile_picture") != nil)
         {
