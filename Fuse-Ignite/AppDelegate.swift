@@ -48,10 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         
         //setup app with estimote
         ESTConfig.setupAppID("fuse-ignite", andAppToken: "9f394667684dbab1f9264c8d33616b84")
-        
-        //setup twitter kit
-        Twitter.sharedInstance().startWithConsumerKey("XKY3bzOvp7GMF2RVDcTJcrFPD", consumerSecret: "YzveyN2QrflvPJ3hauIRNf9eSA9Xi2CMqdwhjQhJ3QQ262xxBQ")
-        Fabric.with([Twitter.sharedInstance()])
 
         //Beacon Notification when in range (Ignite0)
         self.beaconNotificationsManager.enableNotificationsForBeaconID(
@@ -63,6 +59,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         //Enable estimote analytics
         ESTConfig.enableRangingAnalytics(true)
         ESTConfig.enableMonitoringAnalytics(true)
+        
+        //setup twitter kit
+        Twitter.sharedInstance().startWithConsumerKey("XKY3bzOvp7GMF2RVDcTJcrFPD", consumerSecret: "YzveyN2QrflvPJ3hauIRNf9eSA9Xi2CMqdwhjQhJ3QQ262xxBQ")
+        Fabric.with([Twitter.sharedInstance()])
         
         UIApplication.sharedApplication().registerUserNotificationSettings(
             UIUserNotificationSettings(forTypes: .Alert, categories: nil))
