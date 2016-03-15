@@ -12,13 +12,15 @@ import UIKit
 import Parse
 import Bolts
 import ParseFacebookUtilsV4
-import CoreLocation
+import Fabric
+import TwitterKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate {
     
     var window: UIWindow?
     var drawerContainer: MMDrawerController?
+    let beaconNotificationsManager = BeaconNotificationsManager()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -43,7 +45,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
             
             buildUserInterface()
-            
+        
+        //setup app with estimote
+        ESTConfig.setupAppID("fuse-ignite", andAppToken: "9f394667684dbab1f9264c8d33616b84")
+        
+        //setup twitter kit
+        Twitter.sharedInstance().startWithConsumerKey("XKY3bzOvp7GMF2RVDcTJcrFPD", consumerSecret: "YzveyN2QrflvPJ3hauIRNf9eSA9Xi2CMqdwhjQhJ3QQ262xxBQ")
+        Fabric.with([Twitter.sharedInstance()])
+
+        //Beacon Notification when in range (Ignite0)
+        self.beaconNotificationsManager.enableNotificationsForBeaconID(
+            BeaconID(UUIDString: "712CCB65-D5C3-047E-9CF3-E3A683026081", major: 1, minor: 1),
+            enterMessage: "You have entered an event region. Swipe this notification to check in.",
+            exitMessage: "You have exited the event region"
+        )
+        
+        //Enable estimote analytics
+        ESTConfig.enableRangingAnalytics(true)
+        ESTConfig.enableMonitoringAnalytics(true)
+        
         UIApplication.sharedApplication().registerUserNotificationSettings(
             UIUserNotificationSettings(forTypes: .Alert, categories: nil))
 

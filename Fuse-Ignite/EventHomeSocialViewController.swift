@@ -8,7 +8,8 @@
 
 import UIKit
 import Parse
-import ParseUI
+import ParseUI  
+import TwitterKit
 
 class EventHomeViewController: UIViewController {
 
