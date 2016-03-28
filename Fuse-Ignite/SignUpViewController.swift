@@ -24,7 +24,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         super.viewDidLoad()
 
         //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SignUpViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     

@@ -57,6 +57,8 @@
 		65B0CF9C1C4C669F00829D6D /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B0CF9B1C4C669F00829D6D /* FBSDKShareKit.framework */; };
 		65B0CF9E1C4C6E5300829D6D /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B0CF9D1C4C6E5300829D6D /* ParseFacebookUtilsV4.framework */; };
 		65B137421C4EA52000B1DB67 /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B137411C4EA52000B1DB67 /* ParseTwitterUtils.framework */; };
+		65B5828B1C9A9FEB007F86C7 /* AddBeaconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B5828A1C9A9FEB007F86C7 /* AddBeaconViewController.swift */; };
+		65B5828D1C9AA3FE007F86C7 /* BeaconItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B5828C1C9AA3FE007F86C7 /* BeaconItem.swift */; };
 		65C76FE91C9181AE005D934B /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C76FE81C9181AE005D934B /* ContactsTableViewCell.swift */; };
 		65C76FEB1C919F26005D934B /* BeaconTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C76FEA1C919F26005D934B /* BeaconTestViewController.swift */; };
 		65DFF1471C86107F00147F44 /* MyEventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DFF1461C86107F00147F44 /* MyEventsTableViewController.swift */; };
@@ -145,6 +147,8 @@
 		65B0CF9B1C4C669F00829D6D /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		65B0CF9D1C4C6E5300829D6D /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		65B137411C4EA52000B1DB67 /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseTwitterUtils.framework; sourceTree = "<group>"; };
+		65B5828A1C9A9FEB007F86C7 /* AddBeaconViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBeaconViewController.swift; sourceTree = "<group>"; };
+		65B5828C1C9AA3FE007F86C7 /* BeaconItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconItem.swift; sourceTree = "<group>"; };
 		65C76FE81C9181AE005D934B /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		65C76FEA1C919F26005D934B /* BeaconTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconTestViewController.swift; sourceTree = "<group>"; };
 		65DFF1461C86107F00147F44 /* MyEventsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyEventsTableViewController.swift; sourceTree = "<group>"; };
@@ -340,6 +344,7 @@
 				650FFE551C88A982003CAA1C /* EventFeedTableViewController.swift */,
 				6502E1D31C8E4334004B4158 /* EventHomeSocialViewController.swift */,
 				65C76FEA1C919F26005D934B /* BeaconTestViewController.swift */,
+				65B5828A1C9A9FEB007F86C7 /* AddBeaconViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -348,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				65C76FE81C9181AE005D934B /* ContactsTableViewCell.swift */,
+				65B5828C1C9AA3FE007F86C7 /* BeaconItem.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -541,6 +547,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65C76FE91C9181AE005D934B /* ContactsTableViewCell.swift in Sources */,
+				65B5828D1C9AA3FE007F86C7 /* BeaconItem.swift in Sources */,
 				653DC37A1C44AB5900EEAECD /* SignUpViewController.swift in Sources */,
 				650FFE561C88A982003CAA1C /* EventFeedTableViewController.swift in Sources */,
 				650FFE501C887FF0003CAA1C /* ContactsTableViewController.swift in Sources */,
@@ -548,6 +555,7 @@
 				65F7424D1C73659900F4B3A0 /* ProfileViewController.swift in Sources */,
 				65B0CF821C49A21600829D6D /* MMDrawerBarButtonItem.m in Sources */,
 				65F742431C73532A00F4B3A0 /* CreateViewController.swift in Sources */,
+				65B5828B1C9A9FEB007F86C7 /* AddBeaconViewController.swift in Sources */,
 				65603C4B1C9047CA006AA32F /* BeaconID.swift in Sources */,
 				65C76FEB1C919F26005D934B /* BeaconTestViewController.swift in Sources */,
 				65B0CF851C49A21600829D6D /* UIViewController+MMDrawerController.m in Sources */,

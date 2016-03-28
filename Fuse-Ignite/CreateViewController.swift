@@ -19,7 +19,7 @@ class CreateViewController: UIViewController {
     
     override func viewDidLoad() {
         //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CreateViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
 

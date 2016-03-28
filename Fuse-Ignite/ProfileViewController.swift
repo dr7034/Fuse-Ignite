@@ -24,6 +24,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewDidLoad()
         
         loadProfilePicture()
+        if let user = currentObject {
+        userFullNameLabel.text = user["fullName"] as? String
+        }
         
         }
     
