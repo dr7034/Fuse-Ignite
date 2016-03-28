@@ -6,3 +6,4 @@
 #import "MBProgressHUD.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <EstimoteSDK/EstimoteSDK.h>

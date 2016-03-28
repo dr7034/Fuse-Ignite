@@ -19,13 +19,11 @@ class PasswordResetViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PasswordResetViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
     @IBAction func SendEmailButtonTapped(sender: AnyObject) {
         
@@ -74,6 +72,12 @@ class PasswordResetViewController: UIViewController {
         
         self.dismissViewControllerAnimated(true, completion: nil)
         
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
 
 }

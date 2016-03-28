@@ -20,6 +20,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
 
     override func didReceiveMemoryWarning() {
@@ -102,10 +105,10 @@ class ViewController: UIViewController {
         activityIndicator.detailsLabelText = "Please Wait"
         
         // Define fields we would like to read from Facebook User object
-        let requestParameters = ["fields": "id, email, first_name, last_name, name"]
+        let requestParameters: AnyObject = ["fields": "id, email, first_name, last_name, name"]
         
         // /me
-        let userDetails = FBSDKGraphRequest(graphPath: "me", parameters: requestParameters)
+        let userDetails = FBSDKGraphRequest(graphPath: "me", parameters: requestParameters as! [NSObject : AnyObject])
         
         userDetails.startWithCompletionHandler({
             (connection, result, error: NSError!) -> Void in
@@ -126,11 +129,11 @@ class ViewController: UIViewController {
             }
             
             //Extract user fields
-            let userId:String = result["id"] as! String
-//            let userFullName:String = result["name"] as! String
-            let userEmail:String? = result["email"] as? String
-            let userFirstName:String?  = result["first_name"] as? String
-            let userLastName:String? = result["last_name"] as? String
+            let userId: String = "id"
+            //            let userFullName:String = result["name"] as! String
+            let userEmail = "email"
+            let userFirstName  = "first_name"
+            let userLastName = "last_name"
             
             //Get Facebook Profile Picture
             let userProfile = "https://graph.facebook.com/" + userId + "/picture?type=large"
@@ -148,11 +151,11 @@ class ViewController: UIViewController {
                 PFUser.currentUser()?.setObject(profileFileObject, forKey: "profile_picture")
             }
             
-            PFUser.currentUser()?.setObject(userFirstName!, forKey: "first_name")
-            PFUser.currentUser()?.setObject(userLastName!, forKey: "last_name")
+            PFUser.currentUser()?.setObject(userFirstName, forKey: "first_name")
+            PFUser.currentUser()?.setObject(userLastName, forKey: "last_name")
             
             
-            if let userEmail = userEmail
+            if userEmail == userEmail
             {
                 PFUser.currentUser()?.email = userEmail
                 PFUser.currentUser()?.username = userEmail
@@ -212,5 +215,11 @@ class ViewController: UIViewController {
         alert.addAction(okAction)
         self.presentViewController(alert, animated: true, completion: nil)
         
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
 }

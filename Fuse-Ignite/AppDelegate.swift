@@ -12,16 +12,18 @@ import UIKit
 import Parse
 import Bolts
 import ParseFacebookUtilsV4
+import Fabric
+import TwitterKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate {
+    
     var window: UIWindow?
     var drawerContainer: MMDrawerController?
-
-
+    let beaconNotificationsManager = BeaconNotificationsManager()
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
         
         Parse.enableLocalDatastore()
         
@@ -41,10 +43,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
+            
+            buildUserInterface()
+        
+        //setup app with estimote
+        ESTConfig.setupAppID("fuse-ignite", andAppToken: "9f394667684dbab1f9264c8d33616b84")
 
+        //Beacon Notification when in range (Ignite0)
+        self.beaconNotificationsManager.enableNotificationsForBeaconID(
+            BeaconID(UUIDString: "712CCB65-D5C3-047E-9CF3-E3A683026081", major: 1, minor: 1),
+            enterMessage: "You have entered an event region. Swipe this notification to check in.",
+            exitMessage: " "
+        )
         
+        //Enable estimote analytics
+        ESTConfig.enableRangingAnalytics(true)
+        ESTConfig.enableMonitoringAnalytics(true)
         
-        buildUserInterface()
+        //setup twitter kit
+        Twitter.sharedInstance().startWithConsumerKey("XKY3bzOvp7GMF2RVDcTJcrFPD", consumerSecret: "YzveyN2QrflvPJ3hauIRNf9eSA9Xi2CMqdwhjQhJ3QQ262xxBQ")
+        Fabric.with([Twitter.sharedInstance()])
+        
+        UIApplication.sharedApplication().registerUserNotificationSettings(
+            UIUserNotificationSettings(forTypes: .Alert, categories: nil))
 
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -89,6 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -118,7 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let mainStoryBoard:UIStoryboard = UIStoryboard(name:"Main", bundle:nil)
             
             // Create View Controllers
-            let mainPage:MainPageViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("MainPageViewController") as! MainPageViewController
+            let eventFeedPage:EventFeedTableViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("EventFeedTableViewController") as! EventFeedTableViewController
             
             let leftSideMenu:LeftSideViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("LeftSideViewController") as! LeftSideViewController
             
@@ -127,12 +149,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             
             // Wrap into Navigation controllers
-            let mainPageNav = UINavigationController(rootViewController:mainPage)
+            let eventFeedPageNav = UINavigationController(rootViewController:eventFeedPage)
             let leftSideMenuNav = UINavigationController(rootViewController:leftSideMenu)
             let rightSideMenuNav = UINavigationController(rootViewController:rightSideMenu)
             
             
-            drawerContainer = MMDrawerController(centerViewController: mainPageNav, leftDrawerViewController: leftSideMenuNav, rightDrawerViewController: rightSideMenuNav)
+            drawerContainer = MMDrawerController(centerViewController: eventFeedPageNav, leftDrawerViewController: leftSideMenuNav, rightDrawerViewController: rightSideMenuNav)
             
             drawerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView
             drawerContainer!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView
@@ -142,6 +164,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
     }
-
 }
 

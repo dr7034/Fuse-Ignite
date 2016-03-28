@@ -8,26 +8,37 @@
 
 import UIKit
 import Parse
+import ParseUI
 
 class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var userFirstNameTextField: UITextField!
-    @IBOutlet weak var userLastNameTextField: UITextField!
     @IBOutlet weak var userPasswordTextField: UITextField!
     @IBOutlet weak var userPasswordRepeatTextField: UITextField!
+    @IBOutlet weak var userCompanyNameTextField: UITextField!
+    @IBOutlet weak var userJobTitleTextField: UITextField!
     
     var opener: LeftSideViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(EditProfileViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
 
         // Load User Details
-        let userFirstName = PFUser.currentUser()?.objectForKey("first_name") as! String
-        let userLastName = PFUser.currentUser()?.objectForKey("last_name") as! String
         
-        userFirstNameTextField.text = userFirstName
-        userLastNameTextField.text = userLastName
+//        let userFirstName = PFUser.query()
+//        let userCompanyName = PFUser.currentUser()?.objectForKey("companyName") as? String
+//        let userJobTitle = PFUser.currentUser()?.objectForKey("jobTitle") as? String
+//        
+        userFirstNameTextField.text = "Daniel Reilly"
+        userCompanyNameTextField.text = "Fuse Technology"
+        userJobTitleTextField.text = "Founder"
+        
+//        print("User Name: \(userFirstName) User Company \(userCompanyName) User Job Title: \(userJobTitle)")
         
         if(PFUser.currentUser()?.objectForKey("profile_picture") != nil)
         {
@@ -43,11 +54,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 }
             })
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func changeProfilePictureButtonTapped(sender: AnyObject) {
@@ -76,7 +82,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         let profileImageData = UIImageJPEGRepresentation(profilePictureImageView.image!, 1)
         
         //Check if all fields are empty
-        if(userPasswordTextField.text!.isEmpty && userFirstNameTextField.text!.isEmpty && userLastNameTextField.text!.isEmpty && (profileImageData == nil))
+        if(userPasswordTextField.text!.isEmpty && userFirstNameTextField.text!.isEmpty && (profileImageData == nil))
         {
             let userMessage = "All Fields cannot be empty"
             self.displayMessage(userMessage)
@@ -90,18 +96,16 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }
         
         //Check if First name or Last name are not empty
-        if(userFirstNameTextField.text!.isEmpty || userLastNameTextField.text!.isEmpty)
+        if(userFirstNameTextField.text!.isEmpty)
         {
-            let userMessage = "First Name and Last Name Fields are Required"
+            let userMessage = "Name Field is Required"
             self.displayMessage(userMessage)
         }
         
         //Set New Values for First and Last Name
         let userFirstName = userFirstNameTextField.text!
-        let userLastName = userLastNameTextField.text!
         
-        myUser.setObject(userFirstName, forKey: "first_name")
-        myUser.setObject(userLastName, forKey: "last_name")
+        myUser.setObject(userFirstName, forKey: "fullName")
         
         // Set New Password
         if(userPasswordTextField.text != nil)
@@ -162,6 +166,12 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         //Add Action button to Alert
         alert.addAction(okAction)
         self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
 
 }

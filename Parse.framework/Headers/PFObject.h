@@ -136,7 +136,7 @@ NS_REQUIRES_PROPERTY_DEFINITIONS
 
  @param key The key for which to return the corresponding value.
  */
-- (PF_NULLABLE_S id)objectForKey:(NSString *)key;
+- (id)objectForKey:(NSString *)key;
 
 /*!
  @abstract Sets the object associated with a given key.

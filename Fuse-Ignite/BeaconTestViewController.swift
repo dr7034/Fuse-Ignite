@@ -1,27 +1,34 @@
 //
-//  ContactsViewController.swift
+//  BeaconTestViewController.swift
 //  Fuse-Ignite
 //
-//  Created by Daniel Reilly on 16/02/2016.
+//  Created by Daniel Reilly on 10/03/2016.
 //  Copyright © 2016 Fuse Technology. All rights reserved.
 //
 
 import UIKit
+import CoreLocation
 
-class ContactsViewController: UIViewController {
+class BeaconTestViewController: UIViewController, ESTBeaconManagerDelegate {
+    
+    @IBOutlet weak var beaconNameLabel: UILabel!
 
+    
+    let beaconManager: ESTBeaconManager = ESTBeaconManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        self.beaconManager.delegate = self
+        
+//        let beacon1Region = CLBeaconRegion(
+//            proximityUUID: NSUUID(UUIDString: "712CCB65-D5C3-047E-9CF3-E3A683026081")!,
+//            identifier: "Ignite0")
+//        
+        
     }
     
-
+    
     @IBAction func leftSideButtonTapped(sender: AnyObject) {
         
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -37,6 +44,7 @@ class ContactsViewController: UIViewController {
         appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
         
     }
-
-
+    
+    
+    
 }
