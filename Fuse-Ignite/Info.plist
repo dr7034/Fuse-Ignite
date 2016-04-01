@@ -47,7 +47,12 @@
 			</dict>
 			<dict>
 				<key>KitInfo</key>
-				<dict/>
+				<dict>
+					<key>consumerKey</key>
+					<string>DVUMpQ4Vm53BaWy6PyzN4Lfq7</string>
+					<key>consumerSecret</key>
+					<string>MV8sCYRYfDtCUnOi8UL1yZDclzb0OHeu2BONNu3JROagnHzp6M</string>
+				</dict>
 				<key>KitName</key>
 				<string>Twitter</string>
 			</dict>

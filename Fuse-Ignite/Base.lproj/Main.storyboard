@@ -2215,8 +2215,8 @@
         <image name="headerbgeventdiscover" width="750" height="341"/>
         <image name="headereventfeed" width="750" height="700"/>
         <image name="left" width="12" height="22"/>
-        <image name="menu" width="22" height="22"/>
+        <image name="menu" width="22" height="18"/>
         <image name="right" width="12" height="22"/>
-        <image name="search" width="22" height="22"/>
+        <image name="search" width="25" height="24"/>
     </resources>
 </document>

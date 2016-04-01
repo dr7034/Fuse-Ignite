@@ -63,7 +63,7 @@ class DiscoverTableViewController: PFQueryTableViewController {
         
         if let indexPath = self.tableView.indexPathForSelectedRow {
             let row = Int(indexPath.row)
-            eventViewController.currentObject = (objects?[row])
+            eventViewController.currentObject = (objects?[row]) as? PFObject
         }
         
     }

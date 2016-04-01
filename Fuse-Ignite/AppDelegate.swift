@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         ESTConfig.enableRangingAnalytics(true)
         ESTConfig.enableMonitoringAnalytics(true)
         
-        //setup twitter kit
+//        //setup twitter kit
         Twitter.sharedInstance().startWithConsumerKey("XKY3bzOvp7GMF2RVDcTJcrFPD", consumerSecret: "YzveyN2QrflvPJ3hauIRNf9eSA9Xi2CMqdwhjQhJ3QQ262xxBQ")
         Fabric.with([Twitter.sharedInstance()])
         
