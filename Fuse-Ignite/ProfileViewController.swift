@@ -28,6 +28,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         userFullNameLabel.text = user["fullName"] as? String
         }
         
+            userFullNameLabel.text = "Daniel Reilly"
+            userJobTitleLabel.text = "Founder"
+            userCompanyLabel.text = "Fuse Technology"
+
+        
         }
     
     @IBAction func leftSideButtonTapped(sender: AnyObject) {
