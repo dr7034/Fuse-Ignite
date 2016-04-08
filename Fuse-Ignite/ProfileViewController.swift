@@ -16,6 +16,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var userJobTitleLabel: UILabel!
     @IBOutlet weak var userCompanyLabel: UILabel!
     @IBOutlet weak var profilePictureImageView: UIImageView!
+    @IBOutlet weak var userBioTextView: UITextView!
+    @IBOutlet weak var userNetworkingObjectivesTextView: UITextView!
     
     // Container to store the view table selected object
     var currentObject : PFObject?
