@@ -11,7 +11,7 @@ import Parse
 import ParseUI  
 //import TwitterKit
 
-class EventHomeViewController: UIViewController {
+class EventHomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventLocationNameLabel: UILabel!
@@ -20,6 +20,10 @@ class EventHomeViewController: UIViewController {
     @IBOutlet weak var eventLocationCountry: UILabel!
     @IBOutlet weak var eventDescriptionLabel: UILabel!
     @IBOutlet weak var userProfilePicture: UIImageView!
+    
+    @IBOutlet weak var relevantUsersTableView: UITableView!
+    @IBOutlet weak var noTopicsInCommonTableView: UITableView!
+    
     
     var window: UIWindow?
     var drawerContainer: MMDrawerController?
@@ -41,6 +45,11 @@ class EventHomeViewController: UIViewController {
             
             
         }
+        
+        self.relevantUsersTableView.delegate = self
+        self.relevantUsersTableView.dataSource = self
+        self.noTopicsInCommonTableView.delegate = self
+        self.noTopicsInCommonTableView.delegate = self
         
         // Return to table view
         self.navigationController?.popViewControllerAnimated(true)

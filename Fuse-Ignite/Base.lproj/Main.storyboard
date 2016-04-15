@@ -833,6 +833,27 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="157"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <prototypes>
+                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="noTopicsInCommonCell" id="fXP-V8-D0Q" customClass="noTopicsInCommonCell" customModule="Fuse_Ignite" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fXP-V8-D0Q" id="mBx-tI-1Ys">
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJn-sv-Qtd">
+                                                                <rect key="frame" x="8" y="11" width="39" height="22"/>
+                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </tableViewCellContentView>
+                                                    <connections>
+                                                        <outlet property="userNameNTLabel" destination="GJn-sv-Qtd" id="r7z-d9-t7N"/>
+                                                    </connections>
+                                                </tableViewCell>
+                                            </prototypes>
                                         </tableView>
                                     </tableView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RELEVANT USERS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9q-9p-sUf">
@@ -851,6 +872,27 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="157"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <prototypes>
+                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="relevantUsersCell" id="sDj-dI-k7H" customClass="relevantUsersCell" customModule="Fuse_Ignite" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sDj-dI-k7H" id="p3F-6M-JNJ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezs-tW-0Jh">
+                                                                <rect key="frame" x="8" y="11" width="39" height="22"/>
+                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </tableViewCellContentView>
+                                                    <connections>
+                                                        <outlet property="userNameRULabel" destination="ezs-tW-0Jh" id="44q-Er-fTc"/>
+                                                    </connections>
+                                                </tableViewCell>
+                                            </prototypes>
                                         </tableView>
                                     </tableView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVENT DESCRIPTION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ui-xD-9xN">
@@ -1018,6 +1060,8 @@
                         <outlet property="eventLocationNameLabel" destination="Y3p-dC-vyZ" id="BGV-kz-fTk"/>
                         <outlet property="eventLocationPostcodeLabel" destination="0Pq-V6-0Ey" id="cR6-Qg-HNG"/>
                         <outlet property="eventNameLabel" destination="uRl-8H-YnR" id="xN4-Gg-4Gw"/>
+                        <outlet property="noTopicsInCommonTableView" destination="xHg-Pj-wlS" id="qZK-8I-eTV"/>
+                        <outlet property="relevantUsersTableView" destination="XEo-Jw-6jM" id="73p-zA-TSz"/>
                         <outlet property="userProfilePicture" destination="ng6-QI-zQh" id="tY3-cF-u34"/>
                     </connections>
                 </viewController>
@@ -2481,10 +2525,10 @@
                             <mask key="constraints">
                                 <exclude reference="txx-tI-arG"/>
                                 <exclude reference="n7N-DM-mK7"/>
-                                <exclude reference="cga-Dg-Oka"/>
-                                <exclude reference="N9M-Ct-PVF"/>
-                                <exclude reference="qvF-l3-6L4"/>
                                 <exclude reference="CFd-5L-YeO"/>
+                                <exclude reference="N9M-Ct-PVF"/>
+                                <exclude reference="cga-Dg-Oka"/>
+                                <exclude reference="qvF-l3-6L4"/>
                             </mask>
                         </variation>
                     </view>
@@ -2661,10 +2705,10 @@
                             <mask key="constraints">
                                 <exclude reference="0PF-HX-wIR"/>
                                 <exclude reference="rQ8-dF-DnC"/>
-                                <exclude reference="eTY-0r-4Ey"/>
                                 <exclude reference="2qx-xM-9NS"/>
-                                <exclude reference="d7L-14-EoW"/>
                                 <exclude reference="OQO-je-fF2"/>
+                                <exclude reference="d7L-14-EoW"/>
+                                <exclude reference="eTY-0r-4Ey"/>
                             </mask>
                         </variation>
                     </view>
