@@ -25,17 +25,32 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getUserData()
         loadProfilePicture()
-        if let user = currentObject {
-        userFullNameLabel.text = user["fullName"] as? String
         }
+    func getUserData(){
         
-            userFullNameLabel.text = "Daniel Reilly"
-            userJobTitleLabel.text = "Founder"
-            userCompanyLabel.text = "Fuse Technology"
-
-        
-        }
+        PFUser.currentUser()!.fetchInBackgroundWithBlock({ (currentUser: PFObject?, error: NSError?) -> Void in
+            
+            // Update your data
+            
+            if let user = currentUser as? PFUser {
+                
+                let userBio = PFUser.currentUser()?.objectForKey("userBio") as! String
+                let userFullName = PFUser.currentUser()?.objectForKey("fullName") as! String
+                let userJobTitle = PFUser.currentUser()?.objectForKey("jobTitle") as! String
+                let userCompanyName = PFUser.currentUser()?.objectForKey("companyName") as! String
+                let userNetworkingObjectives = PFUser.currentUser()?.objectForKey("networkingObjectives") as! String
+                
+                self.userBioTextView.text = userBio
+                self.userFullNameLabel.text = userFullName
+                self.userJobTitleLabel.text = userJobTitle
+                self.userCompanyLabel.text = userCompanyName
+                self.userNetworkingObjectivesTextView.text = userNetworkingObjectives
+                
+            }
+        })
+    }
     
     @IBAction func leftSideButtonTapped(sender: AnyObject) {
         
