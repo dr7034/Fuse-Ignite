@@ -59,7 +59,7 @@ class DiscoverTableViewController: PFQueryTableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         let nav = segue.destinationViewController as! UINavigationController
-        let eventViewController = nav.topViewController as! EventHomeViewController
+        let eventViewController = nav.topViewController as! EventHomeSocialTableViewController
         
         if let indexPath = self.tableView.indexPathForSelectedRow {
             let row = Int(indexPath.row)

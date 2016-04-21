@@ -49,12 +49,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         //setup app with estimote
         ESTConfig.setupAppID("fuse-ignite", andAppToken: "9f394667684dbab1f9264c8d33616b84")
 
-        //Beacon Notification when in range (Ignite0)
-        self.beaconNotificationsManager.enableNotificationsForBeaconID(
-            BeaconID(UUIDString: "712CCB65-D5C3-047E-9CF3-E3A683026081", major: 1, minor: 1),
-            enterMessage: "You have entered an event region. Swipe this notification to check in.",
-            exitMessage: " "
-        )
+//        //Beacon Notification when in range (Ignite0)
+//        self.beaconNotificationsManager.enableNotificationsForBeaconID(
+//            BeaconID(UUIDString: "712CCB65-D5C3-047E-9CF3-E3A683026081", major: 1, minor: 1),
+//            enterMessage: "You have entered an event region. Swipe this notification to check in.",
+//            exitMessage: " "
+//        )
         
         //Enable estimote analytics
         ESTConfig.enableRangingAnalytics(true)

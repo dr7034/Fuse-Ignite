@@ -8,14 +8,15 @@
 
 import UIKit
 
-class relevantUsersCell: UITableViewCell {
+class RelevantUsersCell: UITableViewCell {
     
     @IBOutlet weak var userNameRULabel: UILabel!
     
     
+    
 }
 
-class noTopicsInCommonCell: UITableViewCell {
+class NoTopicsInCommonCell: UITableViewCell {
     
     @IBOutlet weak var userNameNTLabel: UILabel!
     

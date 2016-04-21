@@ -48,6 +48,7 @@
 		65603C4B1C9047CA006AA32F /* BeaconID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65603C4A1C9047CA006AA32F /* BeaconID.swift */; };
 		65603C4D1C9047ED006AA32F /* BeaconNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65603C4C1C9047ED006AA32F /* BeaconNotificationsManager.swift */; };
 		658DCD7E1C902B3800D5FCD5 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658DCD7D1C902B3800D5FCD5 /* CoreBluetooth.framework */; };
+		6592B4491CC7E3400052AE72 /* EventHomeSocialTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6592B4481CC7E3400052AE72 /* EventHomeSocialTableViewController.swift */; };
 		65B0CF821C49A21600829D6D /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B0CF7A1C49A21600829D6D /* MMDrawerBarButtonItem.m */; };
 		65B0CF831C49A21600829D6D /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B0CF7C1C49A21600829D6D /* MMDrawerController.m */; };
 		65B0CF841C49A21600829D6D /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B0CF7F1C49A21600829D6D /* MMDrawerVisualState.m */; };
@@ -138,6 +139,7 @@
 		65603C4A1C9047CA006AA32F /* BeaconID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconID.swift; sourceTree = "<group>"; };
 		65603C4C1C9047ED006AA32F /* BeaconNotificationsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconNotificationsManager.swift; sourceTree = "<group>"; };
 		658DCD7D1C902B3800D5FCD5 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		6592B4481CC7E3400052AE72 /* EventHomeSocialTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHomeSocialTableViewController.swift; sourceTree = "<group>"; };
 		65B0CF781C49A21500829D6D /* Fuse-Ignite-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fuse-Ignite-Bridging-Header.h"; sourceTree = "<group>"; };
 		65B0CF791C49A21600829D6D /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		65B0CF7A1C49A21600829D6D /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 				6502E1D31C8E4334004B4158 /* EventHomeSocialViewController.swift */,
 				65C76FEA1C919F26005D934B /* BeaconTestViewController.swift */,
 				65B5828A1C9A9FEB007F86C7 /* AddBeaconViewController.swift */,
+				6592B4481CC7E3400052AE72 /* EventHomeSocialTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -593,6 +596,7 @@
 				6502E1D41C8E4334004B4158 /* EventHomeSocialViewController.swift in Sources */,
 				65B0CF8E1C49A78C00829D6D /* LeftSideViewController.swift in Sources */,
 				65B0CF901C49AC9400829D6D /* RightSideViewController.swift in Sources */,
+				6592B4491CC7E3400052AE72 /* EventHomeSocialTableViewController.swift in Sources */,
 				655D49A41C822896007DC051 /* DiscoverTableViewController.swift in Sources */,
 				65B0CF841C49A21600829D6D /* MMDrawerVisualState.m in Sources */,
 			);

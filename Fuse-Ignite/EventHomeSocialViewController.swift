@@ -11,7 +11,8 @@ import Parse
 import ParseUI  
 //import TwitterKit
 
-class EventHomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class EventHomeViewController: UIViewController
+{
 
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventLocationNameLabel: UILabel!
@@ -31,6 +32,9 @@ class EventHomeViewController: UIViewController, UITableViewDelegate, UITableVie
     // Container to store the view table selected object
     var currentObject : PFObject?
     
+//    let numberOfRowsInRelevantUsersTableView = 3
+//    let numberOfRowsInNoTopicsInCommonTableView = 4
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,10 +50,10 @@ class EventHomeViewController: UIViewController, UITableViewDelegate, UITableVie
             
         }
         
-        self.relevantUsersTableView.delegate = self
-        self.relevantUsersTableView.dataSource = self
-        self.noTopicsInCommonTableView.delegate = self
-        self.noTopicsInCommonTableView.delegate = self
+//        self.relevantUsersTableView.delegate = self
+//        self.relevantUsersTableView.dataSource = self
+//        self.noTopicsInCommonTableView.delegate = self
+//        self.noTopicsInCommonTableView.delegate = self
         
         // Return to table view
         self.navigationController?.popViewControllerAnimated(true)
@@ -83,6 +87,21 @@ class EventHomeViewController: UIViewController, UITableViewDelegate, UITableVie
         self.userProfilePicture.layer.cornerRadius = self.userProfilePicture.frame.size.width / 2;
         self.userProfilePicture.clipsToBounds = true;
     }
-
+    
+//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return (tableView == self.relevantUsersTableView) ? self.numberOfRowsInRelevantUsersTableView : self.numberOfRowsInNoTopicsInCommonTableView
+//    }
+//    
+//    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        if(tableView == self.relevantUsersTableView){
+//            let cell: RelevantUsersCell = tableView.dequeueReusableCellWithIdentifier("relevantUsersCell") as! RelevantUsersCell
+//            cell.userNameRULabel.text = "Relevant Users row: \(indexPath.row)"
+//            return cell
+//        }else{
+//            let cell: NoTopicsInCommonCell = tableView.dequeueReusableCellWithIdentifier("noTopicsInCommonCell") as! NoTopicsInCommonCell
+//            cell.userNameNTLabel.text  = "No Topics row: \(indexPath.row)"
+//            return cell
+//        }
+//    }
     
 }
