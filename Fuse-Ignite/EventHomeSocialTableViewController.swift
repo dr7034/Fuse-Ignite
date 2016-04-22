@@ -72,7 +72,7 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("RelevantUsersCell") as? PFTableViewCell!
         if cell == nil {
-            cell = PFTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "RelevantUsersCell") as! PFTableViewCell
+            cell = PFTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "RelevantUsersCell")
         }
     // Extract values from the PFObject to display in the table cell
         if let relevantUsers = object? ["fullName"] as? String {
