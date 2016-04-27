@@ -10,6 +10,16 @@ import UIKit
 import Parse
 import ParseUI
 
+class RelevantUsersCustomCell: PFTableViewCell
+{
+    @IBOutlet var userFullName: UILabel!
+    @IBOutlet var userInterests: UILabel!
+    @IBOutlet weak var userProfilePictureTableView: UIImageView!
+    @IBOutlet weak var userDistance: UILabel!
+}
+
+
+
 class EventHomeSocialTableViewController: PFQueryTableViewController {
     
     @IBOutlet weak var eventNameLabel: UILabel!
@@ -69,21 +79,53 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         return query
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("RelevantUsersCell") as? PFTableViewCell!
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> RelevantUsersCustomCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier("RelevantUsersCell") as? RelevantUsersCustomCell!
         if cell == nil {
-            cell = PFTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "RelevantUsersCell")
+            cell = RelevantUsersCustomCell(style: UITableViewCellStyle.Default, reuseIdentifier: "RelevantUsersCell")
         }
     // Extract values from the PFObject to display in the table cell
-        if let relevantUsers = object? ["fullName"] as? String {
-            cell?.textLabel?.text = relevantUsers
+        
+        if let relevantUsers = object?["fullName"] as? String {
+            cell?.userFullName?.text = relevantUsers
         }
         
         if let userInterests = object?["userInterests"] as? NSArray {
-            cell?.detailTextLabel?.text = userInterests.componentsJoinedByString(" , #")
+            cell?.userInterests?.text = userInterests.componentsJoinedByString(" , #")
+            
         }
         
+        
+        if let profilePicture: PFFile = object?["profile_picture"] as? PFFile
+        {
+        profilePicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) in
+            if(error != nil) {
+                
+            let image: UIImage = UIImage(data: imageData!)!
+            cell?.userProfilePictureTableView?.image = image
+            }
+        }
+        }
+        
+        
+//        {
+//            cell?.userProfilePictureTableView?.image = UIImage(data: profilePicture)
+//        }
+
         return cell!
+    }
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        let header1: String = "Relevant Users"
+        let header2: String = "No Topics in Common"
+
+        
+        return header1
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -103,7 +145,6 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     @IBAction func leftSideButtonTapped(sender: AnyObject) {
         
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
         appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
         
     }
@@ -111,7 +152,6 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     @IBAction func rightSideButtonTapped(sender: AnyObject) {
         
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
         appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
         
     }
