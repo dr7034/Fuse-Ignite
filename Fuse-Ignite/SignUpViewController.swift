@@ -15,8 +15,9 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var userEmailAddresssTextField: UITextField!
     @IBOutlet weak var userPasswordTextField: UITextField!
     @IBOutlet weak var userPasswordRepeatTextField: UITextField!
-    @IBOutlet weak var userFirstNameTextField: UITextField!
-    @IBOutlet weak var userLastNameTextField: UITextField!
+    @IBOutlet weak var userFullNameTextField: UITextField!
+    @IBOutlet weak var userJobTitleTextField: UITextField!
+    @IBOutlet weak var userCompanyNameTextField: UITextField!
     
     
     
@@ -70,11 +71,9 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         let userName = userEmailAddresssTextField.text
         let userPassword = userPasswordTextField.text
         let userPasswordRepeat = userPasswordRepeatTextField.text
-        let userFirstName = userFirstNameTextField.text
-        let userLastName = userLastNameTextField.text
-      
+        let userFullName = userFullNameTextField.text
         
-      if(userName!.isEmpty || userPassword!.isEmpty || userPasswordRepeat!.isEmpty || userFirstName!.isEmpty || userLastName!.isEmpty)
+      if(userName!.isEmpty || userPassword!.isEmpty || userPasswordRepeat!.isEmpty || userFullName!.isEmpty)
       {
             let userMessage = "All fields are required to fill in"
             self.displayMessage(userMessage)
@@ -91,8 +90,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         myUser.username = userName
         myUser.password = userPassword
         myUser.email = userName
-        myUser.setObject(userFirstName!, forKey: "first_name")
-        myUser.setObject(userLastName!, forKey: "last_name")
+        myUser.setObject(userFullName!, forKey: "fullName")
         
         let profileImageData = UIImageJPEGRepresentation(profilePhotoImageView.image!, 1)
         

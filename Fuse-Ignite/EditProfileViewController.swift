@@ -13,13 +13,15 @@ import ParseUI
 class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var profilePictureImageView: UIImageView!
-    @IBOutlet weak var userFirstNameTextField: UITextField!
+    @IBOutlet weak var userFullNameTextField: UITextField!
     @IBOutlet weak var userPasswordTextField: UITextField!
     @IBOutlet weak var userPasswordRepeatTextField: UITextField!
     @IBOutlet weak var userCompanyNameTextField: UITextField!
     @IBOutlet weak var userJobTitleTextField: UITextField!
     
     var opener: LeftSideViewController!
+    
+    var currentObject : PFObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,15 +32,22 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
 
         // Load User Details
         
-//        let userFirstName = PFUser.query()
-//        let userCompanyName = PFUser.currentUser()?.objectForKey("companyName") as? String
-//        let userJobTitle = PFUser.currentUser()?.objectForKey("jobTitle") as? String
-//        
-        userFirstNameTextField.text = "Daniel Reilly"
-        userCompanyNameTextField.text = "Fuse Technology"
-        userJobTitleTextField.text = "Founder"
+        if let object = PFUser.currentUser() {
+            userFullNameTextField.text = object["fullName"] as? String
+            userCompanyNameTextField.text = object["companyName"] as? String
+            userJobTitleTextField.text = object["jobTitle"] as? String
+        }
+        
+//        if let userFullName = object!["fullName"] as? String {
+//            self.userFullNameTextField.text = userFullName
+//        }
+        
+//        userFullNameTextField.text = 
+//        userCompanyNameTextField.text = "Fuse Technology"
+//        userJobTitleTextField.text = "Founder"
         
 //        print("User Name: \(userFirstName) User Company \(userCompanyName) User Job Title: \(userJobTitle)")
+
         
         if(PFUser.currentUser()?.objectForKey("profile_picture") != nil)
         {
@@ -82,7 +91,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         let profileImageData = UIImageJPEGRepresentation(profilePictureImageView.image!, 1)
         
         //Check if all fields are empty
-        if(userPasswordTextField.text!.isEmpty && userFirstNameTextField.text!.isEmpty && (profileImageData == nil))
+        if(userPasswordTextField.text!.isEmpty && userFullNameTextField.text!.isEmpty && (profileImageData == nil))
         {
             let userMessage = "All Fields cannot be empty"
             self.displayMessage(userMessage)
@@ -96,14 +105,14 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }
         
         //Check if First name or Last name are not empty
-        if(userFirstNameTextField.text!.isEmpty)
+        if(userFullNameTextField.text!.isEmpty)
         {
             let userMessage = "Name Field is Required"
             self.displayMessage(userMessage)
         }
         
         //Set New Values for First and Last Name
-        let userFirstName = userFirstNameTextField.text!
+        let userFirstName = userFullNameTextField.text!
         
         myUser.setObject(userFirstName, forKey: "fullName")
         

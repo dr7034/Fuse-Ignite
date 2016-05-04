@@ -43,7 +43,6 @@
 		6540B99B1CAEAA1900977C8D /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6540B9971CAEAA1900977C8D /* TwitterCore.framework */; };
 		6540B99C1CAEAF1000977C8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653DC32C1C44A54A00EEAECD /* AppDelegate.swift */; };
 		6540B99E1CAEB34B00977C8D /* EstimoteSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6540B99D1CAEB34B00977C8D /* EstimoteSDK.framework */; };
-		655B1CF81CC10FA200A6B780 /* EventHomeTableViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655B1CF71CC10FA200A6B780 /* EventHomeTableViews.swift */; };
 		655D49A41C822896007DC051 /* DiscoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655D49A31C822896007DC051 /* DiscoverTableViewController.swift */; };
 		65603C4B1C9047CA006AA32F /* BeaconID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65603C4A1C9047CA006AA32F /* BeaconID.swift */; };
 		65603C4D1C9047ED006AA32F /* BeaconNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65603C4C1C9047ED006AA32F /* BeaconNotificationsManager.swift */; };
@@ -133,7 +132,6 @@
 		6540B9961CAEAA1900977C8D /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
 		6540B9971CAEAA1900977C8D /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		6540B99D1CAEB34B00977C8D /* EstimoteSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = EstimoteSDK.framework; sourceTree = "<group>"; };
-		655B1CF71CC10FA200A6B780 /* EventHomeTableViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHomeTableViews.swift; sourceTree = "<group>"; };
 		655D49951C7F5100007DC051 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		655D49A31C822896007DC051 /* DiscoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewController.swift; sourceTree = "<group>"; };
 		65603C4A1C9047CA006AA32F /* BeaconID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconID.swift; sourceTree = "<group>"; };
@@ -378,7 +376,6 @@
 			children = (
 				65C76FE81C9181AE005D934B /* ContactsTableViewCell.swift */,
 				65B5828C1C9AA3FE007F86C7 /* BeaconItem.swift */,
-				655B1CF71CC10FA200A6B780 /* EventHomeTableViews.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -577,7 +574,6 @@
 				653DC37A1C44AB5900EEAECD /* SignUpViewController.swift in Sources */,
 				650FFE561C88A982003CAA1C /* EventFeedTableViewController.swift in Sources */,
 				650FFE501C887FF0003CAA1C /* ContactsTableViewController.swift in Sources */,
-				655B1CF81CC10FA200A6B780 /* EventHomeTableViews.swift in Sources */,
 				65603C4D1C9047ED006AA32F /* BeaconNotificationsManager.swift in Sources */,
 				65F7424D1C73659900F4B3A0 /* ProfileViewController.swift in Sources */,
 				65B0CF821C49A21600829D6D /* MMDrawerBarButtonItem.m in Sources */,

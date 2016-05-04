@@ -8,13 +8,15 @@
 
 import UIKit
 import Parse
+import CoreLocation
+import CoreBluetooth
 import ParseUI
 
 class RelevantUsersCustomCell: PFTableViewCell
 {
     @IBOutlet var userFullName: UILabel!
     @IBOutlet var userInterests: UILabel!
-    @IBOutlet weak var userProfilePictureTableView: UIImageView!
+    @IBOutlet weak var userProfilePicture: UIImageView!
     @IBOutlet weak var userDistance: UILabel!
 }
 
@@ -47,10 +49,8 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
             eventLocationPostcodeLabel.text = object["eventPostcode"] as? String
             eventLocationCountryLabel.text = object["eventCountry"] as? String
             eventDescriptionLabel.text = object["eventDescription"] as? String
-            
-            
         }
-
+        
         // Return to table view
         self.navigationController?.popViewControllerAnimated(true)
         
@@ -91,40 +91,31 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         }
         
         if let userInterests = object?["userInterests"] as? NSArray {
-            cell?.userInterests?.text = userInterests.componentsJoinedByString(" , #")
+            cell?.userInterests?.text = userInterests.componentsJoinedByString(", ")
             
         }
-        
-        
-        if let profilePicture: PFFile = object?["profile_picture"] as? PFFile
-        {
-        profilePicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) in
-            if(error != nil) {
-                
-            let image: UIImage = UIImage(data: imageData!)!
-            cell?.userProfilePictureTableView?.image = image
-            }
-        }
-        }
-        
-        
-//        {
-//            cell?.userProfilePictureTableView?.image = UIImage(data: profilePicture)
+            
+//        let userProfilePicture = object?["profile_picture"] as? PFFile
+//        userProfilePicture!.getDataInBackgroundWithBlock {
+//            (imageData: NSData?, error: NSError?) -> Void in
+//            if error == nil {
+//                if let imageData = imageData {
+//                    let image = UIImage(data:imageData)
+//                }
+//            }
 //        }
-
+        
         return cell!
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         let header1: String = "Relevant Users"
-        let header2: String = "No Topics in Common"
 
-        
         return header1
     }
     
@@ -170,5 +161,14 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         self.userProfilePictureImage.layer.cornerRadius = self.userProfilePictureImage.frame.size.width / 2;
         self.userProfilePictureImage.clipsToBounds = true;
     }
+    
+//    func beaconBroadcast(){
+//        
+//        let major:UInt16 = 29
+//        let minor:UInt16 = 1
+//        let uuid = NSUUID(UUIDString: "0CF052C2-97CA-407C-84F8-B62AAC4E95634")
+////        
+////        let region = CLBeaconRegion(proximityUUID: uuid!, major: major, minor: minor, identifier: "Test)
+//    }
     
 }

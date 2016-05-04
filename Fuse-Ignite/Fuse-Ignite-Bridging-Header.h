@@ -7,3 +7,5 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <EstimoteSDK/EstimoteSDK.h>
+#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
