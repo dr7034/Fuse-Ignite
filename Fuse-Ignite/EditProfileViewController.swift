@@ -18,6 +18,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var userPasswordRepeatTextField: UITextField!
     @IBOutlet weak var userCompanyNameTextField: UITextField!
     @IBOutlet weak var userJobTitleTextField: UITextField!
+    @IBOutlet weak var userInterestsTextField: UITextField!
+    @IBOutlet weak var userEmailAddressTextField: UITextField!
+    
     
     var opener: LeftSideViewController!
     
@@ -36,18 +39,15 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             userFullNameTextField.text = object["fullName"] as? String
             userCompanyNameTextField.text = object["companyName"] as? String
             userJobTitleTextField.text = object["jobTitle"] as? String
+            userEmailAddressTextField.text = object["email"] as? String
         }
         
-//        if let userFullName = object!["fullName"] as? String {
-//            self.userFullNameTextField.text = userFullName
-//        }
+        currentObject?.fetchInBackgroundWithBlock({ (object, error) in
+            let userInterests = self.userInterestsTextField.text
+            
+            userInterests?.componentsSeparatedByString(", ")
+        })
         
-//        userFullNameTextField.text = 
-//        userCompanyNameTextField.text = "Fuse Technology"
-//        userJobTitleTextField.text = "Founder"
-        
-//        print("User Name: \(userFirstName) User Company \(userCompanyName) User Job Title: \(userJobTitle)")
-
         
         if(PFUser.currentUser()?.objectForKey("profile_picture") != nil)
         {

@@ -18,6 +18,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var userBioTextView: UITextView!
     @IBOutlet weak var userNetworkingObjectivesTextView: UITextView!
+    @IBOutlet weak var userFollowingCountLabel: UILabel!
+    @IBOutlet weak var userFollowersCountLabel: UILabel!
+    @IBOutlet weak var userScheduledEventsCountLabel: UILabel!
+    
+    
     
     // Container to store the view table selected object
     var currentObject : PFObject?
@@ -28,6 +33,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         getUserData()
         loadProfilePicture()
         }
+    
     func getUserData(){
         
         PFUser.currentUser()!.fetchInBackgroundWithBlock({ (currentUser: PFObject?, error: NSError?) -> Void in
@@ -47,7 +53,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.userJobTitleLabel.text = userJobTitle
                 self.userCompanyLabel.text = userCompanyName
                 self.userNetworkingObjectivesTextView.text = userNetworkingObjectives
+            
+                let followers = PFQuery(className: "Followers")
+                followers.whereKey("follower", equalTo: user.username!)
+                followers.countObjectsInBackgroundWithBlock({ (count: Int32, error: NSError?) in
+                    self.userFollowersCountLabel.text = "\(count)"
+                })
                 
+                let following = PFQuery(className: "Followers")
+                following.whereKey("following", equalTo: user.username!)
+                following.countObjectsInBackgroundWithBlock({ (count: Int32, error: NSError?) in
+                    self.userFollowingCountLabel.text = "\(count)"
+                })
             }
         })
     }

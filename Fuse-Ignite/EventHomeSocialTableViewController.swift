@@ -31,6 +31,7 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     @IBOutlet weak var eventLocationCountryLabel: UILabel!
     @IBOutlet weak var eventDescriptionLabel: UILabel!
     @IBOutlet weak var userProfilePictureImage: UIImageView!
+    @IBOutlet weak var userLoadEventButton: UIButton!
     
     var window: UIWindow?
     var drawerContainer: MMDrawerController?
@@ -40,6 +41,9 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.userLoadEventButton.layer.cornerRadius = self.userLoadEventButton.frame.size.width / 2;
+        self.userLoadEventButton.clipsToBounds = true;
         
         // Unwrap the current object object
         if let object = currentObject {
@@ -162,6 +166,17 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         self.userProfilePictureImage.clipsToBounds = true;
     }
     
+    @IBAction func doneButtonTapped(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    @IBAction func userJoinEvent(sender: UIButton, forEvent event: UIEvent) {
+        let gameQuery = PFQuery(className:"EventObject")
+        if let user = PFUser.currentUser()?.objectId {
+            gameQuery.includeKey(user)
+        }
+
+
+    }
 //    func beaconBroadcast(){
 //        
 //        let major:UInt16 = 29

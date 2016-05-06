@@ -213,10 +213,9 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func loadUserDetails(){
         
-        let userFirstName = PFUser.currentUser()?.objectForKey("first_name") as! String
-        let userLastName = PFUser.currentUser()?.objectForKey("last_name") as! String
+        let userFullName = PFUser.currentUser()?.objectForKey("fullName") as! String
         
-        userFullNameLabel.text = userFirstName + " " + userLastName
+        userFullNameLabel.text = userFullName
         
         let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
         
