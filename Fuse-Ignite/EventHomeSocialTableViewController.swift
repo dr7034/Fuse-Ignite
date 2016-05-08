@@ -160,6 +160,7 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
             if(imageData != nil)
             {
                 self.userProfilePictureImage.image = UIImage(data: imageData!)
+                
             }
         }
         self.userProfilePictureImage.layer.cornerRadius = self.userProfilePictureImage.frame.size.width / 2;
@@ -169,6 +170,7 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     @IBAction func doneButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
     @IBAction func userJoinEvent(sender: UIButton, forEvent event: UIEvent) {
         let gameQuery = PFQuery(className:"EventObject")
         if let user = PFUser.currentUser()?.objectId {

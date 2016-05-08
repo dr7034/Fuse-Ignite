@@ -34,6 +34,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         loadProfilePicture()
         }
     
+    
+    func implementTapGestures(){
+        
+
+    }
+    
     func getUserData(){
         
         PFUser.currentUser()!.fetchInBackgroundWithBlock({ (currentUser: PFObject?, error: NSError?) -> Void in
@@ -55,19 +61,46 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.userNetworkingObjectivesTextView.text = userNetworkingObjectives
             
                 let followers = PFQuery(className: "Followers")
-                followers.whereKey("follower", equalTo: user.username!)
+                followers.whereKey("following", equalTo: user.username!)
                 followers.countObjectsInBackgroundWithBlock({ (count: Int32, error: NSError?) in
                     self.userFollowersCountLabel.text = "\(count)"
                 })
                 
+                let followersTap = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.followersTap))
+                followersTap.numberOfTapsRequired = 1
+                self.userFollowersCountLabel.userInteractionEnabled = true
+                self.userFollowersCountLabel.addGestureRecognizer(followersTap)
+                
                 let following = PFQuery(className: "Followers")
-                following.whereKey("following", equalTo: user.username!)
+                following.whereKey("follower", equalTo: user.username!)
                 following.countObjectsInBackgroundWithBlock({ (count: Int32, error: NSError?) in
                     self.userFollowingCountLabel.text = "\(count)"
                 })
+                
+                let followingTap = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.followingTap))
+                followingTap.numberOfTapsRequired = 1
+                self.userFollowingCountLabel.userInteractionEnabled = true
+                self.userFollowingCountLabel.addGestureRecognizer(followingTap)
             }
         })
     }
+    
+    func followersTap() {
+        user = (PFUser.currentUser()?.username)!
+        show = "followers"
+        
+        let followers = self.storyboard?.instantiateViewControllerWithIdentifier("FollowersTableViewController") as! FollowersTableViewController
+        self.navigationController?.pushViewController(followers, animated: true)
+    }
+    
+    func followingTap() {
+        user = (PFUser.currentUser()?.username)!
+        show = "following"
+        
+        let following = self.storyboard?.instantiateViewControllerWithIdentifier("FollowersTableViewController") as! FollowersTableViewController
+        self.navigationController?.pushViewController(following, animated: true)
+    }
+
     
     @IBAction func leftSideButtonTapped(sender: AnyObject) {
         
