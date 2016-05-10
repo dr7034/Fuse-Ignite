@@ -10,6 +10,7 @@
 		6502E1D41C8E4334004B4158 /* EventHomeSocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6502E1D31C8E4334004B4158 /* EventHomeSocialViewController.swift */; };
 		65041F5C1CDEBDF700771E3B /* FollowersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65041F5B1CDEBDF700771E3B /* FollowersTableViewController.swift */; };
 		65041F5E1CDEBE9D00771E3B /* FollowersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65041F5D1CDEBE9D00771E3B /* FollowersCell.swift */; };
+		65041F601CE01E7D00771E3B /* ProfileVisitorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65041F5F1CE01E7D00771E3B /* ProfileVisitorViewController.swift */; };
 		650FFE501C887FF0003CAA1C /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650FFE4F1C887FF0003CAA1C /* ContactsTableViewController.swift */; };
 		650FFE561C88A982003CAA1C /* EventFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650FFE551C88A982003CAA1C /* EventFeedTableViewController.swift */; };
 		653DC32F1C44A54A00EEAECD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653DC32E1C44A54A00EEAECD /* ViewController.swift */; };
@@ -93,6 +94,7 @@
 		6502E1D31C8E4334004B4158 /* EventHomeSocialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHomeSocialViewController.swift; sourceTree = "<group>"; };
 		65041F5B1CDEBDF700771E3B /* FollowersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersTableViewController.swift; sourceTree = "<group>"; };
 		65041F5D1CDEBE9D00771E3B /* FollowersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersCell.swift; sourceTree = "<group>"; };
+		65041F5F1CE01E7D00771E3B /* ProfileVisitorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVisitorViewController.swift; sourceTree = "<group>"; };
 		650FFE4F1C887FF0003CAA1C /* ContactsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		650FFE551C88A982003CAA1C /* EventFeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFeedTableViewController.swift; sourceTree = "<group>"; };
 		653DC3291C44A54900EEAECD /* Fuse-Ignite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fuse-Ignite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -372,6 +374,7 @@
 				65B5828A1C9A9FEB007F86C7 /* AddBeaconViewController.swift */,
 				6592B4481CC7E3400052AE72 /* EventHomeSocialTableViewController.swift */,
 				65041F5B1CDEBDF700771E3B /* FollowersTableViewController.swift */,
+				65041F5F1CE01E7D00771E3B /* ProfileVisitorViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -589,6 +592,7 @@
 				65C76FEB1C919F26005D934B /* BeaconTestViewController.swift in Sources */,
 				65B0CF851C49A21600829D6D /* UIViewController+MMDrawerController.m in Sources */,
 				6540B99C1CAEAF1000977C8D /* AppDelegate.swift in Sources */,
+				65041F601CE01E7D00771E3B /* ProfileVisitorViewController.swift in Sources */,
 				65B0CF891C49A30700829D6D /* MBProgressHUD.m in Sources */,
 				653DC32F1C44A54A00EEAECD /* ViewController.swift in Sources */,
 				65B0CF961C4A933C00829D6D /* EditProfileViewController.swift in Sources */,

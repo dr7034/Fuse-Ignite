@@ -34,12 +34,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         loadProfilePicture()
         }
     
-    
-    func implementTapGestures(){
-        
-
-    }
-    
     func getUserData(){
         
         PFUser.currentUser()!.fetchInBackgroundWithBlock({ (currentUser: PFObject?, error: NSError?) -> Void in
@@ -115,6 +109,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func editProfileButtonTapped(sender: AnyObject) {
+        
+        
         
     }
     

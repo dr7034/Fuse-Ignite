@@ -152,4 +152,21 @@ class FollowersTableViewController: UITableViewController {
         
         return cell
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        //recall cell to call cells data
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! FollowersCell
+        
+        //if user tapped on themselves, go home else go visitor
+        if cell.usernameLabel.text! == PFUser.currentUser()!.username {
+            let myProfile = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+            self.navigationController?.pushViewController(myProfile, animated: true)
+        } else {
+            visitorName.append(cell.usernameLabel.text!)
+            let visitor = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVisitorViewController") as! ProfileVisitorViewController
+            self.navigationController?.pushViewController(visitor, animated: true)
+        }
+    }
+    
 }
