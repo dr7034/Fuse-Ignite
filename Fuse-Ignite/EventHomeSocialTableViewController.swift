@@ -47,8 +47,15 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         self.userJoinEventButton.clipsToBounds = true;
         
         let idQuery = PFQuery(className: "EventObject")
-        idQuery.whereKey("objectId", equalTo: eventObjectId)
-        
+//        idQuery.whereKey("objectId", equalTo: eventObjectId.last!)
+//        idQuery.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
+//            if(error == nil) {
+//                if objects!.isEmpty {
+//                    print("User not registered")
+//                }
+//            }
+//        }
+//        
         // Unwrap the current object object
         if let object = currentObject {
             eventNameLabel.text = object["eventName"] as? String
