@@ -18,9 +18,10 @@ class RelevantUsersCustomCell: PFTableViewCell
     @IBOutlet var userInterests: UILabel!
     @IBOutlet weak var userProfilePicture: UIImageView!
     @IBOutlet weak var userDistance: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
 }
 
-
+var eventObjectId = String()
 
 class EventHomeSocialTableViewController: PFQueryTableViewController {
     
@@ -31,7 +32,7 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     @IBOutlet weak var eventLocationCountryLabel: UILabel!
     @IBOutlet weak var eventDescriptionLabel: UILabel!
     @IBOutlet weak var userProfilePictureImage: UIImageView!
-    @IBOutlet weak var userLoadEventButton: UIButton!
+    @IBOutlet weak var userJoinEventButton: UIButton!
     
     var window: UIWindow?
     var drawerContainer: MMDrawerController?
@@ -42,8 +43,11 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.userLoadEventButton.layer.cornerRadius = self.userLoadEventButton.frame.size.width / 2;
-        self.userLoadEventButton.clipsToBounds = true;
+        self.userJoinEventButton.layer.cornerRadius = self.userJoinEventButton.frame.size.width / 2;
+        self.userJoinEventButton.clipsToBounds = true;
+        
+        let idQuery = PFQuery(className: "EventObject")
+        idQuery.whereKey("objectId", equalTo: eventObjectId)
         
         // Unwrap the current object object
         if let object = currentObject {
@@ -53,6 +57,7 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
             eventLocationPostcodeLabel.text = object["eventPostcode"] as? String
             eventLocationCountryLabel.text = object["eventCountry"] as? String
             eventDescriptionLabel.text = object["eventDescription"] as? String
+            self.eventDescriptionLabel.sizeToFit()
         }
         
         // Return to table view
@@ -90,24 +95,24 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         }
     // Extract values from the PFObject to display in the table cell
         
+//        let profilePicFile: PFFile = (object?.objectForKey("profile_picture") as? PFFile)!
+//        profilePicFile.getDataInBackgroundWithBlock({ (data: NSData?, error:NSError?) in
+//            cell?.userProfilePicture.image = UIImage(data: data!)
+//        })
+
         if let relevantUsers = object?["fullName"] as? String {
             cell?.userFullName?.text = relevantUsers
         }
+
+        if let username = object?["username"] as? String {
+            cell?.usernameLabel?.text = "@" + username
+        }
         
         if let userInterests = object?["userInterests"] as? NSArray {
-            cell?.userInterests?.text = userInterests.componentsJoinedByString(", ")
-            
+            cell?.userInterests?.text = "#" + userInterests.componentsJoinedByString(", ")
+        } else {
+            cell?.userInterests?.text = "No interests yet Entered"
         }
-            
-//        let userProfilePicture = object?["profile_picture"] as? PFFile
-//        userProfilePicture!.getDataInBackgroundWithBlock {
-//            (imageData: NSData?, error: NSError?) -> Void in
-//            if error == nil {
-//                if let imageData = imageData {
-//                    let image = UIImage(data:imageData)
-//                }
-//            }
-//        }
         
         return cell!
     }
@@ -172,12 +177,23 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     }
     
     @IBAction func userJoinEvent(sender: UIButton, forEvent event: UIEvent) {
-        let gameQuery = PFQuery(className:"EventObject")
-        if let user = PFUser.currentUser()?.objectId {
-            gameQuery.includeKey(user)
-        }
-
-
+        
+        
+        
+            let eventAttendees = PFObject(className: "UserAttending")
+        
+            eventAttendees["attendee"] = PFUser.currentUser()!.username!
+            eventAttendees["eventId"] = eventObjectId
+                
+                eventAttendees.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+                    if(success) {
+                        self.userJoinEventButton.imageForState(UIControlState.Disabled)
+                    } else {
+                        print(error?.localizedDescription)
+                    }
+                })
+            }
+    
     }
 //    func beaconBroadcast(){
 //        
@@ -187,5 +203,3 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
 ////        
 ////        let region = CLBeaconRegion(proximityUUID: uuid!, major: major, minor: minor, identifier: "Test)
 //    }
-    
-}
