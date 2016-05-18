@@ -35,8 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     
         //[Optional] Track statistics around application opens
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
-        
-        
+                
         //Register for Push Notifications through Parse
         let userNotificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
         

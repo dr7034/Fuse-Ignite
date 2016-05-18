@@ -18,8 +18,10 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var userFullNameTextField: UITextField!
     @IBOutlet weak var userJobTitleTextField: UITextField!
     @IBOutlet weak var userCompanyNameTextField: UITextField!
-    
-    
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var userWebPageTextField: UITextField!
+    @IBOutlet weak var userInterestsTextField: UITextField!
+    @IBOutlet weak var userShowDataSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,16 +70,29 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     @IBAction func signUpButtonTapped(sender: AnyObject) {
         
-        let userName = userEmailAddresssTextField.text
+        let userName = usernameTextField.text
         let userPassword = userPasswordTextField.text
         let userPasswordRepeat = userPasswordRepeatTextField.text
         let userFullName = userFullNameTextField.text
+        let userJobTitle = userJobTitleTextField.text
+        let userCompanyName = userCompanyNameTextField.text
         
       if(userName!.isEmpty || userPassword!.isEmpty || userPasswordRepeat!.isEmpty || userFullName!.isEmpty)
       {
             let userMessage = "All fields are required to fill in"
             self.displayMessage(userMessage)
         
+        }
+        
+        if (!validateEmail(userEmailAddresssTextField.text!)) {
+            displayMessage("Invalid Email")
+            return
+        }
+        
+        if (!validateWebPage(userWebPageTextField.text!)) {
+            displayMessage("Invalid Web Page. Please enter web pages in the following format: http://fuseignite.co")
+
+            return
         }
         
         if(userPassword != userPasswordRepeat)
@@ -91,6 +106,8 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         myUser.password = userPassword
         myUser.email = userName
         myUser.setObject(userFullName!, forKey: "fullName")
+        myUser.setObject(userJobTitle!, forKey: "jobTitle")
+        myUser.setObject(userCompanyName!, forKey: "companyName")
         
         let profileImageData = UIImageJPEGRepresentation(profilePhotoImageView.image!, 1)
         
@@ -118,6 +135,20 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             
         }
         
+    }
+    
+    func validateEmail(email:String) -> Bool {
+        let regex = "[A-Z0-9a-z._%+-]{4}+@[A-Z0-9a-z._]+{2}\\.[AZa-z]{2}"
+        let range = email.rangeOfString(regex, options: .RegularExpressionSearch)
+        let result = range != nil ? true:false
+        return result
+    }
+    
+    func validateWebPage(webpage:String) -> Bool {
+        let regex = "http://+[A-Z0-9a-z.%+-]+.[A-Za-z]{2}"
+        let range = webpage.rangeOfString(regex, options: .RegularExpressionSearch)
+        let result = range != nil ? true:false
+        return result
     }
     
     func displayMessage(userMessage:String)

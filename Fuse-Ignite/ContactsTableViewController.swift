@@ -10,6 +10,8 @@ import UIKit
 import Parse
 import ParseUI
 
+var eventNameObject = [String]()
+
 class ContactsTableViewController: PFQueryTableViewController {
     
     // Initialise the PFQueryTable tableview
@@ -50,7 +52,20 @@ class ContactsTableViewController: PFQueryTableViewController {
         }
         return cell
     }
+    
+    func returnEventObject() {
 
+    let eventNameQuery = PFQuery(className: "eventObject")
+        eventNameQuery.findObjectsInBackgroundWithBlock { (object:[PFObject]?, error:NSError?) in
+       
+            if(eventNameObject.isEmpty) {
+                eventNameObject.removeAll()
+            }
+            
+        }
+    
+    }
+    
     @IBAction func leftSideButtonTapped(sender: AnyObject) {
         
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -59,6 +74,7 @@ class ContactsTableViewController: PFQueryTableViewController {
         
     }
     
+    
     @IBAction func rightSideButtonTapped(sender: AnyObject) {
         
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -66,21 +82,5 @@ class ContactsTableViewController: PFQueryTableViewController {
         appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
         
     }
-    
-//    func loadProfilePicture(){
-//        
-//        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
-//        
-//        profilePictureObject.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-//            
-//            if(imageData != nil)
-//            {
-//                self.userProfilePicture.image = UIImage(data: imageData!)
-//            }
-//        }
-//        self.userProfilePicture.layer.cornerRadius = self.userProfilePicture.frame.size.width / 2;
-//        self.userProfilePicture.clipsToBounds = true;
-//    }
-    
 
 }

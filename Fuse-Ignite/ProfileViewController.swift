@@ -10,7 +10,9 @@ import UIKit
 import Parse
 import ParseUI
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
+
+
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var userFullNameLabel: UILabel!
     @IBOutlet weak var userJobTitleLabel: UILabel!
@@ -22,17 +24,113 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var userFollowersCountLabel: UILabel!
     @IBOutlet weak var userScheduledEventsCountLabel: UILabel!
     
-    
+    //tableview outlets
+    @IBOutlet weak var conversationTopicsTableView: UITableView!
+    @IBOutlet weak var eventObjectivesTableView: UITableView!
+    @IBOutlet weak var motivationsTableView: UITableView!
     
     // Container to store the view table selected object
     var currentObject : PFObject?
+    
+    /// A simple data structure to populate the table view.
+    struct PreviewDetail {
+        let title: String
+        let preferredHeight: Double
+    }
+    
+    let conversationTopics =  [
+    
+        PreviewDetail(title: "Nine", preferredHeight: 160.0),
+        PreviewDetail(title: "Ten", preferredHeight: 320.0),
+        PreviewDetail(title: "Eleven", preferredHeight: 0.0), // 0.0 to get the default height.
+        PreviewDetail(title: "More", preferredHeight: 0.0) // 0.0 to get the default height.
+        
+    ]
+    
+    let eventObjectives = [
+        PreviewDetail(title: "Nine", preferredHeight: 160.0),
+        PreviewDetail(title: "Ten", preferredHeight: 320.0),
+        PreviewDetail(title: "Eleven", preferredHeight: 0.0), // 0.0 to get the default height.
+        PreviewDetail(title: "More", preferredHeight: 0.0) // 0.0 to get the default height.
+    ]
+    
+    let motivations = [
+        PreviewDetail(title: "Nine", preferredHeight: 160.0),
+        PreviewDetail(title: "Ten", preferredHeight: 320.0),
+        PreviewDetail(title: "Eleven", preferredHeight: 0.0), // 0.0 to get the default height.
+        PreviewDetail(title: "More", preferredHeight: 0.0) // 0.0 to get the default height.
+    ]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         getUserData()
         loadProfilePicture()
+        
+        conversationTopicsTableView.dataSource = self
+        conversationTopicsTableView.delegate = self
+        conversationTopicsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "conversationTopicsCell")
+        
+        eventObjectivesTableView.dataSource = self
+        eventObjectivesTableView.delegate = self
+        eventObjectivesTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "eventObjectivesCell")
+        
+        motivationsTableView.dataSource = self
+        motivationsTableView.delegate = self
+        motivationsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "motivationsCell")
+        
+        
         }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Return the number of items in the sample data structure.
+        
+        var count:Int?
+        
+        if tableView == self.conversationTopicsTableView {
+            count = conversationTopics.count
+        }
+        
+        if tableView == self.eventObjectivesTableView {
+            count =  eventObjectives.count
+        }
+        
+        if tableView == self.motivationsTableView {
+            count =  motivations.count
+        }
+        
+        return count!
+        
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        var cell:UITableViewCell?
+        
+        if tableView == self.conversationTopicsTableView {
+            cell = tableView.dequeueReusableCellWithIdentifier("conversationTopicsCell", forIndexPath: indexPath)
+            let previewDetail = conversationTopics[indexPath.row]
+            cell!.textLabel!.text = previewDetail.title
+            
+        }
+        
+        if tableView == self.eventObjectivesTableView {
+            cell = tableView.dequeueReusableCellWithIdentifier("eventObjectivesCell", forIndexPath: indexPath)
+            let previewDetail = eventObjectives[indexPath.row]
+            cell!.textLabel!.text = previewDetail.title
+            
+        }
+        
+        if tableView == self.motivationsTableView {
+            cell = tableView.dequeueReusableCellWithIdentifier("motivationsCell", forIndexPath: indexPath)
+            let previewDetail = motivations[indexPath.row]
+            cell!.textLabel!.text = previewDetail.title
+            
+        }
+        
+        return cell!
+    }
     
     func getUserData(){
         
@@ -47,12 +145,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 let userJobTitle = PFUser.currentUser()?.objectForKey("jobTitle") as! String
                 let userCompanyName = PFUser.currentUser()?.objectForKey("companyName") as! String
                 let userNetworkingObjectives = PFUser.currentUser()?.objectForKey("networkingObjectives") as! String
-                
+
                 self.userBioTextView.text = userBio
                 self.userFullNameLabel.text = userFullName
                 self.userJobTitleLabel.text = userJobTitle
                 self.userCompanyLabel.text = userCompanyName
                 self.userNetworkingObjectivesTextView.text = userNetworkingObjectives
+                
             
                 let followers = PFQuery(className: "Followers")
                 followers.whereKey("following", equalTo: user.username!)
@@ -113,7 +212,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func editProfileButtonTapped(sender: AnyObject) {
-        
         
         
     }

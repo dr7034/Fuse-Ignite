@@ -136,10 +136,10 @@ class FollowersTableViewController: UITableViewController {
         query.countObjectsInBackgroundWithBlock ({ (count: Int32, error: NSError?) in
             if(error == nil) {
                 if(count == 0) {
-                    cell.userFollowingButton.setTitle("FOLLOW", forState: UIControlState.Normal)
+                    cell.userFollowingButton.setTitle("Follow +", forState: UIControlState.Normal)
                     cell.userFollowingButton.backgroundColor = .lightGrayColor()
                 } else {
-                    cell.userFollowingButton.setTitle("FOLLOWING", forState: UIControlState.Normal)
+                    cell.userFollowingButton.setTitle("Following", forState: UIControlState.Normal)
                     cell.userFollowingButton.backgroundColor = UIColor.greenColor()
                 }
             }

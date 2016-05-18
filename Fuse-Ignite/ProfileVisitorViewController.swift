@@ -24,8 +24,12 @@ class ProfileVisitorViewController: UIViewController {
     @IBOutlet weak var userFollowingCountLabel: UILabel!
     @IBOutlet weak var userFollowersCountLabel: UILabel!
     @IBOutlet weak var userScheduledEventsCountLabel: UILabel!
-    
     @IBOutlet weak var userFollowButton: UIButton!
+    
+    //table views
+    @IBOutlet weak var conversationTopicsTableView: UITableView!
+    @IBOutlet weak var eventObjectivesTableView: UITableView!
+    @IBOutlet weak var motivationsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

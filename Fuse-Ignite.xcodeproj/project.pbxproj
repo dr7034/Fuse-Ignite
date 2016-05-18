@@ -49,8 +49,11 @@
 		655D49A41C822896007DC051 /* DiscoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655D49A31C822896007DC051 /* DiscoverTableViewController.swift */; };
 		65603C4B1C9047CA006AA32F /* BeaconID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65603C4A1C9047CA006AA32F /* BeaconID.swift */; };
 		65603C4D1C9047ED006AA32F /* BeaconNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65603C4C1C9047ED006AA32F /* BeaconNotificationsManager.swift */; };
+		65678D0F1CEB4C3100325D8B /* ConversationTopicsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65678D0E1CEB4C3100325D8B /* ConversationTopicsTVC.swift */; };
+		65678D141CEB4DD300325D8B /* ConversationTopicsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65678D131CEB4DD300325D8B /* ConversationTopicsTableView.swift */; };
 		658DCD7E1C902B3800D5FCD5 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658DCD7D1C902B3800D5FCD5 /* CoreBluetooth.framework */; };
 		6592B4491CC7E3400052AE72 /* EventHomeSocialTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6592B4481CC7E3400052AE72 /* EventHomeSocialTableViewController.swift */; };
+		659627301CE3D44F001BE2B4 /* PostUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596272F1CE3D44F001BE2B4 /* PostUpdateViewController.swift */; };
 		65B0CF821C49A21600829D6D /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B0CF7A1C49A21600829D6D /* MMDrawerBarButtonItem.m */; };
 		65B0CF831C49A21600829D6D /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B0CF7C1C49A21600829D6D /* MMDrawerController.m */; };
 		65B0CF841C49A21600829D6D /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B0CF7F1C49A21600829D6D /* MMDrawerVisualState.m */; };
@@ -142,8 +145,11 @@
 		655D49A31C822896007DC051 /* DiscoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewController.swift; sourceTree = "<group>"; };
 		65603C4A1C9047CA006AA32F /* BeaconID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconID.swift; sourceTree = "<group>"; };
 		65603C4C1C9047ED006AA32F /* BeaconNotificationsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconNotificationsManager.swift; sourceTree = "<group>"; };
+		65678D0E1CEB4C3100325D8B /* ConversationTopicsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationTopicsTVC.swift; sourceTree = "<group>"; };
+		65678D131CEB4DD300325D8B /* ConversationTopicsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationTopicsTableView.swift; sourceTree = "<group>"; };
 		658DCD7D1C902B3800D5FCD5 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		6592B4481CC7E3400052AE72 /* EventHomeSocialTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHomeSocialTableViewController.swift; sourceTree = "<group>"; };
+		6596272F1CE3D44F001BE2B4 /* PostUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostUpdateViewController.swift; sourceTree = "<group>"; };
 		65B0CF781C49A21500829D6D /* Fuse-Ignite-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fuse-Ignite-Bridging-Header.h"; sourceTree = "<group>"; };
 		65B0CF791C49A21600829D6D /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		65B0CF7A1C49A21600829D6D /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
@@ -330,6 +336,56 @@
 			name = Beacons;
 			sourceTree = "<group>";
 		};
+		65678D0D1CEB4C0C00325D8B /* ProfileTableViews */ = {
+			isa = PBXGroup;
+			children = (
+				65678D111CEB4C4E00325D8B /* VisitorProfile */,
+				65678D101CEB4C3D00325D8B /* UserProfile */,
+			);
+			name = ProfileTableViews;
+			sourceTree = "<group>";
+		};
+		65678D101CEB4C3D00325D8B /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				65678D0E1CEB4C3100325D8B /* ConversationTopicsTVC.swift */,
+			);
+			name = UserProfile;
+			sourceTree = "<group>";
+		};
+		65678D111CEB4C4E00325D8B /* VisitorProfile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = VisitorProfile;
+			sourceTree = "<group>";
+		};
+		659627311CE5DED0001BE2B4 /* ProfileViews */ = {
+			isa = PBXGroup;
+			children = (
+				659627321CE5DFEE001BE2B4 /* Visitor */,
+				659627331CE5DFFF001BE2B4 /* UserProfile */,
+			);
+			name = ProfileViews;
+			sourceTree = "<group>";
+		};
+		659627321CE5DFEE001BE2B4 /* Visitor */ = {
+			isa = PBXGroup;
+			children = (
+				65041F5F1CE01E7D00771E3B /* ProfileVisitorViewController.swift */,
+			);
+			name = Visitor;
+			sourceTree = "<group>";
+		};
+		659627331CE5DFFF001BE2B4 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				65F7424C1C73659900F4B3A0 /* ProfileViewController.swift */,
+				65678D131CEB4DD300325D8B /* ConversationTopicsTableView.swift */,
+			);
+			name = UserProfile;
+			sourceTree = "<group>";
+		};
 		65B0CF861C49A22800829D6D /* MMDrawer */ = {
 			isa = PBXGroup;
 			children = (
@@ -365,7 +421,7 @@
 				65B0CF951C4A933C00829D6D /* EditProfileViewController.swift */,
 				65F742421C73532A00F4B3A0 /* CreateViewController.swift */,
 				655D49A31C822896007DC051 /* DiscoverTableViewController.swift */,
-				65F7424C1C73659900F4B3A0 /* ProfileViewController.swift */,
+				659627311CE5DED0001BE2B4 /* ProfileViews */,
 				65DFF1461C86107F00147F44 /* MyEventsTableViewController.swift */,
 				650FFE4F1C887FF0003CAA1C /* ContactsTableViewController.swift */,
 				650FFE551C88A982003CAA1C /* EventFeedTableViewController.swift */,
@@ -374,7 +430,7 @@
 				65B5828A1C9A9FEB007F86C7 /* AddBeaconViewController.swift */,
 				6592B4481CC7E3400052AE72 /* EventHomeSocialTableViewController.swift */,
 				65041F5B1CDEBDF700771E3B /* FollowersTableViewController.swift */,
-				65041F5F1CE01E7D00771E3B /* ProfileVisitorViewController.swift */,
+				6596272F1CE3D44F001BE2B4 /* PostUpdateViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -382,6 +438,7 @@
 		65F742471C7364E000F4B3A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				65678D0D1CEB4C0C00325D8B /* ProfileTableViews */,
 				65C76FE81C9181AE005D934B /* ContactsTableViewCell.swift */,
 				65B5828C1C9AA3FE007F86C7 /* BeaconItem.swift */,
 				65041F5D1CDEBE9D00771E3B /* FollowersCell.swift */,
@@ -582,12 +639,14 @@
 				65B5828D1C9AA3FE007F86C7 /* BeaconItem.swift in Sources */,
 				653DC37A1C44AB5900EEAECD /* SignUpViewController.swift in Sources */,
 				650FFE561C88A982003CAA1C /* EventFeedTableViewController.swift in Sources */,
+				65678D141CEB4DD300325D8B /* ConversationTopicsTableView.swift in Sources */,
 				650FFE501C887FF0003CAA1C /* ContactsTableViewController.swift in Sources */,
 				65603C4D1C9047ED006AA32F /* BeaconNotificationsManager.swift in Sources */,
 				65F7424D1C73659900F4B3A0 /* ProfileViewController.swift in Sources */,
 				65B0CF821C49A21600829D6D /* MMDrawerBarButtonItem.m in Sources */,
 				65F742431C73532A00F4B3A0 /* CreateViewController.swift in Sources */,
 				65B5828B1C9A9FEB007F86C7 /* AddBeaconViewController.swift in Sources */,
+				65678D0F1CEB4C3100325D8B /* ConversationTopicsTVC.swift in Sources */,
 				65603C4B1C9047CA006AA32F /* BeaconID.swift in Sources */,
 				65C76FEB1C919F26005D934B /* BeaconTestViewController.swift in Sources */,
 				65B0CF851C49A21600829D6D /* UIViewController+MMDrawerController.m in Sources */,
@@ -607,6 +666,7 @@
 				6592B4491CC7E3400052AE72 /* EventHomeSocialTableViewController.swift in Sources */,
 				655D49A41C822896007DC051 /* DiscoverTableViewController.swift in Sources */,
 				65B0CF841C49A21600829D6D /* MMDrawerVisualState.m in Sources */,
+				659627301CE3D44F001BE2B4 /* PostUpdateViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
