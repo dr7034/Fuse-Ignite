@@ -11,7 +11,6 @@ import Parse
 import ParseUI
 
 
-
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var userFullNameLabel: UILabel!
@@ -24,112 +23,112 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var userFollowersCountLabel: UILabel!
     @IBOutlet weak var userScheduledEventsCountLabel: UILabel!
     
+    @IBOutlet weak var userEmailAddressLabel: UILabel!
+    @IBOutlet weak var userTelephoneNumberLabel: UILabel!
+    @IBOutlet weak var userWebPageLabel: UILabel!
+    
     //tableview outlets
     @IBOutlet weak var conversationTopicsTableView: UITableView!
     @IBOutlet weak var eventObjectivesTableView: UITableView!
     @IBOutlet weak var motivationsTableView: UITableView!
+    @IBOutlet weak var interestsTableView: UITableView!
     
     // Container to store the view table selected object
     var currentObject : PFObject?
-    
-    /// A simple data structure to populate the table view.
-    struct PreviewDetail {
-        let title: String
-        let preferredHeight: Double
-    }
-    
-    let conversationTopics =  [
-    
-        PreviewDetail(title: "Nine", preferredHeight: 160.0),
-        PreviewDetail(title: "Ten", preferredHeight: 320.0),
-        PreviewDetail(title: "Eleven", preferredHeight: 0.0), // 0.0 to get the default height.
-        PreviewDetail(title: "More", preferredHeight: 0.0) // 0.0 to get the default height.
-        
-    ]
-    
-    let eventObjectives = [
-        PreviewDetail(title: "Nine", preferredHeight: 160.0),
-        PreviewDetail(title: "Ten", preferredHeight: 320.0),
-        PreviewDetail(title: "Eleven", preferredHeight: 0.0), // 0.0 to get the default height.
-        PreviewDetail(title: "More", preferredHeight: 0.0) // 0.0 to get the default height.
-    ]
-    
-    let motivations = [
-        PreviewDetail(title: "Nine", preferredHeight: 160.0),
-        PreviewDetail(title: "Ten", preferredHeight: 320.0),
-        PreviewDetail(title: "Eleven", preferredHeight: 0.0), // 0.0 to get the default height.
-        PreviewDetail(title: "More", preferredHeight: 0.0) // 0.0 to get the default height.
-    ]
-    
-    
+
+    //Table Views Arrays to store data pulled from parse to display
+    var conversationTopics: [String] = []
+    var eventObjectives: [String] = []
+    var motivations: [String] = []
+    var interests: [String] = []
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         getUserData()
         loadProfilePicture()
-        
+        getTableViewDataFromParse()
+        setTableViewDelegates()
+        }
+    
+    func setTableViewDelegates() {
         conversationTopicsTableView.dataSource = self
         conversationTopicsTableView.delegate = self
-        conversationTopicsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "conversationTopicsCell")
         
         eventObjectivesTableView.dataSource = self
         eventObjectivesTableView.delegate = self
-        eventObjectivesTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "eventObjectivesCell")
         
         motivationsTableView.dataSource = self
         motivationsTableView.delegate = self
-        motivationsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "motivationsCell")
         
-        
+        interestsTableView.dataSource = self
+        interestsTableView.delegate = self
+    }
+
+    func getTableViewDataFromParse() {
+        PFUser.currentUser()!.fetchInBackgroundWithBlock { (object: PFObject?, error: NSError?) in
+            
+            let conversationTopicsData = object!.valueForKey("conversationTopics")
+            let eventObjectivesData = object!.valueForKey("eventObjectives")
+            let motivationsData = object!.valueForKey("userMotivations")
+            let interestsData = object!.valueForKey("userInterests")
+            
+            self.conversationTopics = conversationTopicsData! as! [String]
+            self.eventObjectives = eventObjectivesData! as! [String]
+            self.motivations = motivationsData! as! [String]
+            self.interests = interestsData! as! [String]
+            
+            self.conversationTopicsTableView.reloadData()
+            self.eventObjectivesTableView.reloadData()
+            self.motivationsTableView.reloadData()
+            self.interestsTableView.reloadData()
+
+            }
+    
         }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of items in the sample data structure.
-        
         var count:Int?
         
         if tableView == self.conversationTopicsTableView {
-            count = conversationTopics.count
+            count = self.conversationTopics.count
         }
-        
         if tableView == self.eventObjectivesTableView {
-            count =  eventObjectives.count
+            count =  self.eventObjectives.count
         }
-        
         if tableView == self.motivationsTableView {
-            count =  motivations.count
+            count =  self.motivations.count
         }
-        
+        if tableView == self.interestsTableView {
+            count =  self.interests.count
+        }
         return count!
-        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell:UITableViewCell?
+        var cell = UITableViewCell()
         
         if tableView == self.conversationTopicsTableView {
-            cell = tableView.dequeueReusableCellWithIdentifier("conversationTopicsCell", forIndexPath: indexPath)
-            let previewDetail = conversationTopics[indexPath.row]
-            cell!.textLabel!.text = previewDetail.title
-            
+        cell = tableView.dequeueReusableCellWithIdentifier("conversationTopicsCell", forIndexPath: indexPath)
+        cell.textLabel?.text = self.conversationTopics[indexPath.row]
         }
         
         if tableView == self.eventObjectivesTableView {
             cell = tableView.dequeueReusableCellWithIdentifier("eventObjectivesCell", forIndexPath: indexPath)
-            let previewDetail = eventObjectives[indexPath.row]
-            cell!.textLabel!.text = previewDetail.title
-            
+            cell.textLabel?.text = self.eventObjectives[indexPath.row]
         }
         
         if tableView == self.motivationsTableView {
             cell = tableView.dequeueReusableCellWithIdentifier("motivationsCell", forIndexPath: indexPath)
-            let previewDetail = motivations[indexPath.row]
-            cell!.textLabel!.text = previewDetail.title
-            
+            cell.textLabel?.text = self.motivations[indexPath.row]
         }
-        
-        return cell!
+        if tableView == self.interestsTableView {
+            cell = tableView.dequeueReusableCellWithIdentifier("interestsCell", forIndexPath: indexPath)
+            cell.textLabel?.text = self.interests[indexPath.row]
+        }
+        return cell
     }
     
     func getUserData(){
@@ -145,14 +144,19 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 let userJobTitle = PFUser.currentUser()?.objectForKey("jobTitle") as! String
                 let userCompanyName = PFUser.currentUser()?.objectForKey("companyName") as! String
                 let userNetworkingObjectives = PFUser.currentUser()?.objectForKey("networkingObjectives") as! String
-
+                let userEmailAddress = PFUser.currentUser()?.objectForKey("email") as! String
+                let userWebPage = PFUser.currentUser()?.objectForKey("webPage") as! String
+                let userTelNumber = PFUser.currentUser()?.objectForKey("telNumber") as! String
+                
                 self.userBioTextView.text = userBio
                 self.userFullNameLabel.text = userFullName
                 self.userJobTitleLabel.text = userJobTitle
                 self.userCompanyLabel.text = userCompanyName
                 self.userNetworkingObjectivesTextView.text = userNetworkingObjectives
+                self.userEmailAddressLabel.text = userEmailAddress
+                self.userWebPageLabel.text = userWebPage
+                self.userTelephoneNumberLabel.text = userTelNumber
                 
-            
                 let followers = PFQuery(className: "Followers")
                 followers.whereKey("following", equalTo: user.username!)
                 followers.countObjectsInBackgroundWithBlock({ (count: Int32, error: NSError?) in
@@ -196,23 +200,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     
     @IBAction func leftSideButtonTapped(sender: AnyObject) {
-        
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
-        
     }
     
     @IBAction func rightSideButtonTapped(sender: AnyObject) {
-        
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
-        
     }
     
     @IBAction func editProfileButtonTapped(sender: AnyObject) {
-        
         
     }
     
@@ -224,14 +223,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             
             if(imageData != nil)
             {
-                self.profilePictureImageView.image = UIImage(data: imageData!)
+            self.profilePictureImageView.image = UIImage(data: imageData!)
             }
         }
         self.profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width / 2;
         self.profilePictureImageView.clipsToBounds = true;
     }
-    
-    
-    
-
 }

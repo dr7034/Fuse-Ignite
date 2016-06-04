@@ -10,5 +10,10 @@ import Parse
 import ParseUI
 
 class ContactsTableViewCell: PFTableViewCell {
+    
+    @IBOutlet weak var userFullNameLabel: UILabel!
+    @IBOutlet weak var userEmailAddressLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
+    
 
 }

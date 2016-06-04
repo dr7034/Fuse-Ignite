@@ -1,10 +1,5 @@
-//
-//  EventHomeSocialTableViewController.swift
-//  Fuse-Ignite
-//
 //  Created by Daniel Reilly on 20/04/2016.
 //  Copyright © 2016 Fuse Technology. All rights reserved.
-//
 
 import UIKit
 import Parse
@@ -33,6 +28,7 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     @IBOutlet weak var eventDescriptionLabel: UILabel!
     @IBOutlet weak var userProfilePictureImage: UIImageView!
     @IBOutlet weak var userJoinEventButton: UIButton!
+    @IBOutlet weak var eventObjectLabel: UILabel!
     
     var window: UIWindow?
     var drawerContainer: MMDrawerController?
@@ -40,13 +36,19 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     // Container to store the view table selected object
     var currentObject : PFObject?
     
+    var usernameArray = [String]()
+    var profilePictureArray = [PFFile]()
+    
+    var followArray = [String]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.userJoinEventButton.layer.cornerRadius = self.userJoinEventButton.frame.size.width / 2;
         self.userJoinEventButton.clipsToBounds = true;
         
-        let idQuery = PFQuery(className: "EventObject")
+//        let idQuery = PFQuery(className: "EventObject")
 //        idQuery.whereKey("objectId", equalTo: eventObjectId.last!)
 //        idQuery.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
 //            if(error == nil) {
@@ -58,6 +60,7 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
 //        
         // Unwrap the current object object
         if let object = currentObject {
+            eventObjectLabel.text = object.objectId!
             eventNameLabel.text = object["eventName"] as? String
             eventLocationNameLabel.text = object["eventLocationName"] as? String
             eventLocationAddress1Label.text = object["eventAddress1"] as? String
@@ -112,7 +115,7 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         }
 
         if let username = object?["username"] as? String {
-            cell?.usernameLabel?.text = "@" + username
+            cell?.usernameLabel?.text = username
         }
         
         if let userInterests = object?["userInterests"] as? NSArray {
@@ -136,16 +139,18 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("showProfile", sender: tableView)
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let nav = segue.destinationViewController as! UINavigationController
-        let profileViewController = nav.topViewController as! ProfileViewController
         
-        if let indexPath = self.tableView.indexPathForSelectedRow {
-            let row = Int(indexPath.row)
-            profileViewController.currentObject = (objects?[row]) as? PFObject
+        //recall cell to call cells data
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! RelevantUsersCustomCell
+        
+        //if user tapped on themselves, go home else go visitor
+        if cell.usernameLabel.text! == PFUser.currentUser()!.username! {
+            let myProfile = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+            self.navigationController?.pushViewController(myProfile, animated: true)
+        } else {
+            visitorName.append(cell.usernameLabel.text!)
+            let visitor = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVisitorViewController") as! ProfileVisitorViewController
+            self.navigationController?.pushViewController(visitor, animated: true)
         }
     }
     
@@ -185,8 +190,6 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     
     @IBAction func userJoinEvent(sender: UIButton, forEvent event: UIEvent) {
         
-        
-        
             let eventAttendees = PFObject(className: "UserAttending")
         
             eventAttendees["attendee"] = PFUser.currentUser()!.username!
@@ -200,13 +203,4 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
                     }
                 })
             }
-    
     }
-//    func beaconBroadcast(){
-//        
-//        let major:UInt16 = 29
-//        let minor:UInt16 = 1
-//        let uuid = NSUUID(UUIDString: "0CF052C2-97CA-407C-84F8-B62AAC4E95634")
-////        
-////        let region = CLBeaconRegion(proximityUUID: uuid!, major: major, minor: minor, identifier: "Test)
-//    }

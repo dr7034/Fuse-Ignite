@@ -13,18 +13,4 @@ import Bolts
 
 class ConversationTopicsTableView:  UITableView {
     
-    var friendsUsernamesListArray: [String] = []
-
-        let query : PFQuery = PFUser.query()!
-//    query
-//        query.findObjectsInBackgroundWithBlock {
-//            (objects: [PFObject]?, error: NSError?) -> Void in
-//            
-//            if error == nil{
-//                print(objects)
-//            }else{
-//                print("Getting Usernames Info Failure")
-//                print(error)
-//        }
-//}
 }

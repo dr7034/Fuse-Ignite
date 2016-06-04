@@ -15,6 +15,17 @@ class EventFeedTableViewController: PFQueryTableViewController {
     @IBOutlet weak var userProfilePicture: UIImageView!
     @IBOutlet weak var currentDateTime: UILabel!
     
+    var usernameArray = [String]()
+    var avatarArray = [PFFile]()
+    var imageArray = [PFFile]()
+    var dateArray = [NSDate?]()
+    var titleArray = [String]()
+    var uuidArray = [String]()
+    
+    var followArray = [String]()
+    
+    var page: Int = 10
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Clears Badges on Page open
@@ -24,6 +35,9 @@ class EventFeedTableViewController: PFQueryTableViewController {
         loadProfilePicture()
         currentDate()
     }
+    
+    
+    
 
     // Initialise the PFQueryTable tableview
     override init(style: UITableViewStyle, className: String!) {
@@ -34,16 +48,15 @@ class EventFeedTableViewController: PFQueryTableViewController {
         super.init(coder: aDecoder)!
         
         // Configure the PFQueryTableView
-        self.parseClassName = "EventObject"
-        self.textKey = "eventName"
+        self.parseClassName = "UpdateObject"
+        self.textKey = "objectId"
         self.pullToRefreshEnabled = true
         self.paginationEnabled = false
     }
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
-        let query = PFQuery(className: "EventObject")
-        query.orderByAscending("eventName")
+        let query = PFQuery(className: "UpdateObject")
         return query
     }
     

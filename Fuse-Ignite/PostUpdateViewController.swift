@@ -34,12 +34,14 @@ class PostUpdateViewController: UIViewController, UINavigationControllerDelegate
         self.view.userInteractionEnabled = true
         self.view.addGestureRecognizer(hideTap)
         
+        //reset UI
+        postImageView.image = UIImage(named: "")
+        
         //select image tap
         let picTap = UITapGestureRecognizer(target: self, action: #selector(PostUpdateViewController.selectImage))
         picTap.numberOfTapsRequired = 1
         postImageView.userInteractionEnabled = true
         postImageView.addGestureRecognizer(picTap)
-        
     }
     
     @IBAction func selectPhotoButtonTapped(sender: AnyObject) {
@@ -49,24 +51,22 @@ class PostUpdateViewController: UIViewController, UINavigationControllerDelegate
         imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         
         self.presentViewController(imagePickerController, animated: true, completion: nil)
-        
     }
-    
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
         
-        postImageView.image = info [UIImagePickerControllerEditedImage] as! UIImage
+        postImageView.image = info [UIImagePickerControllerOriginalImage] as? UIImage
         
         self.dismissViewControllerAnimated(true, completion: nil)
         
-        self.postImageView.layer.cornerRadius = self.postImageView.frame.size.width / 2;
-        self.postImageView.clipsToBounds = true;
-        
         postUpdateButton.enabled = true
         postUpdateButton.backgroundColor = UIColor(red:0.13, green:0.57, blue:1.00, alpha:1.00)
+        
+        //unhide remove button
+        removeButton.hidden = false
+        
     }
-    
     
     //hide keyboard function
     func hideKeyboardTap() {
@@ -79,6 +79,7 @@ class PostUpdateViewController: UIViewController, UINavigationControllerDelegate
         picker.delegate = self
         picker.sourceType = .PhotoLibrary
         picker.allowsEditing = true
+        presentViewController(picker, animated: true, completion: nil)
     }
     
     
@@ -90,6 +91,7 @@ class PostUpdateViewController: UIViewController, UINavigationControllerDelegate
         let object = PFObject(className: "UpdateObject")
         
         object["username"] = PFUser.currentUser()!.username
+        object["avatar"] = PFUser.currentUser()?.valueForKey("profile_picture") as! PFFile
         
         if (postCaptionTextView.text!.isEmpty) {
             object["caption"] = " "
@@ -102,8 +104,12 @@ class PostUpdateViewController: UIViewController, UINavigationControllerDelegate
         
         object.saveInBackgroundWithBlock { (success: Bool, error: NSError?) in
             if (error == nil) {
-                self.displayMessage("Update Posted Successfully to \(self.postEventObjectTextField.text!)")
                 self.dismissViewControllerAnimated(true, completion: nil)
+                self.viewDidLoad()
+                self.postCaptionTextView.text = ""
+                self.postHashtagsTextField.text = ""
+                self.postEventObjectTextField.text = ""
+                
             } else {
                 self.displayMessage("Update Failed to Post. Please try again later.")
             }
@@ -127,7 +133,7 @@ class PostUpdateViewController: UIViewController, UINavigationControllerDelegate
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBOutlet weak var removeImageButton: UIButton!
-   
-    
+    @IBAction func removeImageButton(sender: AnyObject) {
+        self.viewDidLoad()
+    }
 }

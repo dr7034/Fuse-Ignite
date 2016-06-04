@@ -10,6 +10,8 @@ import UIKit
 import Parse
 import ParseUI
 
+var userInterestsArray = [String]()
+
 class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var profilePictureImageView: UIImageView!
@@ -20,7 +22,14 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var userJobTitleTextField: UITextField!
     @IBOutlet weak var userInterestsTextField: UITextField!
     @IBOutlet weak var userEmailAddressTextField: UITextField!
-    
+    @IBOutlet weak var userIntroductionTextView: UITextView!
+    @IBOutlet weak var userNetworkingObjectivesTextView: UITextView!
+    @IBOutlet weak var userTelNumberTextField: UITextField!
+    @IBOutlet weak var userWebAddressTextField: UITextField!
+    @IBOutlet weak var userTwitterHandleTextField: UITextField!
+    @IBOutlet weak var userEventObjectivesTextField: UITextField!
+    @IBOutlet weak var userMotivationsTextField: UITextField!
+    @IBOutlet weak var userConversationTopicsTextField: UITextField!
     
     var opener: LeftSideViewController!
     
@@ -35,16 +44,47 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
 
         // Load User Details
         
+        userInterestsArray.removeAll(keepCapacity: false)
+        
         if let object = PFUser.currentUser() {
             userFullNameTextField.text = object["fullName"] as? String
             userCompanyNameTextField.text = object["companyName"] as? String
             userJobTitleTextField.text = object["jobTitle"] as? String
             userEmailAddressTextField.text = object["email"] as? String
-        }
+            userTelNumberTextField.text = object["telNumber"] as? String
+            userWebAddressTextField.text = object["webPage"] as? String
+            userTwitterHandleTextField.text = object["twitterHandle"] as? String
+            
+            //populate text areas 
+            userIntroductionTextView.text = object["userBio"] as? String
+            userNetworkingObjectivesTextView.text = object["networkingObjectives"] as? String
+            
+            //populate user interests
+            let userInterests = object["userInterests"] as? NSArray
+            let userInterestsArray = userInterests?.componentsJoinedByString(", ")
+            userInterestsTextField.text = userInterestsArray
+            
+            //populate eventObjectives
+            let eventObjectives = object["eventObjectives"] as? NSArray
+            let eventObjectivesArray = eventObjectives?.componentsJoinedByString(", ")
+            userEventObjectivesTextField.text = eventObjectivesArray
+            
+            //populate user motivations
+            let userMotivations = object["userMotivations"] as? NSArray
+            let userMotivationsArray = userMotivations?.componentsJoinedByString(", ")
+            userMotivationsTextField.text = userMotivationsArray
+            
+            //populate conversation Topics
+            let conversationTopics = object["conversationTopics"] as? NSArray
+            let conversationTopicsArray = conversationTopics?.componentsJoinedByString(", ")
+            userConversationTopicsTextField.text = conversationTopicsArray
+            
+            }
         
         currentObject?.fetchInBackgroundWithBlock({ (object, error) in
-            let userInterests = self.userInterestsTextField.text
             
+            var userInterests = self.userInterestsTextField.text
+            userInterests = object!["userInterests"] as? String
             userInterests?.componentsSeparatedByString(", ")
         })
         
@@ -111,10 +151,10 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             self.displayMessage(userMessage)
         }
         
-        //Set New Values for First and Last Name
-        let userFirstName = userFullNameTextField.text!
+        //Set New Values for Full Name
+        let userFullName = userFullNameTextField.text!
         
-        myUser.setObject(userFirstName, forKey: "fullName")
+        myUser.setObject(userFullName, forKey: "fullName")
         
         // Set New Password
         if(userPasswordTextField.text != nil)
@@ -176,11 +216,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         alert.addAction(okAction)
         self.presentViewController(alert, animated: true, completion: nil)
     }
-    
     //Calls this function when the tap is recognized.
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
-
 }

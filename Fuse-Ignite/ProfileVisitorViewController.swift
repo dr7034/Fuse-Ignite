@@ -12,7 +12,7 @@ import ParseUI
 
 var visitorName = [String]()
 
-class ProfileVisitorViewController: UIViewController {
+class ProfileVisitorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate  {
     
     
     @IBOutlet weak var userFullNameLabel: UILabel!
@@ -26,13 +26,33 @@ class ProfileVisitorViewController: UIViewController {
     @IBOutlet weak var userScheduledEventsCountLabel: UILabel!
     @IBOutlet weak var userFollowButton: UIButton!
     
+    
+    @IBOutlet weak var userEmailAddressLabel: UILabel!
+    @IBOutlet weak var userTelephoneNumberLabel: UILabel!
+    @IBOutlet weak var userWebPageLabel: UILabel!
+    
     //table views
     @IBOutlet weak var conversationTopicsTableView: UITableView!
     @IBOutlet weak var eventObjectivesTableView: UITableView!
     @IBOutlet weak var motivationsTableView: UITableView!
+    @IBOutlet weak var interestsTableView: UITableView!
+    
+    //Table Views Arrays to store data pulled from parse to display
+    var conversationTopics: [String] = []
+    var eventObjectives: [String] = []
+    var motivations: [String] = []
+    var interests: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getUserData()
+        setTableViewDelegates()
+    }
+    
+    
+
+        
+    func getUserData() {
         
         //top title
         self.navigationItem.title = "@" + visitorName.last!
@@ -53,8 +73,22 @@ class ProfileVisitorViewController: UIViewController {
                     self.userCompanyLabel.text = object["companyName"] as? String
                     self.userJobTitleLabel.text = object["jobTitle"] as? String
                     self.userNetworkingObjectivesTextView.text = object["networkingObjectives"] as? String
-                    self.userBioTextView.sizeToFit()
+//                    self.conversationTopics = object.valueForKey("conversationTopics") as! [String]
+//                    self.eventObjectives = object.valueForKey("eventObjectives") as! [String]
+//                    self.motivations = object.valueForKey("userMotivations") as! [String]
+//                    self.interests = object.valueForKey("userInterests") as! [String]
                     let profilePicFile: PFFile = (object.objectForKey("profile_picture") as? PFFile)!
+                    
+                    //These need to show for only mutual followers
+                    self.userTelephoneNumberLabel.text = object["telNumber"] as? String
+                    self.userEmailAddressLabel.text = object["email"] as? String
+                    self.userWebPageLabel.text = object["webPage"] as? String
+                    
+//                    self.conversationTopicsTableView.reloadData()
+//                    self.eventObjectivesTableView.reloadData()
+//                    self.motivationsTableView.reloadData()
+//                    self.interestsTableView.reloadData()
+                    
                     profilePicFile.getDataInBackgroundWithBlock({ (data: NSData?, error:NSError?) in
                         self.profilePictureImageView.image = UIImage(data: data!)
                         self.loadProfilePictureDimensions()
@@ -63,7 +97,9 @@ class ProfileVisitorViewController: UIViewController {
             } else {
                 print(error?.localizedDescription)
             }
-        }
+
+    }
+        
     
         let followQuery = PFQuery(className: "Followers")
         followQuery.whereKey("follower", equalTo: PFUser.currentUser()!.username!)
@@ -105,13 +141,13 @@ class ProfileVisitorViewController: UIViewController {
         })
         
         //tap to get followers
-        let followersTap = UITapGestureRecognizer(target: self, action: "followersTap")
+        let followersTap = UITapGestureRecognizer(target: self, action: #selector(ProfileVisitorViewController.followersTap))
         followersTap.numberOfTapsRequired = 1
         self.userFollowersCountLabel.userInteractionEnabled = true
         self.userFollowersCountLabel.addGestureRecognizer(followersTap)
         
         //tap to get users following
-        let followingTap = UITapGestureRecognizer(target: self, action: "followingTap")
+        let followingTap = UITapGestureRecognizer(target: self, action: #selector(ProfileVisitorViewController.followingTap))
         followingTap.numberOfTapsRequired = 1
         self.userFollowingCountLabel.userInteractionEnabled = true
         self.userFollowingCountLabel.addGestureRecognizer(followingTap)
@@ -125,6 +161,64 @@ class ProfileVisitorViewController: UIViewController {
         let followers = self.storyboard?.instantiateViewControllerWithIdentifier("FollowersTableViewController") as! FollowersTableViewController
         self.navigationController? .pushViewController(followers, animated: true)
         
+    }
+    
+    func setTableViewDelegates() {
+        conversationTopicsTableView.dataSource = self
+        conversationTopicsTableView.delegate = self
+        
+        eventObjectivesTableView.dataSource = self
+        eventObjectivesTableView.delegate = self
+        
+        motivationsTableView.dataSource = self
+        motivationsTableView.delegate = self
+        
+        interestsTableView.dataSource = self
+        interestsTableView.delegate = self
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Return the number of items in the sample data structure.
+        var count:Int?
+        
+        if tableView == self.conversationTopicsTableView {
+            count = self.conversationTopics.count
+        }
+        if tableView == self.eventObjectivesTableView {
+            count =  self.eventObjectives.count
+        }
+        if tableView == self.motivationsTableView {
+            count =  self.motivations.count
+        }
+        if tableView == self.interestsTableView {
+            count =  self.interests.count
+        }
+        return count!
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        var cell = UITableViewCell()
+        
+        if tableView == self.conversationTopicsTableView {
+            cell = tableView.dequeueReusableCellWithIdentifier("conversationTopicsCell", forIndexPath: indexPath)
+            cell.textLabel?.text = self.conversationTopics[indexPath.row]
+        }
+        
+        if tableView == self.eventObjectivesTableView {
+            cell = tableView.dequeueReusableCellWithIdentifier("eventObjectivesCell", forIndexPath: indexPath)
+            cell.textLabel?.text = self.eventObjectives[indexPath.row]
+        }
+        
+        if tableView == self.motivationsTableView {
+            cell = tableView.dequeueReusableCellWithIdentifier("motivationsCell", forIndexPath: indexPath)
+            cell.textLabel?.text = self.motivations[indexPath.row]
+        }
+        if tableView == self.interestsTableView {
+            cell = tableView.dequeueReusableCellWithIdentifier("interestsCell", forIndexPath: indexPath)
+            cell.textLabel?.text = self.interests[indexPath.row]
+        }
+        return cell
     }
     
     //tapped followeing count

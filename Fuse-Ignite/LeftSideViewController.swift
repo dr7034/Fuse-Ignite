@@ -15,7 +15,7 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var userFullNameLabel: UILabel!
     
     
-    var menuItems:[String] = ["Home","Discover","Create an Event","My Events","Contacts","Profile","Beacon Testing Ground","Sign Out", "."]
+    var menuItems:[String] = ["Home","Discover","Create an Event","My Events","Contacts","Profile","Beacon Testing Ground","Sign Out"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

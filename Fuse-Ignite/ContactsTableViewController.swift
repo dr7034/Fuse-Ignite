@@ -36,19 +36,22 @@ class ContactsTableViewController: PFQueryTableViewController {
         return query
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> ContactsTableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("contactsCell") as! PFTableViewCell!
+        var cell = tableView.dequeueReusableCellWithIdentifier("contactsCell") as! ContactsTableViewCell!
         if cell == nil {
-            cell = PFTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "contactsCell")
+            cell = ContactsTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "contactsCell")
         }
         
         // Extract values from the PFObject to display in the table cell
         if let contactName = object?["fullName"] as? String {
-            cell?.textLabel?.text = contactName
+            cell?.userFullNameLabel?.text = contactName
         }
-        if let eventDescription = object?["email"] as? String {
-            cell?.detailTextLabel?.text = eventDescription
+        if let contactEmail = object?["email"] as? String {
+            cell?.userEmailAddressLabel?.text = contactEmail
+        }
+        if let contactUsername = object?["username"] as? String {
+            cell?.usernameLabel?.text = contactUsername
         }
         return cell
     }
@@ -64,6 +67,22 @@ class ContactsTableViewController: PFQueryTableViewController {
             
         }
     
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        //recall cell to call cells data
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ContactsTableViewCell
+        
+        //if user tapped on themselves, go home else go visitor
+        if cell.usernameLabel.text! == PFUser.currentUser()!.username! {
+            let myProfile = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+            self.navigationController?.pushViewController(myProfile, animated: true)
+        } else {
+            visitorName.append(cell.usernameLabel.text!)
+            let visitor = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVisitorViewController") as! ProfileVisitorViewController
+            self.navigationController?.pushViewController(visitor, animated: true)
+        }
     }
     
     @IBAction func leftSideButtonTapped(sender: AnyObject) {
