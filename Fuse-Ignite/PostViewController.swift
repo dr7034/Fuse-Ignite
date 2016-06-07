@@ -40,7 +40,6 @@ class PostViewController: UITableViewController {
         tableView.estimatedRowHeight = 450
         
         let postQuery = PFQuery(className: "UpdateObject")
-        postQuery.whereKey("objectId", equalTo: postuuid.last!)
         postQuery.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
             if(error == nil) {
                 
@@ -115,10 +114,26 @@ class PostViewController: UITableViewController {
         
         
 //        //manipulate like button based on user like
-//        let didLike = PFQuery(className: "likes")
-//        didLike.whereKey("sender", equalTo: PFUser.currentUser!.username!)
-//        didLike.whereKey("recipient", equalTo: cell.uuidL)
-//        
+        let didLike = PFQuery(className: "likes")
+        didLike.whereKey("sender", equalTo: PFUser.currentUser()!.username!)
+        didLike.whereKey("recipient", equalTo: cell.uuidHiddenLabel.text!)
+        didLike.countObjectsInBackgroundWithBlock { (count: Int32, error: NSError?) in
+            //if no likes are found, else found likes
+            if (count == 0) {
+//                cell.likesButton.setTitle("unlike", forState: .Normal)
+                cell.likesButton.setBackgroundImage(UIImage(named: "unlikeButton"), forState: .Normal)
+            } else {
+//                cell.likesButton.setTitle("like", forState: .Normal)
+                cell.likesButton.setBackgroundImage(UIImage(named: "likeButton"), forState: .Normal)
+            }
+        }
+        //count likes of post
+        let countLikes = PFQuery(className: "Likes")
+        countLikes.whereKey("recipient", equalTo: cell.uuidHiddenLabel.text!)
+        countLikes.countObjectsInBackgroundWithBlock { (count: Int32, error: NSError?) in
+            cell.likeLabel.text = "\(count)"
+        }
+        
         return cell
     }
     

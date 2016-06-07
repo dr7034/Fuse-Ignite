@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class PostTableViewCell: UITableViewCell {
     
@@ -30,10 +31,32 @@ class PostTableViewCell: UITableViewCell {
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+    @IBAction func likesButtonClicked(sender: AnyObject) {
+        
+        let title = sender.titleForState(.Normal)
+        
+        if(title == "unlike") {
+            let object = PFObject(className: "Likes")
+            object["sender"] = PFUser.currentUser()?.username!
+            object["recipient"] = uuidHiddenLabel.text!
+            object.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+                print("liked")
+                self.likesButton.setTitle("like", forState: .Normal)
+                self.likesButton.setBackgroundImage(UIImage(named: "likeButton"), forState: .Normal)
+            })
+        } else {
+            let object = PFObject(className: "Likes")
+            object["sender"] = PFUser.currentUser()?.username!
+            object["recipient"] = uuidHiddenLabel.text!
+            
+            //delete in background with block
+            object.deleteInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+                self.likesButton.setTitle("unlike", forState: .Normal)
+                self.likesButton.setBackgroundImage(UIImage(named: "unlikeButton"), forState: .Normal)
+            })
+        }
+        
     }
 
 }

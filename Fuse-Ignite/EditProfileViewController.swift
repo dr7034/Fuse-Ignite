@@ -43,7 +43,6 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         view.addGestureRecognizer(tap)
 
         // Load User Details
-        
         userInterestsArray.removeAll(keepCapacity: false)
         
         if let object = PFUser.currentUser() {
@@ -125,7 +124,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     @IBAction func saveButtonTapped(sender: AnyObject) {
         //Get Current User
-        let myUser:PFUser = PFUser.currentUser()!
+        let userObject:PFUser = PFUser.currentUser()!
         
         //Get profile image
         let profileImageData = UIImageJPEGRepresentation(profilePictureImageView.image!, 1)
@@ -144,7 +143,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             self.displayMessage(userMessage)
         }
         
-        //Check if First name or Last name are not empty
+        //Check if full name is not empty
         if(userFullNameTextField.text!.isEmpty)
         {
             let userMessage = "Name Field is Required"
@@ -153,21 +152,64 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         //Set New Values for Full Name
         let userFullName = userFullNameTextField.text!
-        
-        myUser.setObject(userFullName, forKey: "fullName")
+        userObject.setObject(userFullName, forKey: "fullName")
         
         // Set New Password
         if(userPasswordTextField.text != nil)
         {
             let userPassword = userPasswordTextField.text
-            myUser.password = userPassword
+            userObject.password = userPassword
         }
+        
+        //set user bio
+        let userBio = userIntroductionTextView.text!
+        //FIELD NAME MAY NOT BE CORRECT
+        userObject.setObject(userBio, forKey: "userBio")
+        
+        //set user networking objectives
+        let networkingObjectives = userNetworkingObjectivesTextView.text!
+        userObject.setObject(networkingObjectives, forKey: "networkingObjectives")
+        
+        //set user email
+        let userEmail = userEmailAddressTextField.text!
+        userObject.setObject(userEmail, forKey: "email")
+        
+        //set telephone number
+        let userTelNumber = userTelNumberTextField.text!
+        userObject.setObject(userTelNumber, forKey: "TelNumber")
+        
+        //set web address
+        let webPage = userWebAddressTextField.text!
+        userObject.setObject(webPage, forKey: "webPage")
+        
+        //set Twitter handle
+        let twitterHandle = userTwitterHandleTextField.text!
+        userObject.setObject(twitterHandle, forKey: "twitterHandle")
+        
+        //set user interets
+        let userInterests = userInterestsTextField.text!
+        userObject.setObject("[" + userInterests + "]", forKey: "userInterests")
+        
+        //set event objectives
+        let eventObjectives = userEventObjectivesTextField.text!
+        userObject.setObject("[" + eventObjectives + "]", forKey: "eventObjectives")
+        
+        //set motivations
+        let motivations = userMotivationsTextField.text!
+        userObject.setObject("[" + motivations + "]", forKey: "motivations")
+        
+        //set conversation Topics
+        let conversationTopics = userConversationTopicsTextField.text!
+        userObject.setObject("[" + conversationTopics + "]", forKey: "conversationTopics")
+        
+        //set binary contact info sharing request
+        
         
         //Set Profile Picture
         if(profileImageData != nil)
         {
             let profileFileObject = PFFile(data: profileImageData!)
-            myUser.setObject(profileFileObject, forKey: "profile_picture")
+            userObject.setObject(profileFileObject, forKey: "profile_picture")
         }
         
         //Display Activity Indicator
@@ -177,7 +219,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         //Save in Data in Background with Block
         
-        myUser.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+        userObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             
             //Hide Activity Indicator
             loadingNotification.hide(true)
@@ -192,16 +234,13 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             {
                 let userMessage = "Profile details successfully updated"
                 self.displayMessage(userMessage)
-                
             }
         }
     }
     
     
     @IBAction func doneButtonTapped(sender: AnyObject) {
-        
         self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
     func displayMessage(userMessage:String)

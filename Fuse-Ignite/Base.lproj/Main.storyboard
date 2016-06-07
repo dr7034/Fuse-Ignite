@@ -1750,6 +1750,7 @@
                                             <rect key="frame" x="66" y="24" width="79" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="79" id="NXM-xR-WrJ"/>
+                                                <constraint firstAttribute="height" constant="21" id="TXn-Wb-Fls"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2768,7 +2769,11 @@
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qkx-Oc-2Av">
                                             <rect key="frame" x="8" y="221" width="30" height="30"/>
-                                            <state key="normal" title="Likes" image="likeButton"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                            <state key="normal" backgroundImage="unlikeButton"/>
+                                            <connections>
+                                                <action selector="likesButtonClicked:" destination="bxA-ME-ix5" eventType="touchUpInside" id="ijo-Tq-4fg"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDT-r5-PDZ">
                                             <rect key="frame" x="279" y="225" width="24" height="23"/>
@@ -3813,9 +3818,9 @@
         <image name="headerbgeventdiscover" width="750" height="341"/>
         <image name="headereventfeed" width="750" height="700"/>
         <image name="left" width="12" height="22"/>
-        <image name="likeButton" width="32" height="30"/>
         <image name="menu" width="22" height="18"/>
         <image name="right" width="12" height="22"/>
         <image name="search" width="25" height="24"/>
+        <image name="unlikeButton" width="32" height="30"/>
     </resources>
 </document>

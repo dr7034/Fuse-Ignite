@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "likeUnfilledButton.png",
+      "filename" : "unlikeButton.png",
       "scale" : "1x"
     },
     {
