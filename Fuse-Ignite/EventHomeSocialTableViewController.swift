@@ -8,7 +8,7 @@ import CoreBluetooth
 import ParseUI
 
 class RelevantUsersCustomCell: PFTableViewCell
-{
+ {
     @IBOutlet var userFullName: UILabel!
     @IBOutlet var userInterests: UILabel!
     @IBOutlet weak var userProfilePicture: UIImageView!
@@ -48,19 +48,9 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         self.userJoinEventButton.layer.cornerRadius = self.userJoinEventButton.frame.size.width / 2;
         self.userJoinEventButton.clipsToBounds = true;
         
-//        let idQuery = PFQuery(className: "EventObject")
-//        idQuery.whereKey("objectId", equalTo: eventObjectId.last!)
-//        idQuery.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
-//            if(error == nil) {
-//                if objects!.isEmpty {
-//                    print("User not registered")
-//                }
-//            }
-//        }
-//        
         // Unwrap the current object object
         if let object = currentObject {
-            eventObjectLabel.text = object.objectId!
+            eventObjectLabel.text = object.objectId
             eventNameLabel.text = object["eventName"] as? String
             eventLocationNameLabel.text = object["eventLocationName"] as? String
             eventLocationAddress1Label.text = object["eventAddress1"] as? String
@@ -68,11 +58,11 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
             eventLocationCountryLabel.text = object["eventCountry"] as? String
             eventDescriptionLabel.text = object["eventDescription"] as? String
             self.eventDescriptionLabel.sizeToFit()
+            
         }
         
         // Return to table view
         self.navigationController?.popViewControllerAnimated(true)
-        
         loadProfilePicture()
     }
     
@@ -132,17 +122,13 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
         let header1: String = "Relevant Users"
-
         return header1
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
         //recall cell to call cells data
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! RelevantUsersCustomCell
-        
         //if user tapped on themselves, go home else go visitor
         if cell.usernameLabel.text! == PFUser.currentUser()!.username! {
             let myProfile = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
@@ -155,29 +141,23 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     }
     
     @IBAction func leftSideButtonTapped(sender: AnyObject) {
-        
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
-        
     }
     
     @IBAction func rightSideButtonTapped(sender: AnyObject) {
-        
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
-        
     }
     
     func loadProfilePicture(){
         
         let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
-        
         profilePictureObject.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
             
             if(imageData != nil)
             {
                 self.userProfilePictureImage.image = UIImage(data: imageData!)
-                
             }
         }
         self.userProfilePictureImage.layer.cornerRadius = self.userProfilePictureImage.frame.size.width / 2;
@@ -189,15 +169,13 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     }
     
     @IBAction func userJoinEvent(sender: UIButton, forEvent event: UIEvent) {
-        
+        //When user attending username matches && event objectId match button must be disabled to prevent duplicate entries on database
             let eventAttendees = PFObject(className: "UserAttending")
-        
             eventAttendees["attendee"] = PFUser.currentUser()!.username!
-            eventAttendees["eventId"] = eventObjectId
-                
+            eventAttendees["eventAttendingId"] = eventObjectLabel.text
                 eventAttendees.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
                     if(success) {
-                        self.userJoinEventButton.imageForState(UIControlState.Disabled)
+                        self.userJoinEventButton.enabled = false
                     } else {
                         print(error?.localizedDescription)
                     }

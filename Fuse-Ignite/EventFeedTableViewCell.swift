@@ -9,22 +9,14 @@
 import UIKit
 
 class EventFeedTableViewCell: UITableViewCell {
-    
     @IBOutlet weak var userFullNameLabel: UILabel!
     @IBOutlet weak var usernameButton: UIButton!
     @IBOutlet weak var timeSincePostLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var postTitleImageView: UILabel!
+    @IBOutlet weak var postTitleLabel: UILabel!
+    @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var hiddenUUIDLabel: UILabel!
+    @IBOutlet weak var likesButton: UIButton!
+    @IBOutlet weak var likeLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

@@ -237,7 +237,6 @@
 #import "ESTNearableManager.h"
 #import "ESTSimulatedNearableManager.h"
 #import "ESTNearableDefinitions.h"
-#import "ESTNearableSettingsManager.h"
 
 #import "ESTSettingNearableInterval.h"
 #import "ESTSettingNearablePower.h"

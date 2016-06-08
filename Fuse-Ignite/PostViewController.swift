@@ -59,7 +59,6 @@ class PostViewController: UITableViewController {
                 }
             }
         }
-        
     }
 
     
@@ -134,8 +133,31 @@ class PostViewController: UITableViewController {
             cell.likeLabel.text = "\(count)"
         }
         
+        cell.usernameButton.layer.setValue(indexPath, forKey: "index")
+        
         return cell
     }
+    
+    @IBAction func clickedUsernameButton(sender: AnyObject) {
+        
+        //call index of button
+        let i = sender.layer.valueForKey("index") as! NSIndexPath
+        
+        //call cell to call further cell data
+        let cell = tableView.cellForRowAtIndexPath(i) as! PostTableViewCell
+        
+        //if user tapped on themselves go home otherwise go to visitor page
+        if (cell.usernameButton.titleLabel?.text == PFUser.currentUser()?.username) {
+            let home = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+            self.navigationController?.pushViewController(home, animated: true)
+        } else {
+            visitorName.append(cell.usernameButton.titleLabel!.text!)
+            let visitor = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVisitorViewController") as! ProfileVisitorViewController
+            self.navigationController?.pushViewController(visitor, animated: true)
+        }
+        
+    }
+    
     
     func back(sender: UIBarButtonItem) {
         self.navigationController?.popToRootViewControllerAnimated(true)
