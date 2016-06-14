@@ -59,7 +59,7 @@ class ProfileVisitorViewController: UIViewController, UIImagePickerControllerDel
         
         let infoQuery = PFQuery(className: "_User")
         infoQuery.whereKey("username", equalTo: visitorName.last!)
-        infoQuery.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
+        infoQuery.findObjectsInBackground { (objects: [PFObject]?, error: NSError?) in
             if(error == nil) {
                 if objects!.isEmpty {
                     print("wrong user")
@@ -77,7 +77,7 @@ class ProfileVisitorViewController: UIViewController, UIImagePickerControllerDel
 //                    self.eventObjectives = object.valueForKey("eventObjectives") as! [String]
 //                    self.motivations = object.valueForKey("userMotivations") as! [String]
 //                    self.interests = object.valueForKey("userInterests") as! [String]
-                    let profilePicFile: PFFile = (object.objectForKey("profile_picture") as? PFFile)!
+                    let profilePicFile: PFFile = (object.object(forKey: "profile_picture") as? PFFile)!
                     
                     //These need to show for only mutual followers
                     self.userTelephoneNumberLabel.text = object["telNumber"] as? String
@@ -89,7 +89,7 @@ class ProfileVisitorViewController: UIViewController, UIImagePickerControllerDel
 //                    self.motivationsTableView.reloadData()
 //                    self.interestsTableView.reloadData()
                     
-                    profilePicFile.getDataInBackgroundWithBlock({ (data: NSData?, error:NSError?) in
+                    profilePicFile.getDataInBackground({ (data: Data?, error:NSError?) in
                         self.profilePictureImageView.image = UIImage(data: data!)
                         self.loadProfilePictureDimensions()
                     })
@@ -102,16 +102,16 @@ class ProfileVisitorViewController: UIViewController, UIImagePickerControllerDel
         
     
         let followQuery = PFQuery(className: "Followers")
-        followQuery.whereKey("follower", equalTo: PFUser.currentUser()!.username!)
+        followQuery.whereKey("follower", equalTo: PFUser.current()!.username!)
         followQuery.whereKey("following", equalTo: visitorName.last!)
-        followQuery.countObjectsInBackgroundWithBlock({ (count: Int32, error: NSError?) in
+        followQuery.countObjectsInBackground({ (count: Int32, error: NSError?) in
             if(error == nil) {
                 if count == 0 {
-                    self.userFollowButton.setTitle("Follow +", forState: .Normal)
-                    self.userFollowButton.backgroundColor = .blueColor()
+                    self.userFollowButton.setTitle("Follow +", for: UIControlState())
+                    self.userFollowButton.backgroundColor = .blue()
                 } else {
-                    self.userFollowButton.setTitle("Following", forState: .Normal)
-                    self.userFollowButton.backgroundColor = .greenColor()
+                    self.userFollowButton.setTitle("Following", for: UIControlState())
+                    self.userFollowButton.backgroundColor = .green()
                 }
             } else {
                 print(error?.localizedDescription)
@@ -121,7 +121,7 @@ class ProfileVisitorViewController: UIViewController, UIImagePickerControllerDel
         //count users who are followers
         let followers = PFQuery(className: "Followers")
         followers.whereKey("following", equalTo: visitorName.last!)
-        followers.countObjectsInBackgroundWithBlock ({ (count: Int32, error: NSError?) in
+        followers.countObjectsInBackground ({ (count: Int32, error: NSError?) in
             if (error == nil) {
                 self.userFollowersCountLabel.text = "\(count)"
             } else {
@@ -132,7 +132,7 @@ class ProfileVisitorViewController: UIViewController, UIImagePickerControllerDel
         //count users following
         let following = PFQuery(className: "Followers")
         following.whereKey("follower", equalTo: visitorName.last!)
-        following.countObjectsInBackgroundWithBlock ({ (count: Int32, error: NSError?) in
+        following.countObjectsInBackground ({ (count: Int32, error: NSError?) in
             if (error == nil) {
                 self.userFollowingCountLabel.text = "\(count)"
             } else {
@@ -143,13 +143,13 @@ class ProfileVisitorViewController: UIViewController, UIImagePickerControllerDel
         //tap to get followers
         let followersTap = UITapGestureRecognizer(target: self, action: #selector(ProfileVisitorViewController.followersTap))
         followersTap.numberOfTapsRequired = 1
-        self.userFollowersCountLabel.userInteractionEnabled = true
+        self.userFollowersCountLabel.isUserInteractionEnabled = true
         self.userFollowersCountLabel.addGestureRecognizer(followersTap)
         
         //tap to get users following
         let followingTap = UITapGestureRecognizer(target: self, action: #selector(ProfileVisitorViewController.followingTap))
         followingTap.numberOfTapsRequired = 1
-        self.userFollowingCountLabel.userInteractionEnabled = true
+        self.userFollowingCountLabel.isUserInteractionEnabled = true
         self.userFollowingCountLabel.addGestureRecognizer(followingTap)
     }
     
@@ -158,7 +158,7 @@ class ProfileVisitorViewController: UIViewController, UIImagePickerControllerDel
         user = visitorName.last!
         show = "followers"
         
-        let followers = self.storyboard?.instantiateViewControllerWithIdentifier("FollowersTableViewController") as! FollowersTableViewController
+        let followers = self.storyboard?.instantiateViewController(withIdentifier: "FollowersTableViewController") as! FollowersTableViewController
         self.navigationController? .pushViewController(followers, animated: true)
         
     }
@@ -177,7 +177,7 @@ class ProfileVisitorViewController: UIViewController, UIImagePickerControllerDel
         interestsTableView.delegate = self
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of items in the sample data structure.
         var count:Int?
         
@@ -196,27 +196,27 @@ class ProfileVisitorViewController: UIViewController, UIImagePickerControllerDel
         return count!
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cell = UITableViewCell()
         
         if tableView == self.conversationTopicsTableView {
-            cell = tableView.dequeueReusableCellWithIdentifier("conversationTopicsCell", forIndexPath: indexPath)
-            cell.textLabel?.text = self.conversationTopics[indexPath.row]
+            cell = tableView.dequeueReusableCell(withIdentifier: "conversationTopicsCell", for: indexPath)
+            cell.textLabel?.text = self.conversationTopics[(indexPath as NSIndexPath).row]
         }
         
         if tableView == self.eventObjectivesTableView {
-            cell = tableView.dequeueReusableCellWithIdentifier("eventObjectivesCell", forIndexPath: indexPath)
-            cell.textLabel?.text = self.eventObjectives[indexPath.row]
+            cell = tableView.dequeueReusableCell(withIdentifier: "eventObjectivesCell", for: indexPath)
+            cell.textLabel?.text = self.eventObjectives[(indexPath as NSIndexPath).row]
         }
         
         if tableView == self.motivationsTableView {
-            cell = tableView.dequeueReusableCellWithIdentifier("motivationsCell", forIndexPath: indexPath)
-            cell.textLabel?.text = self.motivations[indexPath.row]
+            cell = tableView.dequeueReusableCell(withIdentifier: "motivationsCell", for: indexPath)
+            cell.textLabel?.text = self.motivations[(indexPath as NSIndexPath).row]
         }
         if tableView == self.interestsTableView {
-            cell = tableView.dequeueReusableCellWithIdentifier("interestsCell", forIndexPath: indexPath)
-            cell.textLabel?.text = self.interests[indexPath.row]
+            cell = tableView.dequeueReusableCell(withIdentifier: "interestsCell", for: indexPath)
+            cell.textLabel?.text = self.interests[(indexPath as NSIndexPath).row]
         }
         return cell
     }
@@ -226,24 +226,24 @@ class ProfileVisitorViewController: UIViewController, UIImagePickerControllerDel
         user = visitorName.last!
         show = "following"
         
-        let following = self.storyboard?.instantiateViewControllerWithIdentifier("FollowersTableViewController") as! FollowersTableViewController
+        let following = self.storyboard?.instantiateViewController(withIdentifier: "FollowersTableViewController") as! FollowersTableViewController
         self.navigationController? .pushViewController(following, animated: true)
     }
     
-    @IBAction func followButtonTapped(sender: AnyObject) {
+    @IBAction func followButtonTapped(_ sender: AnyObject) {
         
-        let title = userFollowButton.titleForState(.Normal)
+        let title = userFollowButton.title(for: UIControlState())
         
         //follow user
         if(title == "FOLLOW") {
             let object = PFObject(className: "Followers")
-            object["follower"] = PFUser.currentUser()?.username
+            object["follower"] = PFUser.current()?.username
             object["following"] = visitorName.last!
             
-            object.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+            object.saveInBackground({ (success:Bool, error:NSError?) in
                 if(success) {
-                    self.userFollowButton.setTitle("Following", forState: UIControlState.Normal)
-                    self.userFollowButton.backgroundColor = .greenColor()
+                    self.userFollowButton.setTitle("Following", for: UIControlState())
+                    self.userFollowButton.backgroundColor = .green()
                 } else {
                     print(error?.localizedDescription)
                 }
@@ -252,15 +252,15 @@ class ProfileVisitorViewController: UIViewController, UIImagePickerControllerDel
             
         } else {
             let query = PFQuery(className: "Followers")
-            query.whereKey("follower", equalTo: (PFUser.currentUser()?.username)!)
+            query.whereKey("follower", equalTo: (PFUser.current()?.username)!)
             query.whereKey("following", equalTo: visitorName.last!)
-            query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
+            query.findObjectsInBackground({ (objects: [PFObject]?, error: NSError?) in
                 if error == nil {
                     for object in objects! {
-                        object.deleteInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+                        object.deleteInBackground({ (success:Bool, error:NSError?) in
                             if (success) {
-                                self.userFollowButton.setTitle("Follow +", forState: UIControlState.Normal)
-                                self.userFollowButton.backgroundColor = .lightGrayColor()
+                                self.userFollowButton.setTitle("Follow +", for: UIControlState())
+                                self.userFollowButton.backgroundColor = .lightGray()
                             } else {
                                 print(error?.localizedDescription)
                             }

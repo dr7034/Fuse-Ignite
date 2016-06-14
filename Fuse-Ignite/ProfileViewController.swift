@@ -66,12 +66,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
 
     func getTableViewDataFromParse() {
-        PFUser.currentUser()!.fetchInBackgroundWithBlock { (object: PFObject?, error: NSError?) in
+        PFUser.current()!.fetchInBackground { (object: PFObject?, error: NSError?) in
             
-            let conversationTopicsData = object!.valueForKey("conversationTopics")
-            let eventObjectivesData = object!.valueForKey("eventObjectives")
-            let motivationsData = object!.valueForKey("userMotivations")
-            let interestsData = object!.valueForKey("userInterests")
+            let conversationTopicsData = object!.value(forKey: "conversationTopics")
+            let eventObjectivesData = object!.value(forKey: "eventObjectives")
+            let motivationsData = object!.value(forKey: "userMotivations")
+            let interestsData = object!.value(forKey: "userInterests")
             
             self.conversationTopics = conversationTopicsData! as! [String]
             self.eventObjectives = eventObjectivesData! as! [String]
@@ -87,7 +87,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
         }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of items in the sample data structure.
         var count:Int?
         
@@ -106,47 +106,47 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         return count!
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cell = UITableViewCell()
         
         if tableView == self.conversationTopicsTableView {
-        cell = tableView.dequeueReusableCellWithIdentifier("conversationTopicsCell", forIndexPath: indexPath)
-        cell.textLabel?.text = self.conversationTopics[indexPath.row]
+        cell = tableView.dequeueReusableCell(withIdentifier: "conversationTopicsCell", for: indexPath)
+        cell.textLabel?.text = self.conversationTopics[(indexPath as NSIndexPath).row]
         }
         
         if tableView == self.eventObjectivesTableView {
-            cell = tableView.dequeueReusableCellWithIdentifier("eventObjectivesCell", forIndexPath: indexPath)
-            cell.textLabel?.text = self.eventObjectives[indexPath.row]
+            cell = tableView.dequeueReusableCell(withIdentifier: "eventObjectivesCell", for: indexPath)
+            cell.textLabel?.text = self.eventObjectives[(indexPath as NSIndexPath).row]
         }
         
         if tableView == self.motivationsTableView {
-            cell = tableView.dequeueReusableCellWithIdentifier("motivationsCell", forIndexPath: indexPath)
-            cell.textLabel?.text = self.motivations[indexPath.row]
+            cell = tableView.dequeueReusableCell(withIdentifier: "motivationsCell", for: indexPath)
+            cell.textLabel?.text = self.motivations[(indexPath as NSIndexPath).row]
         }
         if tableView == self.interestsTableView {
-            cell = tableView.dequeueReusableCellWithIdentifier("interestsCell", forIndexPath: indexPath)
-            cell.textLabel?.text = self.interests[indexPath.row]
+            cell = tableView.dequeueReusableCell(withIdentifier: "interestsCell", for: indexPath)
+            cell.textLabel?.text = self.interests[(indexPath as NSIndexPath).row]
         }
         return cell
     }
     
     func getUserData(){
         
-        PFUser.currentUser()!.fetchInBackgroundWithBlock({ (currentUser: PFObject?, error: NSError?) -> Void in
+        PFUser.current()!.fetchInBackground({ (currentUser: PFObject?, error: NSError?) -> Void in
             
             // Update your data
             
             if let user = currentUser as? PFUser {
                 
-                let userBio = PFUser.currentUser()?.objectForKey("userBio") as! String
-                let userFullName = PFUser.currentUser()?.objectForKey("fullName") as! String
-                let userJobTitle = PFUser.currentUser()?.objectForKey("jobTitle") as! String
-                let userCompanyName = PFUser.currentUser()?.objectForKey("companyName") as! String
-                let userNetworkingObjectives = PFUser.currentUser()?.objectForKey("networkingObjectives") as! String
-                let userEmailAddress = PFUser.currentUser()?.objectForKey("email") as! String
-                let userWebPage = PFUser.currentUser()?.objectForKey("webPage") as! String
-                let userTelNumber = PFUser.currentUser()?.objectForKey("telNumber") as! String
+                let userBio = PFUser.current()?.object(forKey: "userBio") as! String
+                let userFullName = PFUser.current()?.object(forKey: "fullName") as! String
+                let userJobTitle = PFUser.current()?.object(forKey: "jobTitle") as! String
+                let userCompanyName = PFUser.current()?.object(forKey: "companyName") as! String
+                let userNetworkingObjectives = PFUser.current()?.object(forKey: "networkingObjectives") as! String
+                let userEmailAddress = PFUser.current()?.object(forKey: "email") as! String
+                let userWebPage = PFUser.current()?.object(forKey: "webPage") as! String
+                let userTelNumber = PFUser.current()?.object(forKey: "telNumber") as! String
                 
                 self.userBioTextView.text = userBio
                 self.userFullNameLabel.text = userFullName
@@ -159,67 +159,67 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 
                 let followers = PFQuery(className: "Followers")
                 followers.whereKey("following", equalTo: user.username!)
-                followers.countObjectsInBackgroundWithBlock({ (count: Int32, error: NSError?) in
+                followers.countObjectsInBackground({ (count: Int32, error: NSError?) in
                     self.userFollowersCountLabel.text = "\(count)"
                 })
                 
                 let followersTap = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.followersTap))
                 followersTap.numberOfTapsRequired = 1
-                self.userFollowersCountLabel.userInteractionEnabled = true
+                self.userFollowersCountLabel.isUserInteractionEnabled = true
                 self.userFollowersCountLabel.addGestureRecognizer(followersTap)
                 
                 let following = PFQuery(className: "Followers")
                 following.whereKey("follower", equalTo: user.username!)
-                following.countObjectsInBackgroundWithBlock({ (count: Int32, error: NSError?) in
+                following.countObjectsInBackground({ (count: Int32, error: NSError?) in
                     self.userFollowingCountLabel.text = "\(count)"
                 })
                 
                 let followingTap = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.followingTap))
                 followingTap.numberOfTapsRequired = 1
-                self.userFollowingCountLabel.userInteractionEnabled = true
+                self.userFollowingCountLabel.isUserInteractionEnabled = true
                 self.userFollowingCountLabel.addGestureRecognizer(followingTap)
             }
         })
     }
     
     func followersTap() {
-        user = (PFUser.currentUser()?.username)!
+        user = (PFUser.current()?.username)!
         show = "followers"
         
-        let followers = self.storyboard?.instantiateViewControllerWithIdentifier("FollowersTableViewController") as! FollowersTableViewController
+        let followers = self.storyboard?.instantiateViewController(withIdentifier: "FollowersTableViewController") as! FollowersTableViewController
         self.navigationController?.pushViewController(followers, animated: true)
     }
     
     func followingTap() {
-        user = (PFUser.currentUser()?.username)!
+        user = (PFUser.current()?.username)!
         show = "following"
         
-        let following = self.storyboard?.instantiateViewControllerWithIdentifier("FollowersTableViewController") as! FollowersTableViewController
+        let following = self.storyboard?.instantiateViewController(withIdentifier: "FollowersTableViewController") as! FollowersTableViewController
         self.navigationController?.pushViewController(following, animated: true)
     }
 
     
-    @IBAction func leftSideButtonTapped(sender: AnyObject) {
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    @IBAction func leftSideButtonTapped(_ sender: AnyObject) {
+        let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
         
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+        appDelegate.drawerContainer?.toggle(MMDrawerSide.left, animated: true, completion: nil)
     }
     
-    @IBAction func rightSideButtonTapped(sender: AnyObject) {
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    @IBAction func rightSideButtonTapped(_ sender: AnyObject) {
+        let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
         
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
+        appDelegate.drawerContainer?.toggle(MMDrawerSide.right, animated: true, completion: nil)
     }
     
-    @IBAction func editProfileButtonTapped(sender: AnyObject) {
+    @IBAction func editProfileButtonTapped(_ sender: AnyObject) {
         
     }
     
     func loadProfilePicture(){
         
-        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
+        let profilePictureObject = PFUser.current()?.object(forKey: "profile_picture") as! PFFile
         
-        profilePictureObject.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+        profilePictureObject.getDataInBackground { (imageData: Data?, error: NSError?) -> Void in
             
             if(imageData != nil)
             {

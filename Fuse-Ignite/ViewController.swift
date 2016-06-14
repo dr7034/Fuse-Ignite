@@ -19,18 +19,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    @IBAction func signInButtonTapped(sender: AnyObject) {
+    
+    @IBAction func signInButtonTapped(_ sender: AnyObject) {
         
         let userEmail = userEmailAddressTextField!.text
         let userPassword = userPasswordTextField!.text
@@ -40,15 +33,15 @@ class ViewController: UIViewController {
             return
         }
         
-        let activityIndicator = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        activityIndicator.labelText = "Sending"
-        activityIndicator.detailsLabelText = "Please wait"
+        let activityIndicator = MBProgressHUD.showAdded(to: self.view, animated: true)
+        activityIndicator?.labelText = "Sending"
+        activityIndicator?.detailsLabelText = "Please wait"
         
         //Perform Log In with Parse
         
-        PFUser.logInWithUsernameInBackground(userEmail!, password: userPassword!) { (user: PFUser?, error: NSError?) -> Void in
+        PFUser.logInWithUsername(inBackground: userEmail!, password: userPassword!) { (user: PFUser?, error: NSError?) -> Void in
             
-            MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+            MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             
             var userMessage = "Welcome!"
             
@@ -57,13 +50,13 @@ class ViewController: UIViewController {
                 //Remember the sign in state
                 let userName: String = (user?.username)!
                 
-                NSUserDefaults.standardUserDefaults().setObject(userName, forKey: "user_name")
-                NSUserDefaults.standardUserDefaults().synchronize()
+                UserDefaults.standard().set(userName, forKey: "username")
+                UserDefaults.standard().synchronize()
                 
                 
                 //Navigate to Protected Page
                 
-                let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
                 
                 appDelegate.buildUserInterface()
                 
@@ -75,11 +68,11 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func facebookLoginButtonTapped(sender: AnyObject) {
+    @IBAction func facebookLoginButtonTapped(_ sender: AnyObject) {
         
         let permissions = ["public_profile","email"]
         
-        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions, block: { (user:PFUser?, error:NSError?) -> Void in
+        PFFacebookUtils.logInInBackground(withReadPermissions: permissions, block: { (user:PFUser?, error:NSError?) -> Void in
             
             if(error != nil) {
                 //display an error message
@@ -100,9 +93,9 @@ class ViewController: UIViewController {
     func loadFacebookUserDetails() {
         
         //Display Activity Indicator
-        let activityIndicator = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        activityIndicator.labelText = "Fetching Data"
-        activityIndicator.detailsLabelText = "Please Wait"
+        let activityIndicator = MBProgressHUD.showAdded(to: self.view, animated: true)
+        activityIndicator?.labelText = "Fetching Data"
+        activityIndicator?.detailsLabelText = "Please Wait"
         
         // Define fields we would like to read from Facebook User object
         let requestParameters: AnyObject = ["fields": "id, email, first_name, last_name, name"]
@@ -110,7 +103,7 @@ class ViewController: UIViewController {
         // /me
         let userDetails = FBSDKGraphRequest(graphPath: "me", parameters: requestParameters as! [NSObject : AnyObject])
         
-        userDetails.startWithCompletionHandler({
+        userDetails?.start(completionHandler: {
             (connection, result, error: NSError!) -> Void in
             
             if(error != nil)
@@ -130,17 +123,15 @@ class ViewController: UIViewController {
             
             //Extract user fields
             let userId: String = "id"
-            //            let userFullName:String = result["name"] as! String
+            let userFullName:String = "fullName"
             let userEmail = "email"
-            let userFirstName  = "first_name"
-            let userLastName = "last_name"
             
             //Get Facebook Profile Picture
             let userProfile = "https://graph.facebook.com/" + userId + "/picture?type=large"
             
-            let profilePictureUrl = NSURL(string: userProfile)
+            let profilePictureUrl = URL(string: userProfile)
             
-            let profilePictureData = NSData(contentsOfURL: profilePictureUrl!)
+            let profilePictureData = try? Data(contentsOf: profilePictureUrl!)
             
             //Prepare PFUser Object
             
@@ -148,23 +139,21 @@ class ViewController: UIViewController {
             if(profilePictureData != nil)
             {
                 let profileFileObject = PFFile(data:profilePictureData!)
-                PFUser.currentUser()?.setObject(profileFileObject, forKey: "profile_picture")
+                PFUser.current()?.setObject(profileFileObject, forKey: "profile_picture")
             }
             
-            PFUser.currentUser()?.setObject(userFirstName, forKey: "first_name")
-            PFUser.currentUser()?.setObject(userLastName, forKey: "last_name")
-            
+            PFUser.current()?.setObject(userFullName, forKey: "fullName")
             
             if userEmail == userEmail
             {
-                PFUser.currentUser()?.email = userEmail
-                PFUser.currentUser()?.username = userEmail
+                PFUser.current()?.email = userEmail
+                PFUser.current()?.username = userEmail
                 
                 //TODO: Log Out User If Email does not exist
                 
             }
             
-            PFUser.currentUser()?.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) -> Void in
+            PFUser.current()?.saveInBackground({ (success:Bool, error:NSError?) -> Void in
                 
                 activityIndicator.hide(true)
                 
@@ -184,12 +173,12 @@ class ViewController: UIViewController {
                 {
                     if !userId.isEmpty
                     {
-                        NSUserDefaults.standardUserDefaults().setObject(userId, forKey: "user_name")
-                        NSUserDefaults.standardUserDefaults().synchronize()
+                        UserDefaults.standard().set(userId, forKey: "user_name")
+                        UserDefaults.standard().synchronize()
                         
                         //Take user to Main Page through the Segue in AppDelegate asyncronously
-                        dispatch_async(dispatch_get_main_queue()) {
-                            let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                        DispatchQueue.main.async {
+                            let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
                             appDelegate.buildUserInterface()
                             
                             }
@@ -199,21 +188,21 @@ class ViewController: UIViewController {
             })
         }
         
-    func displayMessage(userMessage:String)
+    func displayMessage(_ userMessage:String)
     {
         //Create Alert
-        let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
         
         //Create Alert Action Button
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
         {
             action in
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
         
         //Add Action button to Alert
         alert.addAction(okAction)
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
         
     }
     

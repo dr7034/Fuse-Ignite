@@ -2,9 +2,6 @@
 //  EventFeedTableViewController.swift
 //  Fuse-Ignite
 //
-//  Created by Daniel Reilly on 03/03/2016.
-//  Copyright © 2016 Fuse Technology. All rights reserved.
-//
 
 import UIKit
 import Parse
@@ -15,10 +12,12 @@ class EventFeedTableViewController: UITableViewController {
     @IBOutlet weak var userProfilePicture: UIImageView!
     @IBOutlet weak var currentDateTime: UILabel!
     
+    var refresher = UIRefreshControl()
+    
     var usernameArray = [String]()
     var avatarArray = [PFFile]()
     var imageArray = [PFFile]()
-    var dateArray = [NSDate?]()
+    var dateArray = [Date?]()
     var titleArray = [String]()
     var uuidArray = [String]()
     
@@ -29,46 +28,154 @@ class EventFeedTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Clears Badges on Page open
-        let currentInstallation = PFInstallation.currentInstallation()
+        let currentInstallation = PFInstallation.current()
         currentInstallation.badge = 0
         
         loadProfilePicture()
         currentDate()
+//        
+//        refresher.addTarget(self, action: #selector(EventFeedTableViewController.loadPosts), forControlEvents: UIControlEvents.ValueChanged)
+//        tableView.addSubview(refresher)
         
-//        //dynamic cell height
+        //call function to load posts
+//        loadPosts()
+        
+        //dynamic cell height
 //        tableView.rowHeight = UITableViewAutomaticDimension
 //        tableView.estimatedRowHeight = 450
-//        
-//        let postQuery = PFQuery(className: "UpdateObject")
-//        postQuery.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
-//            if(error == nil) {
-//                
-//                //clean up
-//                self.usernameArray.removeAll(keepCapacity: false)
-//                self.avatarArray.removeAll(keepCapacity: false)
-//                self.imageArray.removeAll(keepCapacity: false)
-//                self.dateArray.removeAll(keepCapacity: false)
-//                self.titleArray.removeAll(keepCapacity: false)
-//                
-//                for object in objects! {
-//                    self.avatarArray.append((object.valueForKey("avatar") as? PFFile)!)
-//                    self.usernameArray.append(object.valueForKey("username") as! String)
-//                    self.imageArray.append(object.valueForKey("postImage") as! PFFile)
-//                    self.dateArray.append(object.createdAt)
-//                    self.titleArray.append(object.valueForKey("caption") as! String)
-//                }
-//            }
-//        }
+        
     }
     
-//    // MARK: - Table view data source
+    //load posts
+//    func loadPosts() {
+//       let followQuery = PFQuery(className: "Followers")
+//        followQuery.whereKey("follower", equalTo: (PFUser.currentUser()?.username)!)
+//        followQuery.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
+//            if (error == nil) {
+//                //clean array
+//                self.followArray.removeAll(keepCapacity: false)
+//                
+//                for object in objects! {
+//                    self.followArray.append(object.objectForKey("following") as! String)
+//                }
+//                self.followArray.append(PFUser.currentUser()!.username!)
+//                
+//                //find posts made by users you are following
+//                let query = PFQuery(className: "UpdateObject")
+//                query.whereKey("username", containedIn: self.followArray)
+//                query.limit = self.page
+//                query.addDescendingOrder("createdAt")
+//                query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
+//                    if (error == nil) {
+//                        
+//                    //clean up
+//                    self.usernameArray.removeAll(keepCapacity: false)
+//                    self.avatarArray.removeAll(keepCapacity: false)
+//                    self.imageArray.removeAll(keepCapacity: false)
+//                    self.dateArray.removeAll(keepCapacity: false)
+//                    self.titleArray.removeAll(keepCapacity: false)
+//                    self.uuidArray.removeAll(keepCapacity: false)
+//                        
+//                    for object in objects! {
+//                        self.usernameArray.append(object.objectForKey("username") as! String)
+//                        
+//                        self.avatarArray.append(object.valueForKey("avatar") as! PFFile)
+//
+//                        self.imageArray.append(object.valueForKey("postImage") as! PFFile)
+//                        
+//                        self.dateArray.append(object.createdAt)
+//                        self.titleArray.append(object.valueForKey("caption") as! String)
+//                        self.uuidArray.append(object.valueForKey("objectId") as! String)
+//                        }
+//                        self.tableView.reloadData()
+//                        self.refresher.endRefreshing()
+//                    } else {
+//                        print(error!.localizedDescription)
+//                    }
+//                })
+//            } else {
+//                print(error!.localizedDescription)
+//            }
+//        }
+//    }
+////
+////    //scroll down
+//    override func scrollViewDidScroll(scrollView: UIScrollView) {
+//        if scrollView.contentOffset.y >= scrollView.contentSize.height - self.view.frame.size.height {
+//            loadMore()
+//        }
+//    }
 //    
+//    func loadMore() {
+//        if page <= uuidArray.count {
+//            
+//            //increase page size to load 10 more posts
+//            page = page + 10
+//            
+//            let followQuery = PFQuery(className: "Followers")
+//            followQuery.whereKey("follower", equalTo: (PFUser.currentUser()?.username)!)
+//            followQuery.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
+//                if (error == nil) {
+//                    //clean array
+//                    self.followArray.removeAll(keepCapacity: false)
+//                    
+//                    for object in objects! {
+//                        self.followArray.append(object.objectForKey("following") as! String)
+//                    }
+//                    self.followArray.append(PFUser.currentUser()!.username!)
+//                    
+//                    //find posts made by users you are following
+//                    let query = PFQuery(className: "UpdateObject")
+//                    query.whereKey("username", containedIn: self.followArray)
+//                    query.limit = self.page
+//                    query.addDescendingOrder("createdAt")
+//                    query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
+//                        if (error == nil) {
+//                            
+//                            //clean up
+//                            self.usernameArray.removeAll(keepCapacity: false)
+//                            self.avatarArray.removeAll(keepCapacity: false)
+//                            self.imageArray.removeAll(keepCapacity: false)
+//                            self.dateArray.removeAll(keepCapacity: false)
+//                            self.titleArray.removeAll(keepCapacity: false)
+//                            
+//                            for object in objects! {
+//                                self.usernameArray.append(object.objectForKey("username") as! String)
+//                                self.avatarArray.append(object.valueForKey("avatar") as! PFFile!)
+//                                self.imageArray.append(object.valueForKey("postImage") as! PFFile)
+//                                
+//                                self.dateArray.append(object.createdAt)
+//                                self.titleArray.append(object.valueForKey("caption") as! String)
+//                                self.uuidArray.append(object.valueForKey("objectId") as! String)
+//                            }
+//                            self.tableView.reloadData()
+//                        } else {
+//                            print(error!.localizedDescription)
+//                        }
+//                    })
+//                } else {
+//                    print(error!.localizedDescription)
+//                }
+//            }
+//
+//        }
+//    }
+    
+    // MARK: - Table view data source
+    
 //    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 //        return 1
 //    }
 //    
-//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! EventFeedTableViewCell
+//    
+//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return uuidArray.count
+//    }
+
+    
+
+//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> EventFeedTableViewCell {
+//        let cell = tableView.dequeueReusableCellWithIdentifier("eventFeedCell", forIndexPath: indexPath) as! EventFeedTableViewCell
 //        
 //        cell.usernameButton.setTitle(usernameArray[indexPath.row], forState: UIControlState.Normal)
 //        cell.postTitleLabel.text = titleArray[indexPath.row]
@@ -116,10 +223,8 @@ class EventFeedTableViewController: UITableViewController {
 //        didLike.countObjectsInBackgroundWithBlock { (count: Int32, error: NSError?) in
 //            //if no likes are found, else found likes
 //            if (count == 0) {
-//                //                cell.likesButton.setTitle("unlike", forState: .Normal)
 //                cell.likesButton.setBackgroundImage(UIImage(named: "unlikeButton"), forState: .Normal)
 //            } else {
-//                //                cell.likesButton.setTitle("like", forState: .Normal)
 //                cell.likesButton.setBackgroundImage(UIImage(named: "likeButton"), forState: .Normal)
 //            }
 //        }
@@ -152,41 +257,24 @@ class EventFeedTableViewController: UITableViewController {
 //            let visitor = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVisitorViewController") as! ProfileVisitorViewController
 //            self.navigationController?.pushViewController(visitor, animated: true)
 //        }
-//        
-//    }
-//    
-//    
-//    func back(sender: UIBarButtonItem) {
-//        self.navigationController?.popToRootViewControllerAnimated(true)
-//        
-//        if(!postuuid.isEmpty) {
-//            postuuid.removeLast()
-//        }
-//        
 //    }
     
-    @IBAction func leftSideButtonTapped(sender: AnyObject) {
+    @IBAction func leftSideButtonTapped(_ sender: AnyObject) {
+        let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
         
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
-        
+        appDelegate.drawerContainer?.toggle(MMDrawerSide.left, animated: true, completion: nil)
     }
     
-    @IBAction func rightSideButtonTapped(sender: AnyObject) {
-        
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
-        
+    @IBAction func rightSideButtonTapped(_ sender: AnyObject) {
+        let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
+        appDelegate.drawerContainer?.toggle(MMDrawerSide.right, animated: true, completion: nil)
     }
     
     func loadProfilePicture(){
         
-        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
+        let profilePictureObject = PFUser.current()?.object(forKey: "profile_picture") as! PFFile
         
-        profilePictureObject.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-            
+        profilePictureObject.getDataInBackground { (imageData: Data?, error: NSError?) -> Void in
             if(imageData != nil)
             {
                 self.userProfilePicture.image = UIImage(data: imageData!)
@@ -197,17 +285,11 @@ class EventFeedTableViewController: UITableViewController {
     }
     
     func currentDate(){
-        
-        let currentDate = NSDate()
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale.currentLocale()
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current()
         dateFormatter.dateFormat = "EEEE, MMMM dd, yyyy"
-        let convertedDate = dateFormatter.stringFromDate(currentDate)
+        let convertedDate = dateFormatter.string(from: currentDate)
         self.currentDateTime.text = convertedDate
-        
-        
     }
-
-
-
 }

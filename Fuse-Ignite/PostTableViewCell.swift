@@ -32,7 +32,7 @@ class PostTableViewCell: UITableViewCell {
         //double tap to like 
         let likeTap = UITapGestureRecognizer(target: self, action: #selector(PostTableViewCell.likeTap))
         likeTap.numberOfTapsRequired = 2
-        postImageView.userInteractionEnabled = true
+        postImageView.isUserInteractionEnabled = true
         postImageView.addGestureRecognizer(likeTap)
     }
     
@@ -45,58 +45,58 @@ class PostTableViewCell: UITableViewCell {
         likePic.alpha = 0.8
         self.addSubview(likePic)
         
-        UIView.animateWithDuration(0.4) {
+        UIView.animate(withDuration: 0.4) {
             likePic.alpha = 0
-            likePic.transform = CGAffineTransformMakeScale(0.1, 0.1)
+            likePic.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         }
         
-        let title = likesButton.titleForState(.Normal)
+        let title = likesButton.title(for: UIControlState())
         
         if(title == "unlike") {
             let object = PFObject(className: "Likes")
-            object["sender"] = PFUser.currentUser()?.username!
+            object["sender"] = PFUser.current()?.username!
             object["recipient"] = uuidHiddenLabel.text!
-            object.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+            object.saveInBackground({ (success: Bool, error: NSError?) in
                 print("liked")
-                self.likesButton.setTitle("like", forState: .Normal)
-                self.likesButton.setBackgroundImage(UIImage(named: "likeButton"), forState: .Normal)
+                self.likesButton.setTitle("like", for: UIControlState())
+                self.likesButton.setBackgroundImage(UIImage(named: "likeButton"), for: UIControlState())
             })
         } else {
             let object = PFObject(className: "Likes")
-            object["sender"] = PFUser.currentUser()?.username!
+            object["sender"] = PFUser.current()?.username!
             object["recipient"] = uuidHiddenLabel.text!
             
             //delete in background with block
-            object.deleteInBackgroundWithBlock({ (success: Bool, error: NSError?) in
-                self.likesButton.setTitle("unlike", forState: .Normal)
-                self.likesButton.setBackgroundImage(UIImage(named: "unlikeButton"), forState: .Normal)
+            object.deleteInBackground({ (success: Bool, error: NSError?) in
+                self.likesButton.setTitle("unlike", for: UIControlState())
+                self.likesButton.setBackgroundImage(UIImage(named: "unlikeButton"), for: UIControlState())
             })
         }
     }
 
 
-    @IBAction func likesButtonClicked(sender: AnyObject) {
+    @IBAction func likesButtonClicked(_ sender: AnyObject) {
         
-        let title = sender.titleForState(.Normal)
+        let title = sender.title(for: UIControlState())
         
         if(title == "unlike") {
             let object = PFObject(className: "Likes")
-            object["sender"] = PFUser.currentUser()?.username!
+            object["sender"] = PFUser.current()?.username!
             object["recipient"] = uuidHiddenLabel.text!
-            object.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+            object.saveInBackground({ (success: Bool, error: NSError?) in
                 print("liked")
-                self.likesButton.setTitle("like", forState: .Normal)
-                self.likesButton.setBackgroundImage(UIImage(named: "likeButton"), forState: .Normal)
+                self.likesButton.setTitle("like", for: UIControlState())
+                self.likesButton.setBackgroundImage(UIImage(named: "likeButton"), for: UIControlState())
             })
         } else {
             let object = PFObject(className: "Likes")
-            object["sender"] = PFUser.currentUser()?.username!
+            object["sender"] = PFUser.current()?.username!
             object["recipient"] = uuidHiddenLabel.text!
             
             //delete in background with block
-            object.deleteInBackgroundWithBlock({ (success: Bool, error: NSError?) in
-                self.likesButton.setTitle("unlike", forState: .Normal)
-                self.likesButton.setBackgroundImage(UIImage(named: "unlikeButton"), forState: .Normal)
+            object.deleteInBackground({ (success: Bool, error: NSError?) in
+                self.likesButton.setTitle("unlike", for: UIControlState())
+                self.likesButton.setBackgroundImage(UIImage(named: "unlikeButton"), for: UIControlState())
             })
         }
         

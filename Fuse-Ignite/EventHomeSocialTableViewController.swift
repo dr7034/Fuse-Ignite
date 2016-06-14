@@ -62,7 +62,7 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         }
         
         // Return to table view
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         loadProfilePicture()
     }
     
@@ -82,16 +82,16 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     }
     
     // Define the query that will provide the data for the table view
-    override func queryForTable() -> PFQuery {
+    override func queryForTable() -> PFQuery<PFObject> {
         let query = PFQuery(className: "_User")
-        query.orderByAscending("userInterests")
+        query.order(byAscending: "userInterests")
         return query
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> RelevantUsersCustomCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("RelevantUsersCell") as? RelevantUsersCustomCell!
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, object: PFObject?) -> RelevantUsersCustomCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "RelevantUsersCell") as? RelevantUsersCustomCell!
         if cell == nil {
-            cell = RelevantUsersCustomCell(style: UITableViewCellStyle.Default, reuseIdentifier: "RelevantUsersCell")
+            cell = RelevantUsersCustomCell(style: UITableViewCellStyle.default, reuseIdentifier: "RelevantUsersCell")
         }
     // Extract values from the PFObject to display in the table cell
         
@@ -109,7 +109,7 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         }
         
         if let userInterests = object?["userInterests"] as? NSArray {
-            cell?.userInterests?.text = "#" + userInterests.componentsJoinedByString(", ")
+            cell?.userInterests?.text = "#" + userInterests.componentsJoined(by: ", ")
         } else {
             cell?.userInterests?.text = "No interests yet Entered"
         }
@@ -117,43 +117,43 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         return cell!
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let header1: String = "Relevant Users"
         return header1
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //recall cell to call cells data
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! RelevantUsersCustomCell
+        let cell = tableView.cellForRow(at: indexPath) as! RelevantUsersCustomCell
         //if user tapped on themselves, go home else go visitor
-        if cell.usernameLabel.text! == PFUser.currentUser()!.username! {
-            let myProfile = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+        if cell.usernameLabel.text! == PFUser.current()!.username! {
+            let myProfile = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
             self.navigationController?.pushViewController(myProfile, animated: true)
         } else {
             visitorName.append(cell.usernameLabel.text!)
-            let visitor = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVisitorViewController") as! ProfileVisitorViewController
+            let visitor = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVisitorViewController") as! ProfileVisitorViewController
             self.navigationController?.pushViewController(visitor, animated: true)
         }
     }
     
-    @IBAction func leftSideButtonTapped(sender: AnyObject) {
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+    @IBAction func leftSideButtonTapped(_ sender: AnyObject) {
+        let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
+        appDelegate.drawerContainer?.toggle(MMDrawerSide.left, animated: true, completion: nil)
     }
     
-    @IBAction func rightSideButtonTapped(sender: AnyObject) {
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
+    @IBAction func rightSideButtonTapped(_ sender: AnyObject) {
+        let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
+        appDelegate.drawerContainer?.toggle(MMDrawerSide.right, animated: true, completion: nil)
     }
     
     func loadProfilePicture(){
         
-        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
-        profilePictureObject.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+        let profilePictureObject = PFUser.current()?.object(forKey: "profile_picture") as! PFFile
+        profilePictureObject.getDataInBackground { (imageData: Data?, error: NSError?) -> Void in
             
             if(imageData != nil)
             {
@@ -164,18 +164,18 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         self.userProfilePictureImage.clipsToBounds = true;
     }
     
-    @IBAction func doneButtonTapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func doneButtonTapped(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func userJoinEvent(sender: UIButton, forEvent event: UIEvent) {
+    @IBAction func userJoinEvent(_ sender: UIButton, forEvent event: UIEvent) {
         //When user attending username matches && event objectId match button must be disabled to prevent duplicate entries on database
             let eventAttendees = PFObject(className: "UserAttending")
-            eventAttendees["attendee"] = PFUser.currentUser()!.username!
+            eventAttendees["attendee"] = PFUser.current()!.username!
             eventAttendees["eventAttendingId"] = eventObjectLabel.text
-                eventAttendees.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+                eventAttendees.saveInBackground({ (success:Bool, error:NSError?) in
                     if(success) {
-                        self.userJoinEventButton.enabled = false
+                        self.userJoinEventButton.isEnabled = false
                     } else {
                         print(error?.localizedDescription)
                     }

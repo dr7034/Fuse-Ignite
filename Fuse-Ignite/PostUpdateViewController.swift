@@ -22,16 +22,16 @@ class PostUpdateViewController: UIViewController, UINavigationControllerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        postUpdateButton.enabled = false
-        postUpdateButton.backgroundColor = .lightGrayColor()
+        postUpdateButton.isEnabled = false
+        postUpdateButton.backgroundColor = .lightGray()
         
         //hide remove button
-        removeButton.hidden = true
+        removeButton.isHidden = true
         
         //hide keyboard tap
         let hideTap = UITapGestureRecognizer(target: self, action: #selector(PostUpdateViewController.hideKeyboardTap))
         hideTap.numberOfTapsRequired = 1
-        self.view.userInteractionEnabled = true
+        self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(hideTap)
         
         //reset UI
@@ -40,31 +40,31 @@ class PostUpdateViewController: UIViewController, UINavigationControllerDelegate
         //select image tap
         let picTap = UITapGestureRecognizer(target: self, action: #selector(PostUpdateViewController.selectImage))
         picTap.numberOfTapsRequired = 1
-        postImageView.userInteractionEnabled = true
+        postImageView.isUserInteractionEnabled = true
         postImageView.addGestureRecognizer(picTap)
     }
     
-    @IBAction func selectPhotoButtonTapped(sender: AnyObject) {
+    @IBAction func selectPhotoButtonTapped(_ sender: AnyObject) {
         
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-        imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
         
-        self.presentViewController(imagePickerController, animated: true, completion: nil)
+        self.present(imagePickerController, animated: true, completion: nil)
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
         
         postImageView.image = info [UIImagePickerControllerOriginalImage] as? UIImage
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
-        postUpdateButton.enabled = true
+        postUpdateButton.isEnabled = true
         postUpdateButton.backgroundColor = UIColor(red:0.13, green:0.57, blue:1.00, alpha:1.00)
         
         //unhide remove button
-        removeButton.hidden = false
+        removeButton.isHidden = false
         
     }
     
@@ -77,34 +77,34 @@ class PostUpdateViewController: UIViewController, UINavigationControllerDelegate
     func selectImage() {
         let picker = UIImagePickerController()
         picker.delegate = self
-        picker.sourceType = .PhotoLibrary
+        picker.sourceType = .photoLibrary
         picker.allowsEditing = true
-        presentViewController(picker, animated: true, completion: nil)
+        present(picker, animated: true, completion: nil)
     }
     
     
-    @IBAction func postUpdateButtonTapped(sender: AnyObject) {
+    @IBAction func postUpdateButtonTapped(_ sender: AnyObject) {
         
     //dismiss editing
         self.view.endEditing(true)
         
         let object = PFObject(className: "UpdateObject")
         
-        object["username"] = PFUser.currentUser()!.username
-        object["avatar"] = PFUser.currentUser()?.valueForKey("profile_picture") as! PFFile
+        object["username"] = PFUser.current()!.username
+        object["avatar"] = PFUser.current()?.value(forKey: "profile_picture") as! PFFile
         
         if (postCaptionTextView.text!.isEmpty) {
             object["caption"] = " "
         } else{
-            object["caption"] = postCaptionTextView.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            object["caption"] = postCaptionTextView.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         }
         let postImage = UIImageJPEGRepresentation(postImageView.image!, 0.5)
         let postImageFile = PFFile(name: "postPicture.jpg", data: postImage!)
         object["postImage"] = postImageFile
         
-        object.saveInBackgroundWithBlock { (success: Bool, error: NSError?) in
+        object.saveInBackground { (success: Bool, error: NSError?) in
             if (error == nil) {
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
                 self.viewDidLoad()
                 self.postCaptionTextView.text = ""
                 self.postHashtagsTextField.text = ""
@@ -116,24 +116,24 @@ class PostUpdateViewController: UIViewController, UINavigationControllerDelegate
         }
     }
     
-    func displayMessage(userMessage:String)
+    func displayMessage(_ userMessage:String)
     {
-        let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
         
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
             action in
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
         
         alert.addAction(okAction)
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func doneButtonTapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func doneButtonTapped(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func removeImageButton(sender: AnyObject) {
+    @IBAction func removeImageButton(_ sender: AnyObject) {
         self.viewDidLoad()
     }
 }

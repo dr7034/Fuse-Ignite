@@ -22,42 +22,42 @@ class BeaconNotificationsManager: NSObject, ESTBeaconManagerDelegate {
         self.beaconManager.delegate = self
         self.beaconManager.requestAlwaysAuthorization()
         
-        UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert], categories: nil))
+        UIApplication.shared().registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert], categories: nil))
     }
     
-    func enableNotificationsForBeaconID(beaconID: BeaconID, enterMessage: String?, exitMessage: String?) {
+    func enableNotificationsForBeaconID(_ beaconID: BeaconID, enterMessage: String?, exitMessage: String?) {
         let beaconRegion = beaconID.asBeaconRegion
         self.enterMessages[beaconRegion.identifier] = enterMessage
         self.exitMessages[beaconRegion.identifier] = exitMessage
-        self.beaconManager.startMonitoringForRegion(beaconRegion)
+        self.beaconManager.startMonitoring(for: beaconRegion)
     }
     
-    func beaconManager(manager: AnyObject, didEnterRegion region: CLBeaconRegion) {
+    func beaconManager(_ manager: AnyObject, didEnter region: CLBeaconRegion) {
         if let message = self.enterMessages[region.identifier] {
             self.showNotificationWithMessage(message)
         }
     }
     
-    func beaconManager(manager: AnyObject, didExitRegion region: CLBeaconRegion) {
+    func beaconManager(_ manager: AnyObject, didExitRegion region: CLBeaconRegion) {
         if let message = self.exitMessages[region.identifier] {
             self.showNotificationWithMessage(message)
         }
     }
     
-    private func showNotificationWithMessage(message: String) {
+    private func showNotificationWithMessage(_ message: String) {
         let notification = UILocalNotification()
         notification.alertBody = message
         notification.soundName = UILocalNotificationDefaultSoundName
-        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+        UIApplication.shared().presentLocalNotificationNow(notification)
     }
     
-    func beaconManager(manager: AnyObject, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == .Denied || status == .Restricted {
+    func beaconManager(_ manager: AnyObject, didChange status: CLAuthorizationStatus) {
+        if status == .denied || status == .restricted {
             NSLog("Location Services are disabled for this app, which means it won't be able to detect beacons.")
         }
     }
     
-    func beaconManager(manager: AnyObject, monitoringDidFailForRegion region: CLBeaconRegion?, withError error: NSError) {
+    func beaconManager(_ manager: AnyObject, monitoringDidFailFor region: CLBeaconRegion?, withError error: NSError) {
         NSLog("Monitoring failed for region: %@. Make sure that Bluetooth and Location Services are on, and that Location Services are allowed for this app. Beacons require a Bluetooth Low Energy compatible device: <http://www.bluetooth.com/Pages/Bluetooth-Smart-Devices-List.aspx>. Note that the iOS simulator doesn't support Bluetooth at all. The error was: %@", region?.identifier ?? "(unknown)", error);
     }
     

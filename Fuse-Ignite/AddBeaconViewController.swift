@@ -16,34 +16,34 @@ class AddBeaconViewController: UITableViewController {
     @IBOutlet weak var majorIdTextField: UITextField!
     @IBOutlet weak var minorIdTextField: UITextField!
     
-    var uuidRegex = try! NSRegularExpression(pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", options: .CaseInsensitive)
+    var uuidRegex = try! RegularExpression(pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", options: .caseInsensitive)
     var nameFieldValid = false
     var UUIDFieldValid = false
     var newItem: BeaconItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        saveBarButtonItem.enabled = false
+        saveBarButtonItem.isEnabled = false
         
-        nameTextField.addTarget(self, action: #selector(AddBeaconViewController.nameTextFieldChanged(_:)), forControlEvents: .EditingChanged)
-        uuidTextField.addTarget(self, action: #selector(AddBeaconViewController.uuidTextFieldChanged(_:)), forControlEvents: .EditingChanged)
+        nameTextField.addTarget(self, action: #selector(AddBeaconViewController.nameTextFieldChanged(_:)), for: .editingChanged)
+        uuidTextField.addTarget(self, action: #selector(AddBeaconViewController.uuidTextFieldChanged(_:)), for: .editingChanged)
     }
     
-    func nameTextFieldChanged(textField: UITextField) {
+    func nameTextFieldChanged(_ textField: UITextField) {
         nameFieldValid = (textField.text!.characters.count > 0)
-        saveBarButtonItem.enabled = (UUIDFieldValid && nameFieldValid)
+        saveBarButtonItem.isEnabled = (UUIDFieldValid && nameFieldValid)
     }
     
-    func uuidTextFieldChanged(textField: UITextField) {
-        let numberOfMatches = uuidRegex.numberOfMatchesInString(textField.text!, options: [], range: NSMakeRange(0, textField.text!.characters.count))
+    func uuidTextFieldChanged(_ textField: UITextField) {
+        let numberOfMatches = uuidRegex.numberOfMatches(in: textField.text!, options: [], range: NSMakeRange(0, textField.text!.characters.count))
         UUIDFieldValid = (numberOfMatches > 0)
         
-        saveBarButtonItem.enabled = (UUIDFieldValid && nameFieldValid)
+        saveBarButtonItem.isEnabled = (UUIDFieldValid && nameFieldValid)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SaveItemSegue" {
-            let uuid = NSUUID(UUIDString: uuidTextField.text!)
+            let uuid = UUID(uuidString: uuidTextField.text!)
             let major: CLBeaconMajorValue = UInt16(Int(majorIdTextField.text!)!)
             let minor: CLBeaconMinorValue = UInt16(Int(minorIdTextField.text!)!)
             

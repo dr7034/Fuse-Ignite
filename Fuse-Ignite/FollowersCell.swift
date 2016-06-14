@@ -16,20 +16,20 @@ class FollowersCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var userFollowingButton: UIButton!
     
-    @IBAction func followButtonTapped(sender: AnyObject) {
+    @IBAction func followButtonTapped(_ sender: AnyObject) {
         
-        let title = userFollowingButton.titleForState(.Normal)
+        let title = userFollowingButton.title(for: UIControlState())
         
         //follow user
         if(title == "FOLLOW") {
             let object = PFObject(className: "Followers")
-            object["follower"] = PFUser.currentUser()?.username
+            object["follower"] = PFUser.current()?.username
             object["following"] = usernameLabel.text
             
-            object.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+            object.saveInBackground({ (success:Bool, error:NSError?) in
                 if(success) {
-                    self.userFollowingButton.setTitle("FOLLOWING", forState: UIControlState.Normal)
-                    self.userFollowingButton.backgroundColor = .greenColor()
+                    self.userFollowingButton.setTitle("FOLLOWING", for: UIControlState())
+                    self.userFollowingButton.backgroundColor = .green()
                 } else {
                     print(error?.localizedDescription)
                 }
@@ -38,15 +38,15 @@ class FollowersCell: UITableViewCell {
             
         } else {
             let query = PFQuery(className: "Followers")
-            query.whereKey("follower", equalTo: (PFUser.currentUser()?.username)!)
+            query.whereKey("follower", equalTo: (PFUser.current()?.username)!)
             query.whereKey("following", equalTo: usernameLabel.text!)
-            query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
+            query.findObjectsInBackground({ (objects: [PFObject]?, error: NSError?) in
                 if error == nil {
                     for object in objects! {
-                        object.deleteInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+                        object.deleteInBackground({ (success:Bool, error:NSError?) in
                             if (success) {
-                                self.userFollowingButton.setTitle("FOLLOW", forState: UIControlState.Normal)
-                                self.userFollowingButton.backgroundColor = .lightGrayColor()
+                                self.userFollowingButton.setTitle("FOLLOW", for: UIControlState())
+                                self.userFollowingButton.backgroundColor = .lightGray()
                             } else {
                                 print(error?.localizedDescription)
                             }

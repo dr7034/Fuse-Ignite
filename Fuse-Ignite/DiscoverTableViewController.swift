@@ -28,17 +28,17 @@ class DiscoverTableViewController: PFQueryTableViewController {
     }
     
     // Define the query that will provide the data for the table view
-    override func queryForTable() -> PFQuery {
+    override func queryForTable() -> PFQuery<PFObject> {
         let query = PFQuery(className: "EventObject")
-        query.orderByAscending("eventName")
+        query.order(byAscending: "eventName")
         return query
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, object: PFObject?) -> PFTableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("discoverCell") as! PFTableViewCell!
+        var cell = tableView.dequeueReusableCell(withIdentifier: "discoverCell") as! PFTableViewCell!
         if cell == nil {
-            cell = PFTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "discoverCell")
+            cell = PFTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "discoverCell")
         }
         
         // Extract values from the PFObject to display in the table cell
@@ -49,38 +49,38 @@ class DiscoverTableViewController: PFQueryTableViewController {
             cell?.detailTextLabel?.text = eventDescription
         }
         
-        return cell
+        return cell!
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("showEvent", sender: tableView)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "showEvent", sender: tableView)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         
         let nav = segue.destinationViewController as! UINavigationController
         let eventViewController = nav.topViewController as! EventHomeSocialTableViewController
         
         if let indexPath = self.tableView.indexPathForSelectedRow {
-            let row = Int(indexPath.row)
+            let row = Int((indexPath as NSIndexPath).row)
             eventViewController.currentObject = (objects?[row]) as? PFObject
         }
         
     }
     
-    @IBAction func leftSideButtonTapped(sender: AnyObject) {
+    @IBAction func leftSideButtonTapped(_ sender: AnyObject) {
         
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
         
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+        appDelegate.drawerContainer?.toggle(MMDrawerSide.left, animated: true, completion: nil)
         
     }
     
-    @IBAction func rightSideButtonTapped(sender: AnyObject) {
+    @IBAction func rightSideButtonTapped(_ sender: AnyObject) {
         
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
         
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
+        appDelegate.drawerContainer?.toggle(MMDrawerSide.right, animated: true, completion: nil)
         
     }
     

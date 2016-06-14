@@ -23,41 +23,41 @@ class CreateViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
 
-    @IBAction func leftSideButtonTapped(sender: AnyObject) {
+    @IBAction func leftSideButtonTapped(_ sender: AnyObject) {
         
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
         
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
-        
-    }
-    
-    @IBAction func rightSideButtonTapped(sender: AnyObject) {
-        
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
+        appDelegate.drawerContainer?.toggle(MMDrawerSide.left, animated: true, completion: nil)
         
     }
     
-    @IBAction func addCoverImageButtonTapped(sender: AnyObject) {
+    @IBAction func rightSideButtonTapped(_ sender: AnyObject) {
+        
+        let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
+        
+        appDelegate.drawerContainer?.toggle(MMDrawerSide.right, animated: true, completion: nil)
         
     }
     
-    @IBAction func isFacebookConnected(sender: AnyObject) {
+    @IBAction func addCoverImageButtonTapped(_ sender: AnyObject) {
+        
     }
     
-    @IBAction func isTwitterConnected(sender: AnyObject) {
+    @IBAction func isFacebookConnected(_ sender: AnyObject) {
+    }
+    
+    @IBAction func isTwitterConnected(_ sender: AnyObject) {
     }
 
-    @IBAction func isInstagramConnected(sender: AnyObject) {
+    @IBAction func isInstagramConnected(_ sender: AnyObject) {
     }
     
     
-    @IBAction func isYouTubeConnected(sender: AnyObject) {
+    @IBAction func isYouTubeConnected(_ sender: AnyObject) {
     }
     
 
-    @IBAction func createEventSubmitButton(sender: AnyObject) {
+    @IBAction func createEventSubmitButton(_ sender: AnyObject) {
         
         let eventName = createEventNameTextField.text!
         let eventDescription = createEventDescriptionTextField.text!
@@ -71,7 +71,7 @@ class CreateViewController: UIViewController {
         event.setObject(eventDescription, forKey: "eventDescription")
         event.setObject(eventContactEmail, forKey: "contactEmail")
         event.setObject(eventLocationName, forKey: "eventLocationName")
-        event.saveInBackgroundWithBlock { (success, error) in
+        event.saveInBackground { (success, error) in
             if success == true {
                 self.displayMessage("Event Created!")
             } else {
@@ -81,17 +81,17 @@ class CreateViewController: UIViewController {
     }
     
     
-    func displayMessage(userMessage:String)
+    func displayMessage(_ userMessage:String)
     {
-        let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
         
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
             action in
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
         
         alert.addAction(okAction)
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     //Calls this function when the tap is recognized.

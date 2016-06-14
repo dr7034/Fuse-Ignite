@@ -17,7 +17,7 @@ class PostViewController: UITableViewController {
     var usernameArray = [String]()
     var avatarArray = [PFFile]()
     var imageArray = [PFFile]()
-    var dateArray = [NSDate?]()
+    var dateArray = [Date?]()
     var titleArray = [String]()
     var uuidArray = [String]()
 
@@ -27,12 +27,12 @@ class PostViewController: UITableViewController {
         self.navigationItem.title = "Post"
 
         self.navigationItem.hidesBackButton = true
-        let backButton = UIBarButtonItem(title: "back", style: UIBarButtonItemStyle.Plain, target: self, action: "back")
+        let backButton = UIBarButtonItem(title: "back", style: UIBarButtonItemStyle.plain, target: self, action: "back")
         self.navigationItem.leftBarButtonItem = backButton
         
         //SWIPE TO GO BACK
         let backSwipe = UISwipeGestureRecognizer(target: self, action: "back")
-        backSwipe.direction = UISwipeGestureRecognizerDirection.Right
+        backSwipe.direction = UISwipeGestureRecognizerDirection.right
         self.view.addGestureRecognizer(backSwipe)
         
         //dynamic cell height
@@ -40,22 +40,22 @@ class PostViewController: UITableViewController {
         tableView.estimatedRowHeight = 450
         
         let postQuery = PFQuery(className: "UpdateObject")
-        postQuery.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
+        postQuery.findObjectsInBackground { (objects: [PFObject]?, error: NSError?) in
             if(error == nil) {
                 
                 //clean up
-                self.usernameArray.removeAll(keepCapacity: false)
-                self.avatarArray.removeAll(keepCapacity: false)
-                self.imageArray.removeAll(keepCapacity: false)
-                self.dateArray.removeAll(keepCapacity: false)
-                self.titleArray.removeAll(keepCapacity: false)
+                self.usernameArray.removeAll(keepingCapacity: false)
+                self.avatarArray.removeAll(keepingCapacity: false)
+                self.imageArray.removeAll(keepingCapacity: false)
+                self.dateArray.removeAll(keepingCapacity: false)
+                self.titleArray.removeAll(keepingCapacity: false)
                 
                 for object in objects! {
-                    self.avatarArray.append(object.valueForKey("avatar") as! PFFile)
-                    self.usernameArray.append(object.valueForKey("username") as! String)
-                    self.imageArray.append(object.valueForKey("postImage") as! PFFile)
+                    self.avatarArray.append(object.value(forKey: "avatar") as! PFFile)
+                    self.usernameArray.append(object.value(forKey: "username") as! String)
+                    self.imageArray.append(object.value(forKey: "postImage") as! PFFile)
                     self.dateArray.append(object.createdAt)
-                    self.titleArray.append(object.valueForKey("title") as! String)
+                    self.titleArray.append(object.value(forKey: "title") as! String)
                 }
             }
         }
@@ -65,31 +65,31 @@ class PostViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PostTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell
         
-        cell.usernameButton.setTitle(usernameArray[indexPath.row], forState: UIControlState.Normal)
-        cell.uuidHiddenLabel.text = uuidArray[indexPath.row]
-        cell.titleLabel.text = titleArray[indexPath.row]
+        cell.usernameButton.setTitle(usernameArray[(indexPath as NSIndexPath).row], for: UIControlState())
+        cell.uuidHiddenLabel.text = uuidArray[(indexPath as NSIndexPath).row]
+        cell.titleLabel.text = titleArray[(indexPath as NSIndexPath).row]
         
         //set profile picture
-        avatarArray[indexPath.row].getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) in
+        avatarArray[(indexPath as NSIndexPath).row].getDataInBackground { (data: Data?, error: NSError?) in
             cell.avatarImage.image = UIImage(data: data!)
         }
         //set post image
-        imageArray[indexPath.row].getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) in
+        imageArray[(indexPath as NSIndexPath).row].getDataInBackground { (data: Data?, error: NSError?) in
             cell.postImageView.image = UIImage(data: data!)
         }
         
         //calculate post date
-        let from = dateArray[indexPath.row]
-        let now = NSDate()
-        let components: NSCalendarUnit = [.Second, .Minute, .Hour, .Day, .WeekOfMonth]
-        let difference = NSCalendar.currentCalendar().components(components, fromDate: from!, toDate: now, options: [])
+        let from = dateArray[(indexPath as NSIndexPath).row]
+        let now = Date()
+        let components: Calendar.Unit = [.second, .minute, .hour, .day, .weekOfMonth]
+        let difference = Calendar.current().components(components, from: from!, to: now, options: [])
         
         //date label business logic
         if (difference.second > 0) {
@@ -114,22 +114,22 @@ class PostViewController: UITableViewController {
         
 //        //manipulate like button based on user like
         let didLike = PFQuery(className: "likes")
-        didLike.whereKey("sender", equalTo: PFUser.currentUser()!.username!)
+        didLike.whereKey("sender", equalTo: PFUser.current()!.username!)
         didLike.whereKey("recipient", equalTo: cell.uuidHiddenLabel.text!)
-        didLike.countObjectsInBackgroundWithBlock { (count: Int32, error: NSError?) in
+        didLike.countObjectsInBackground { (count: Int32, error: NSError?) in
             //if no likes are found, else found likes
             if (count == 0) {
 //                cell.likesButton.setTitle("unlike", forState: .Normal)
-                cell.likesButton.setBackgroundImage(UIImage(named: "unlikeButton"), forState: .Normal)
+                cell.likesButton.setBackgroundImage(UIImage(named: "unlikeButton"), for: UIControlState())
             } else {
 //                cell.likesButton.setTitle("like", forState: .Normal)
-                cell.likesButton.setBackgroundImage(UIImage(named: "likeButton"), forState: .Normal)
+                cell.likesButton.setBackgroundImage(UIImage(named: "likeButton"), for: UIControlState())
             }
         }
         //count likes of post
         let countLikes = PFQuery(className: "Likes")
         countLikes.whereKey("recipient", equalTo: cell.uuidHiddenLabel.text!)
-        countLikes.countObjectsInBackgroundWithBlock { (count: Int32, error: NSError?) in
+        countLikes.countObjectsInBackground { (count: Int32, error: NSError?) in
             cell.likeLabel.text = "\(count)"
         }
         
@@ -138,29 +138,29 @@ class PostViewController: UITableViewController {
         return cell
     }
     
-    @IBAction func clickedUsernameButton(sender: AnyObject) {
+    @IBAction func clickedUsernameButton(_ sender: AnyObject) {
         
         //call index of button
-        let i = sender.layer.valueForKey("index") as! NSIndexPath
+        let i = sender.layer.value(forKey: "index") as! IndexPath
         
         //call cell to call further cell data
-        let cell = tableView.cellForRowAtIndexPath(i) as! PostTableViewCell
+        let cell = tableView.cellForRow(at: i) as! PostTableViewCell
         
         //if user tapped on themselves go home otherwise go to visitor page
-        if (cell.usernameButton.titleLabel?.text == PFUser.currentUser()?.username) {
-            let home = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+        if (cell.usernameButton.titleLabel?.text == PFUser.current()?.username) {
+            let home = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
             self.navigationController?.pushViewController(home, animated: true)
         } else {
             visitorName.append(cell.usernameButton.titleLabel!.text!)
-            let visitor = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVisitorViewController") as! ProfileVisitorViewController
+            let visitor = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVisitorViewController") as! ProfileVisitorViewController
             self.navigationController?.pushViewController(visitor, animated: true)
         }
         
     }
     
     
-    func back(sender: UIBarButtonItem) {
-        self.navigationController?.popToRootViewControllerAnimated(true)
+    func back(_ sender: UIBarButtonItem) {
+        self.navigationController?.popToRootViewController(animated: true)
         
         if(!postuuid.isEmpty) {
             postuuid.removeLast()

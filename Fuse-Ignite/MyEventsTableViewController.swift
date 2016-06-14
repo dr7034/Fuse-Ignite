@@ -28,17 +28,17 @@ class MyEventsTableViewController: PFQueryTableViewController {
     }
 
     // Define the query that will provide the data for the table view
-    override func queryForTable() -> PFQuery {
+    override func queryForTable() -> PFQuery<PFObject> {
         let query = PFQuery(className: "EventObject")
-        query.orderByAscending("eventName")
+        query.order(byAscending: "eventName")
         return query
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, object: PFObject?) -> PFTableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("myEventsCell") as! PFTableViewCell!
+        var cell = tableView.dequeueReusableCell(withIdentifier: "myEventsCell") as! PFTableViewCell!
         if cell == nil {
-            cell = PFTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "discoverCell")
+            cell = PFTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "discoverCell")
         }
         
         // Extract values from the PFObject to display in the table cell
@@ -49,23 +49,23 @@ class MyEventsTableViewController: PFQueryTableViewController {
             cell?.detailTextLabel?.text = eventDescription
         }
         
-        return cell
+        return cell!
     }
 
 
-    @IBAction func leftSideButtonTapped(sender: AnyObject) {
+    @IBAction func leftSideButtonTapped(_ sender: AnyObject) {
         
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
         
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+        appDelegate.drawerContainer?.toggle(MMDrawerSide.left, animated: true, completion: nil)
         
     }
     
-    @IBAction func rightSideButtonTapped(sender: AnyObject) {
+    @IBAction func rightSideButtonTapped(_ sender: AnyObject) {
         
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
         
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
+        appDelegate.drawerContainer?.toggle(MMDrawerSide.right, animated: true, completion: nil)
         
     }
 

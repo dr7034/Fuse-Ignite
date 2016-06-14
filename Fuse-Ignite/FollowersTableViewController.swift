@@ -37,26 +37,26 @@ class FollowersTableViewController: UITableViewController {
         followQuery.whereKey("following", equalTo: user)
         
         //get followers
-        followQuery.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
+        followQuery.findObjectsInBackground { (objects: [PFObject]?, error: NSError?) in
             if(error == nil) {
-                self.followArray.removeAll(keepCapacity: false)
+                self.followArray.removeAll(keepingCapacity: false)
                 
                 for object in objects! {
-                    self.followArray.append(object.valueForKey("follower") as! String)
+                    self.followArray.append(object.value(forKey: "follower") as! String)
                 }
                 let query = PFUser.query()
                 query?.whereKey("username", containedIn: self.followArray)
                 query?.addDescendingOrder("createdAt")
                 
                 //get username and profile picture
-                query?.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error:NSError?) in
+                query?.findObjectsInBackground({ (objects: [PFObject]?, error:NSError?) in
                 if(error == nil) {
-                    self.usernameArray.removeAll(keepCapacity: false)
-                    self.profilePictureArray.removeAll(keepCapacity: false)
+                    self.usernameArray.removeAll(keepingCapacity: false)
+                    self.profilePictureArray.removeAll(keepingCapacity: false)
                     
                 for object in objects! {
-                    self.usernameArray.append(object.valueForKey("username") as! String)
-                    self.profilePictureArray.append(object.valueForKey("profile_picture") as! PFFile)
+                    self.usernameArray.append(object.value(forKey: "username") as! String)
+                    self.profilePictureArray.append(object.value(forKey: "profile_picture") as! PFFile)
                     self.tableView.reloadData()
                         }
                 } else {
@@ -75,26 +75,26 @@ class FollowersTableViewController: UITableViewController {
         followQuery.whereKey("follower", equalTo: user)
         
         //get following
-        followQuery.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
+        followQuery.findObjectsInBackground { (objects: [PFObject]?, error: NSError?) in
             if(error == nil) {
-                self.followArray.removeAll(keepCapacity: false)
+                self.followArray.removeAll(keepingCapacity: false)
                 
                 for object in objects! {
-                    self.followArray.append(object.valueForKey("following") as! String)
+                    self.followArray.append(object.value(forKey: "following") as! String)
                 }
                 
                // find users following the selected user
                 let query = PFQuery(className: "_User")
                 query.whereKey("username", containedIn: self.followArray)
                 query.addDescendingOrder("createdAt")
-                query.findObjectsInBackgroundWithBlock({ (objects: [PFObject]?, error: NSError?) in
+                query.findObjectsInBackground({ (objects: [PFObject]?, error: NSError?) in
                     if(error == nil) {
-                        self.usernameArray.removeAll(keepCapacity: false)
-                        self.profilePictureArray.removeAll(keepCapacity: false)
+                        self.usernameArray.removeAll(keepingCapacity: false)
+                        self.profilePictureArray.removeAll(keepingCapacity: false)
                         
                         for object in objects! {
-                            self.usernameArray.append(object.valueForKey("username") as! String)
-                            self.profilePictureArray.append(object.valueForKey("profile_picture") as! PFFile)
+                            self.usernameArray.append(object.value(forKey: "username") as! String)
+                            self.profilePictureArray.append(object.value(forKey: "profile_picture") as! PFFile)
                             self.tableView.reloadData()
                         }
                     } else {
@@ -108,19 +108,19 @@ class FollowersTableViewController: UITableViewController {
     }
 
     //number of cells
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return usernameArray.count
     }
     
     //cell configuration
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //define cell
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! FollowersCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! FollowersCell
         
         //connect data from server to objects
-        cell.usernameLabel.text = usernameArray[indexPath.row]
-        profilePictureArray[indexPath.row].getDataInBackgroundWithBlock { (data:NSData?, error:NSError?) in
+        cell.usernameLabel.text = usernameArray[(indexPath as NSIndexPath).row]
+        profilePictureArray[(indexPath as NSIndexPath).row].getDataInBackground { (data:Data?, error:NSError?) in
             if(error == nil) {
                 cell.userProfilePictureImage.image = UIImage(data: data!)
                 cell.userProfilePictureImage.layer.cornerRadius = cell.userProfilePictureImage.frame.size.width / 2;
@@ -131,40 +131,40 @@ class FollowersTableViewController: UITableViewController {
         }
         
         let query = PFQuery(className: "Followers")
-        query.whereKey("follower", equalTo: PFUser.currentUser()!.username!)
+        query.whereKey("follower", equalTo: PFUser.current()!.username!)
         query.whereKey("following", equalTo: cell.usernameLabel.text!)
-        query.countObjectsInBackgroundWithBlock ({ (count: Int32, error: NSError?) in
+        query.countObjectsInBackground ({ (count: Int32, error: NSError?) in
             if(error == nil) {
                 if(count == 0) {
-                    cell.userFollowingButton.setTitle("Follow +", forState: UIControlState.Normal)
-                    cell.userFollowingButton.backgroundColor = .lightGrayColor()
+                    cell.userFollowingButton.setTitle("Follow +", for: UIControlState())
+                    cell.userFollowingButton.backgroundColor = .lightGray()
                 } else {
-                    cell.userFollowingButton.setTitle("Following", forState: UIControlState.Normal)
-                    cell.userFollowingButton.backgroundColor = UIColor.greenColor()
+                    cell.userFollowingButton.setTitle("Following", for: UIControlState())
+                    cell.userFollowingButton.backgroundColor = UIColor.green()
                 }
             }
         })
         
         //hide follow button for current user
-        if cell.usernameLabel.text == PFUser.currentUser()?.username {
-            cell.userFollowingButton.hidden = true
+        if cell.usernameLabel.text == PFUser.current()?.username {
+            cell.userFollowingButton.isHidden = true
         }
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         //recall cell to call cells data
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! FollowersCell
+        let cell = tableView.cellForRow(at: indexPath) as! FollowersCell
         
         //if user tapped on themselves, go home else go visitor
-        if cell.usernameLabel.text! == PFUser.currentUser()!.username {
-            let myProfile = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+        if cell.usernameLabel.text! == PFUser.current()!.username {
+            let myProfile = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
             self.navigationController?.pushViewController(myProfile, animated: true)
         } else {
             visitorName.append(cell.usernameLabel.text!)
-            let visitor = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVisitorViewController") as! ProfileVisitorViewController
+            let visitor = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVisitorViewController") as! ProfileVisitorViewController
             self.navigationController?.pushViewController(visitor, animated: true)
         }
     }

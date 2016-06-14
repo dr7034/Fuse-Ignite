@@ -41,34 +41,34 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func selectProfilePhotoButtonTapped(sender: AnyObject) {
+    @IBAction func selectProfilePhotoButtonTapped(_ sender: AnyObject) {
         
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-        imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
         
-        self.presentViewController(imagePickerController, animated: true, completion: nil)
+        self.present(imagePickerController, animated: true, completion: nil)
         
     }
     
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
         
         profilePhotoImageView.image = info [UIImagePickerControllerOriginalImage] as? UIImage
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
         self.profilePhotoImageView.layer.cornerRadius = self.profilePhotoImageView.frame.size.width / 2;
         self.profilePhotoImageView.clipsToBounds = true;
         
     }
     
-    @IBAction func cancelButtonTapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func cancelButtonTapped(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func signUpButtonTapped(sender: AnyObject) {
+    @IBAction func signUpButtonTapped(_ sender: AnyObject) {
         
         let userName = usernameTextField.text
         let userPassword = userPasswordTextField.text
@@ -122,7 +122,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             }
             
         
-            myUser.signUpInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
+            myUser.signUpInBackground {(success: Bool, error: NSError?) -> Void in
                 
                 var userMessage = "Registration was successful. Thank you!"
                 
@@ -137,31 +137,31 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         
     }
     
-    func validateEmail(email:String) -> Bool {
+    func validateEmail(_ email:String) -> Bool {
         let regex = "[A-Z0-9a-z._%+-]{4}+@[A-Z0-9a-z._]+{2}\\.[AZa-z]{2}"
-        let range = email.rangeOfString(regex, options: .RegularExpressionSearch)
+        let range = email.range(of: regex, options: .regularExpressionSearch)
         let result = range != nil ? true:false
         return result
     }
     
-    func validateWebPage(webpage:String) -> Bool {
+    func validateWebPage(_ webpage:String) -> Bool {
         let regex = "http://+[A-Z0-9a-z.%+-]+.[A-Za-z]{2}"
-        let range = webpage.rangeOfString(regex, options: .RegularExpressionSearch)
+        let range = webpage.range(of: regex, options: .regularExpressionSearch)
         let result = range != nil ? true:false
         return result
     }
     
-    func displayMessage(userMessage:String)
+    func displayMessage(_ userMessage:String)
     {
-        let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
         
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
             action in
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
         
         alert.addAction(okAction)
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     //Calls this function when the tap is recognized.

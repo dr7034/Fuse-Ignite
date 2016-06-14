@@ -28,7 +28,7 @@ class RightSideViewController: UIViewController, UITableViewDataSource, UITableV
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return searchResults.count
     }
@@ -36,16 +36,16 @@ class RightSideViewController: UIViewController, UITableViewDataSource, UITableV
     // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
     // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let myCell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) 
+        let myCell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) 
         
-        myCell.textLabel?.text = searchResults[indexPath.row]
+        myCell.textLabel?.text = searchResults[(indexPath as NSIndexPath).row]
         
         return myCell
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar)
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
     {
         searchBar.resignFirstResponder()
         
@@ -58,9 +58,9 @@ class RightSideViewController: UIViewController, UITableViewDataSource, UITableV
         let eventLocationQuery = PFQuery(className: "EventObject")
         eventNameQuery.whereKey("eventLocation", matchesRegex: "(?i)\(searchBar.text)")
     
-        let query = PFQuery.orQueryWithSubqueries([eventNameQuery,eventDescriptionQuery,eventLocationQuery])
+        let query = PFQuery.orQuery(withSubqueries: [eventNameQuery,eventDescriptionQuery,eventLocationQuery])
         
-        query.findObjectsInBackgroundWithBlock { (results: [PFObject]?, error: NSError?) -> Void in
+        query.findObjectsInBackground { (results: [PFObject]?, error: NSError?) -> Void in
             
             if(error != nil)
             {
@@ -69,17 +69,17 @@ class RightSideViewController: UIViewController, UITableViewDataSource, UITableV
             }
             
             if let objects = results {
-                self.searchResults.removeAll(keepCapacity: false)
+                self.searchResults.removeAll(keepingCapacity: false)
                 
                 for object in objects {
-                    let eventName = object.objectForKey("eventName") as! String
-                    _ = object.objectForKey("eventDescription") as! String
-                    _ = object.objectForKey("eventLocation") as! String
+                    let eventName = object.object(forKey: "eventName") as! String
+                    _ = object.object(forKey: "eventDescription") as! String
+                    _ = object.object(forKey: "eventLocation") as! String
 
                     self.searchResults.append(eventName)
                 }
                 
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.searchTable.reloadData()
                     self.searchBar.resignFirstResponder()
                     
@@ -89,32 +89,32 @@ class RightSideViewController: UIViewController, UITableViewDataSource, UITableV
     }
 
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar)
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
     {
         searchBar.resignFirstResponder()
         searchBar.text = ""
     }
    
-    @IBAction func refreshButtonTapped(sender: AnyObject) {
+    @IBAction func refreshButtonTapped(_ sender: AnyObject) {
         
         searchBar.resignFirstResponder()
         searchBar.text = ""
-        searchResults.removeAll(keepCapacity: false)
+        searchResults.removeAll(keepingCapacity: false)
         searchTable.reloadData()
         
     }
     
-    func displayMessage(userMessage:String)
+    func displayMessage(_ userMessage:String)
     {
-        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
         
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
             action in
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
         
         myAlert.addAction(okAction)
-        self.presentViewController(myAlert, animated: true, completion: nil)
+        self.present(myAlert, animated: true, completion: nil)
     }
 
     

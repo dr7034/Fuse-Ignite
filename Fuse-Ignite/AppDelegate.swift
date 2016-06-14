@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     var drawerContainer: MMDrawerController?
     let beaconNotificationsManager = BeaconNotificationsManager()
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         
         Parse.enableLocalDatastore()
@@ -31,15 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         Parse.setApplicationId("d5LFK2as7ay0obVjQ2pMMRQkkMaBbPixMSJwo2dc", clientKey: "sTfq0xw8w0SoxNwZP0gn1ZWHL3f6anQORVV95BfU")
         
         //Init PFFacebookUtils
-        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+        PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
     
         //[Optional] Track statistics around application opens
-        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        PFAnalytics.trackAppOpened(launchOptions: launchOptions)
                 
         //Register for Push Notifications through Parse
-        let userNotificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
+        let userNotificationTypes: UIUserNotificationType = [.alert, .badge, .sound]
         
-        let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+        let settings = UIUserNotificationSettings(types: userNotificationTypes, categories: nil)
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
             
@@ -60,70 +60,70 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         ESTConfig.enableMonitoringAnalytics(true)
         
 //        //setup twitter kit
-        Twitter.sharedInstance().startWithConsumerKey("XKY3bzOvp7GMF2RVDcTJcrFPD", consumerSecret: "YzveyN2QrflvPJ3hauIRNf9eSA9Xi2CMqdwhjQhJ3QQ262xxBQ")
+        Twitter.sharedInstance().start(withConsumerKey: "XKY3bzOvp7GMF2RVDcTJcrFPD", consumerSecret: "YzveyN2QrflvPJ3hauIRNf9eSA9Xi2CMqdwhjQhJ3QQ262xxBQ")
         Fabric.with([Twitter.sharedInstance()])
         
-        UIApplication.sharedApplication().registerUserNotificationSettings(
-            UIUserNotificationSettings(forTypes: .Alert, categories: nil))
+        UIApplication.shared().registerUserNotificationSettings(
+            UIUserNotificationSettings(types: .alert, categories: nil))
 
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         
-        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         // Store the deviceToken in the current Installation and save it to Parse
-        let installation = PFInstallation.currentInstallation()
-        installation.setDeviceTokenFromData(deviceToken)
-        installation.saveInBackgroundWithBlock { (success:Bool, error: NSError?) -> Void in
+        let installation = PFInstallation.current()
+        installation.setDeviceTokenFrom(deviceToken)
+        installation.saveInBackground { (success:Bool, error: NSError?) -> Void in
 //            print("Registration successful? \(success)")
         }
         
     }
     
-    func application(application: UIApplication, didRecieveRemoteNotification userInfo:[NSObject : AnyObject], fetchCompletionHandler:(UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication, didRecieveRemoteNotification userInfo:[NSObject : AnyObject], fetchCompletionHandler:(UIBackgroundFetchResult) -> Void) {
         
-        PFPush.handlePush(userInfo)
-        fetchCompletionHandler(UIBackgroundFetchResult.NewData)
+        PFPush.handle(userInfo)
+        fetchCompletionHandler(UIBackgroundFetchResult.newData)
     }
     
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
 //        print("Failed to register \(error.localizedDescription)")
     }
     
-    func application(application: UIApplication,  didReceiveRemoteNotification userInfo: [NSObject : AnyObject],  fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication,  didReceiveRemoteNotification userInfo: [NSObject : AnyObject],  fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         
         
-        PFPush.handlePush(userInfo)
-        completionHandler(UIBackgroundFetchResult.NewData)
+        PFPush.handle(userInfo)
+        completionHandler(UIBackgroundFetchResult.newData)
     }
 
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         FBSDKAppEvents.activateApp()
         
         
     }
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
@@ -131,7 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
     {
         
         
-        let userName:String? =  NSUserDefaults.standardUserDefaults().stringForKey("user_name")
+        let userName:String? =  UserDefaults.standard().string(forKey: "user_name")
         
         if(userName != nil)
         {
@@ -139,11 +139,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
             let mainStoryBoard:UIStoryboard = UIStoryboard(name:"Main", bundle:nil)
             
             // Create View Controllers
-            let eventFeedPage:EventFeedTableViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("EventFeedTableViewController") as! EventFeedTableViewController
+            let eventFeedPage:EventFeedTableViewController = mainStoryBoard.instantiateViewController(withIdentifier: "EventFeedTableViewController") as! EventFeedTableViewController
             
-            let leftSideMenu:LeftSideViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("LeftSideViewController") as! LeftSideViewController
+            let leftSideMenu:LeftSideViewController = mainStoryBoard.instantiateViewController(withIdentifier: "LeftSideViewController") as! LeftSideViewController
             
-            let rightSideMenu:RightSideViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("RightSideViewController") as! RightSideViewController
+            let rightSideMenu:RightSideViewController = mainStoryBoard.instantiateViewController(withIdentifier: "RightSideViewController") as! RightSideViewController
             
             
             
@@ -153,10 +153,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
             let rightSideMenuNav = UINavigationController(rootViewController:rightSideMenu)
             
             
-            drawerContainer = MMDrawerController(centerViewController: eventFeedPageNav, leftDrawerViewController: leftSideMenuNav, rightDrawerViewController: rightSideMenuNav)
+            drawerContainer = MMDrawerController(center: eventFeedPageNav, leftDrawerViewController: leftSideMenuNav, rightDrawerViewController: rightSideMenuNav)
             
-            drawerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView
-            drawerContainer!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView
+            drawerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.panningCenterView
+            drawerContainer!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.panningCenterView
             
             
             window?.rootViewController = drawerContainer

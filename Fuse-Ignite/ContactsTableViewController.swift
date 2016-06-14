@@ -30,17 +30,17 @@ class ContactsTableViewController: PFQueryTableViewController {
     }
     
     // Define the query that will provide the data for the table view
-    override func queryForTable() -> PFQuery {
+    override func queryForTable() -> PFQuery<PFObject> {
         let query = PFQuery(className: "_User")
-        query.orderByAscending("fullName")
+        query.order(byAscending: "fullName")
         return query
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> ContactsTableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, object: PFObject?) -> ContactsTableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("contactsCell") as! ContactsTableViewCell!
+        var cell = tableView.dequeueReusableCell(withIdentifier: "contactsCell") as! ContactsTableViewCell!
         if cell == nil {
-            cell = ContactsTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "contactsCell")
+            cell = ContactsTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "contactsCell")
         }
         
         // Extract values from the PFObject to display in the table cell
@@ -53,13 +53,13 @@ class ContactsTableViewController: PFQueryTableViewController {
         if let contactUsername = object?["username"] as? String {
             cell?.usernameLabel?.text = contactUsername
         }
-        return cell
+        return cell!
     }
     
     func returnEventObject() {
 
     let eventNameQuery = PFQuery(className: "eventObject")
-        eventNameQuery.findObjectsInBackgroundWithBlock { (object:[PFObject]?, error:NSError?) in
+        eventNameQuery.findObjectsInBackground { (object:[PFObject]?, error:NSError?) in
        
             if(eventNameObject.isEmpty) {
                 eventNameObject.removeAll()
@@ -69,36 +69,36 @@ class ContactsTableViewController: PFQueryTableViewController {
     
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         //recall cell to call cells data
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ContactsTableViewCell
+        let cell = tableView.cellForRow(at: indexPath) as! ContactsTableViewCell
         
         //if user tapped on themselves, go home else go visitor
-        if cell.usernameLabel.text! == PFUser.currentUser()!.username! {
-            let myProfile = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+        if cell.usernameLabel.text! == PFUser.current()!.username! {
+            let myProfile = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
             self.navigationController?.pushViewController(myProfile, animated: true)
         } else {
             visitorName.append(cell.usernameLabel.text!)
-            let visitor = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVisitorViewController") as! ProfileVisitorViewController
+            let visitor = self.storyboard?.instantiateViewController(withIdentifier: "ProfileVisitorViewController") as! ProfileVisitorViewController
             self.navigationController?.pushViewController(visitor, animated: true)
         }
     }
     
-    @IBAction func leftSideButtonTapped(sender: AnyObject) {
+    @IBAction func leftSideButtonTapped(_ sender: AnyObject) {
         
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
         
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+        appDelegate.drawerContainer?.toggle(MMDrawerSide.left, animated: true, completion: nil)
         
     }
     
     
-    @IBAction func rightSideButtonTapped(sender: AnyObject) {
+    @IBAction func rightSideButtonTapped(_ sender: AnyObject) {
         
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
         
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
+        appDelegate.drawerContainer?.toggle(MMDrawerSide.right, animated: true, completion: nil)
         
     }
 

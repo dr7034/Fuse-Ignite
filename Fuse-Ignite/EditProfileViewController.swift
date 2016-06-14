@@ -43,9 +43,9 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         view.addGestureRecognizer(tap)
 
         // Load User Details
-        userInterestsArray.removeAll(keepCapacity: false)
+        userInterestsArray.removeAll(keepingCapacity: false)
         
-        if let object = PFUser.currentUser() {
+        if let object = PFUser.current() {
             userFullNameTextField.text = object["fullName"] as? String
             userCompanyNameTextField.text = object["companyName"] as? String
             userJobTitleTextField.text = object["jobTitle"] as? String
@@ -60,39 +60,39 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             
             //populate user interests
             let userInterests = object["userInterests"] as? NSArray
-            let userInterestsArray = userInterests?.componentsJoinedByString(", ")
+            let userInterestsArray = userInterests?.componentsJoined(by: ", ")
             userInterestsTextField.text = userInterestsArray
             
             //populate eventObjectives
             let eventObjectives = object["eventObjectives"] as? NSArray
-            let eventObjectivesArray = eventObjectives?.componentsJoinedByString(", ")
+            let eventObjectivesArray = eventObjectives?.componentsJoined(by: ", ")
             userEventObjectivesTextField.text = eventObjectivesArray
             
             //populate user motivations
             let userMotivations = object["userMotivations"] as? NSArray
-            let userMotivationsArray = userMotivations?.componentsJoinedByString(", ")
+            let userMotivationsArray = userMotivations?.componentsJoined(by: ", ")
             userMotivationsTextField.text = userMotivationsArray
             
             //populate conversation Topics
             let conversationTopics = object["conversationTopics"] as? NSArray
-            let conversationTopicsArray = conversationTopics?.componentsJoinedByString(", ")
+            let conversationTopicsArray = conversationTopics?.componentsJoined(by: ", ")
             userConversationTopicsTextField.text = conversationTopicsArray
             
             }
         
-        currentObject?.fetchInBackgroundWithBlock({ (object, error) in
+        currentObject?.fetchInBackground({ (object, error) in
             
             var userInterests = self.userInterestsTextField.text
             userInterests = object!["userInterests"] as? String
-            userInterests?.componentsSeparatedByString(", ")
+            userInterests?.components(separatedBy: ", ")
         })
         
         
-        if(PFUser.currentUser()?.objectForKey("profile_picture") != nil)
+        if(PFUser.current()?.object(forKey: "profile_picture") != nil)
         {
-            let userImageFile:PFFile = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
+            let userImageFile:PFFile = PFUser.current()?.object(forKey: "profile_picture") as! PFFile
             
-            userImageFile.getDataInBackgroundWithBlock({ (imageData:NSData?, error:NSError?) -> Void in
+            userImageFile.getDataInBackground({ (imageData:Data?, error:NSError?) -> Void in
                 
                 if(imageData != nil)
                 {
@@ -104,27 +104,27 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     
-    @IBAction func changeProfilePictureButtonTapped(sender: AnyObject) {
+    @IBAction func changeProfilePictureButtonTapped(_ sender: AnyObject) {
         
         let myPickerController = UIImagePickerController()
         myPickerController.delegate = self;
-        myPickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        myPickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
         
-        self.presentViewController(myPickerController, animated: true, completion: nil)
+        self.present(myPickerController, animated: true, completion: nil)
         
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
         profilePictureImageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     
-    @IBAction func saveButtonTapped(sender: AnyObject) {
+    @IBAction func saveButtonTapped(_ sender: AnyObject) {
         //Get Current User
-        let userObject:PFUser = PFUser.currentUser()!
+        let userObject:PFUser = PFUser.current()!
         
         //Get profile image
         let profileImageData = UIImageJPEGRepresentation(profilePictureImageView.image!, 1)
@@ -213,16 +213,16 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }
         
         //Display Activity Indicator
-        let loadingNotification = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        loadingNotification.labelText = "Updating Info."
-        loadingNotification.detailsLabelText = "Please Wait..."
+        let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+        loadingNotification?.labelText = "Updating Info."
+        loadingNotification?.detailsLabelText = "Please Wait..."
         
         //Save in Data in Background with Block
         
-        userObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+        userObject.saveInBackground { (success: Bool, error: NSError?) -> Void in
             
             //Hide Activity Indicator
-            loadingNotification.hide(true)
+            loadingNotification?.hide(true)
             
             if(error != nil)
             {
@@ -239,21 +239,21 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     
-    @IBAction func doneButtonTapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func doneButtonTapped(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func displayMessage(userMessage:String)
+    func displayMessage(_ userMessage:String)
     {
         //Create Alert
-        let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
         
         //Create Alert Action Button
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { action in self.dismissViewControllerAnimated(true, completion: nil)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { action in self.dismiss(animated: true, completion: nil)
         }
         //Add Action button to Alert
         alert.addAction(okAction)
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     //Calls this function when the tap is recognized.
     func dismissKeyboard() {

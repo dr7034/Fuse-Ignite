@@ -25,7 +25,7 @@ class PasswordResetViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
 
-    @IBAction func SendEmailButtonTapped(sender: AnyObject) {
+    @IBAction func SendEmailButtonTapped(_ sender: AnyObject) {
         
         let emailAddress = emailAddressTextField.text
         
@@ -37,7 +37,7 @@ class PasswordResetViewController: UIViewController {
             return
         }
         
-        PFUser.requestPasswordResetForEmailInBackground(emailAddress!) { (success:Bool, error:NSError?) -> Void in
+        PFUser.requestPasswordResetForEmail(inBackground: emailAddress!) { (success:Bool, error:NSError?) -> Void in
             
             if(error != nil)
             {
@@ -46,7 +46,7 @@ class PasswordResetViewController: UIViewController {
                 self.displayMessage(userMessage)
             } else {
                 //Display Success Message
-                let userMessage:String = "Password Reset Email Sent to \(emailAddress)"
+                let userMessage:String = "Password Reset Email Sent to \(self.emailAddressTextField.text)"
                 self.displayMessage(userMessage)
                 
             }
@@ -55,22 +55,22 @@ class PasswordResetViewController: UIViewController {
         
     }
     
-    func displayMessage(userMessage:String)
+    func displayMessage(_ userMessage:String)
     {
-        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
         
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
             action in
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
         
         myAlert.addAction(okAction)
-        self.presentViewController(myAlert, animated: true, completion: nil)
+        self.present(myAlert, animated: true, completion: nil)
     }
 
-    @IBAction func cancelButtonTapped(sender: AnyObject) {
+    @IBAction func cancelButtonTapped(_ sender: AnyObject) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
     }
     
