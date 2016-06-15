@@ -2285,9 +2285,12 @@
                 <tableViewController storyboardIdentifier="EventFeedTableViewController" id="jPq-0H-LvC" customClass="EventFeedTableViewController" customModule="Fuse_Ignite" customModuleProvider="target" sceneMemberID="viewController">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="280" sectionHeaderHeight="28" sectionFooterHeight="28" id="KJw-4P-HE9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="700"/>
 =======
+=======
+>>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
 =======
 >>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="261" sectionHeaderHeight="28" sectionFooterHeight="28" id="KJw-4P-HE9">
@@ -3067,8 +3070,12 @@
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ocd-OX-Ktu">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                                             <frame key="frameInset" minX="66" minY="27" width="198" height="16"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+=======
+                                            <rect key="frame" x="66" y="25" width="198" height="16"/>
+>>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
 =======
                                             <rect key="frame" x="66" y="25" width="198" height="16"/>
 >>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
@@ -3130,6 +3137,7 @@
                                         </button>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSV-1x-v5J">
                                             <frame key="frameInset" minX="66" minY="8" width="231" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3137,6 +3145,8 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+=======
+>>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
 =======
 >>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
 =======
@@ -3450,6 +3460,7 @@
                                 </label>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Und-Il-ksF">
                                     <frame key="frameInset" minX="256" minY="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3457,6 +3468,8 @@
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+=======
+>>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
 =======
 >>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
 =======
