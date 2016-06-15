@@ -63,6 +63,7 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         
         // Return to table view
         self.navigationController?.popViewController(animated: true)
+        
         loadProfilePicture()
     }
     
