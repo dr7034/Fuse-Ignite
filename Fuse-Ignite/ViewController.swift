@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         
         if(userEmail!.isEmpty || userPassword!.isEmpty)
         {
-            return
+            return displayMessage("Please fill in all fields")
         }
         
         let activityIndicator = MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         
         //Perform Log In with Parse
         
-        PFUser.logInWithUsername(inBackground: userEmail!, password: userPassword!) { (user: PFUser?, error: NSError?) -> Void in
+        PFUser.logInWithUsername(inBackground: userEmail!, password: userPassword!) { (user: PFUser?, error: NSError?) in
             
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
                 //Remember the sign in state
                 let userName: String = (user?.username)!
                 
-                UserDefaults.standard().set(userName, forKey: "username")
+                UserDefaults.standard().set(userName, forKey: "user_name")
                 UserDefaults.standard().synchronize()
                 
                 
@@ -98,18 +98,17 @@ class ViewController: UIViewController {
         activityIndicator?.detailsLabelText = "Please Wait"
         
         // Define fields we would like to read from Facebook User object
-        let requestParameters: AnyObject = ["fields": "id, email, first_name, last_name, name"]
+        let requestParameters: AnyObject = ["fields": "id, email, name"]
         
         // /me
         let userDetails = FBSDKGraphRequest(graphPath: "me", parameters: requestParameters as! [NSObject : AnyObject])
         
-        userDetails?.start(completionHandler: {
-            (connection, result, error: NSError!) -> Void in
-            
+        userDetails?.start(completionHandler: { (connection: FBSDKGraphRequestConnection?, result: AnyObject?, error: NSError?) in
+        
             if(error != nil)
             {
                 //Enter Activity Indicator
-                activityIndicator.hide(true)
+                activityIndicator?.hide(true)
                 
                 //display an error message
                 let userMessage = error!.localizedDescription
@@ -155,7 +154,7 @@ class ViewController: UIViewController {
             
             PFUser.current()?.saveInBackground({ (success:Bool, error:NSError?) -> Void in
                 
-                activityIndicator.hide(true)
+                activityIndicator?.hide(true)
                 
                 if(error != nil)
                 {
@@ -173,7 +172,7 @@ class ViewController: UIViewController {
                 {
                     if !userId.isEmpty
                     {
-                        UserDefaults.standard().set(userId, forKey: "user_name")
+                        UserDefaults.standard().set(userId, forKey: "username")
                         UserDefaults.standard().synchronize()
                         
                         //Take user to Main Page through the Segue in AppDelegate asyncronously

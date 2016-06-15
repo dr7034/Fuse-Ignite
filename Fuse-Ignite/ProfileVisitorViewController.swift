@@ -156,7 +156,7 @@ class ProfileVisitorViewController: UIViewController, UIImagePickerControllerDel
     //tapped followers count
     func followersTap() {
         user = visitorName.last!
-        show = "followers"
+        showUserType = "followers"
         
         let followers = self.storyboard?.instantiateViewController(withIdentifier: "FollowersTableViewController") as! FollowersTableViewController
         self.navigationController? .pushViewController(followers, animated: true)
@@ -224,7 +224,7 @@ class ProfileVisitorViewController: UIViewController, UIImagePickerControllerDel
     //tapped followeing count
     func followingTap() {
         user = visitorName.last!
-        show = "following"
+        showUserType = "following"
         
         let following = self.storyboard?.instantiateViewController(withIdentifier: "FollowersTableViewController") as! FollowersTableViewController
         self.navigationController? .pushViewController(following, animated: true)

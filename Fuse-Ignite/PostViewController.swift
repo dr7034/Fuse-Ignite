@@ -27,11 +27,11 @@ class PostViewController: UITableViewController {
         self.navigationItem.title = "Post"
 
         self.navigationItem.hidesBackButton = true
-        let backButton = UIBarButtonItem(title: "back", style: UIBarButtonItemStyle.plain, target: self, action: "back")
+        let backButton = UIBarButtonItem(title: "back", style: UIBarButtonItemStyle.plain, target: self, action: Selector(("back")))
         self.navigationItem.leftBarButtonItem = backButton
         
         //SWIPE TO GO BACK
-        let backSwipe = UISwipeGestureRecognizer(target: self, action: "back")
+        let backSwipe = UISwipeGestureRecognizer(target: self, action: Selector(("back")))
         backSwipe.direction = UISwipeGestureRecognizerDirection.right
         self.view.addGestureRecognizer(backSwipe)
         
@@ -160,6 +160,7 @@ class PostViewController: UITableViewController {
     
     
     func back(_ sender: UIBarButtonItem) {
+        
         self.navigationController?.popToRootViewController(animated: true)
         
         if(!postuuid.isEmpty) {

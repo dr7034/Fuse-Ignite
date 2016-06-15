@@ -184,7 +184,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func followersTap() {
         user = (PFUser.current()?.username)!
-        show = "followers"
+        var showUserType = "followers"
         
         let followers = self.storyboard?.instantiateViewController(withIdentifier: "FollowersTableViewController") as! FollowersTableViewController
         self.navigationController?.pushViewController(followers, animated: true)
@@ -192,7 +192,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func followingTap() {
         user = (PFUser.current()?.username)!
-        show = "following"
+        var showUserType = "following"
         
         let following = self.storyboard?.instantiateViewController(withIdentifier: "FollowersTableViewController") as! FollowersTableViewController
         self.navigationController?.pushViewController(following, animated: true)

@@ -2,24 +2,78 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
-	<key>CFBundleDisplayName</key>
-	<string>Fuse:Ignite</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>bluetooth-central</string>
+		<string>bluetooth-peripheral</string>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<key>Fabric</key>
+	<dict>
+		<key></key>
+		<string></string>
+		<key>APIKey</key>
+		<string>4da32df75f20ee840bf31824416eb5cb8f891a07</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+				<key>KitInfo</key>
+				<dict/>
+			</dict>
+			<dict>
+				<key>KitName</key>
+				<string>Twitter</string>
+				<key>KitInfo</key>
+				<dict>
+					<key>consumerKey</key>
+					<string>DVUMpQ4Vm53BaWy6PyzN4Lfq7</string>
+					<key>consumerSecret</key>
+					<string>MV8sCYRYfDtCUnOi8UL1yZDclzb0OHeu2BONNu3JROagnHzp6M</string>
+				</dict>
+			</dict>
+		</array>
+	</dict>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>0.0.20</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>FacebookAppID</key>
+	<string>1575063156056130</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>FacebookDisplayName</key>
+	<string>Fuse:Ignite</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -32,77 +86,25 @@
 			</array>
 		</dict>
 	</array>
-	<key>CFBundleVersion</key>
-	<string>1</string>
-	<key>Fabric</key>
-	<dict>
-		<key></key>
-		<string></string>
-		<key>APIKey</key>
-		<string>4da32df75f20ee840bf31824416eb5cb8f891a07</string>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-			<dict>
-				<key>KitInfo</key>
-				<dict>
-					<key>consumerKey</key>
-					<string>DVUMpQ4Vm53BaWy6PyzN4Lfq7</string>
-					<key>consumerSecret</key>
-					<string>MV8sCYRYfDtCUnOi8UL1yZDclzb0OHeu2BONNu3JROagnHzp6M</string>
-				</dict>
-				<key>KitName</key>
-				<string>Twitter</string>
-			</dict>
-		</array>
-	</dict>
-	<key>FacebookAppID</key>
-	<string>1575063156056130</string>
-	<key>FacebookDisplayName</key>
-	<string>Fuse:Ignite</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>fbapi</string>
-		<string>fb-messenger-api</string>
-		<string>fbauth2</string>
-		<string>fbshareextension</string>
-	</array>
+	<key>CFBundleSignature</key>
+	<string>????</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
+	<key>CFBundleDisplayName</key>
+	<string>Fuse:Ignite</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This application monitors your location to show notifications when entering and exiting regions.</string>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>bluetooth-central</string>
-		<string>bluetooth-peripheral</string>
-		<string>fetch</string>
-		<string>remote-notification</string>
-	</array>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>This application monitors your location to show notifications when entering and exiting regions.</string>
 </dict>
 </plist>

@@ -10,10 +10,11 @@ import UIKit
 import Parse
 import ParseUI
 
-var show = String()
+var showUserType = String()
 var user = String()
 
 class FollowersTableViewController: UITableViewController {
+
     
     var usernameArray = [String]()
     var profilePictureArray = [PFFile]()
@@ -21,13 +22,14 @@ class FollowersTableViewController: UITableViewController {
     var followArray = [String]()
     
     override func viewDidLoad() {
-        self.navigationItem.title = show.capitalizedString
         
-        if(show == "followers") {
+        self.navigationItem.title = showUserType.capitalized
+        
+        if(showUserType == "followers") {
             loadFollowers()
         }
         
-        if(show == "following") {
+        if(showUserType == "following") {
             loadFollowing()
         }
     }

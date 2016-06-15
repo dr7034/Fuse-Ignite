@@ -85,6 +85,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             var userInterests = self.userInterestsTextField.text
             userInterests = object!["userInterests"] as? String
             userInterests?.components(separatedBy: ", ")
+            print(userInterests)
         })
         
         
