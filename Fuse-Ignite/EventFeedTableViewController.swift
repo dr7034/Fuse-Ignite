@@ -35,6 +35,7 @@ class EventFeedTableViewController: PFQueryTableViewController {
         currentDate()
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 //        
 //        refresher.addTarget(self, action: #selector(EventFeedTableViewController.loadPosts), forControlEvents: UIControlEvents.ValueChanged)
 //        tableView.addSubview(refresher)
@@ -262,6 +263,50 @@ class EventFeedTableViewController: PFQueryTableViewController {
 //    }
 =======
 =======
+=======
+    }
+    
+    
+    
+
+    // Initialise the PFQueryTable tableview
+    override init(style: UITableViewStyle, className: String!) {
+        super.init(style: style, className: className)
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        
+        // Configure the PFQueryTableView
+        self.parseClassName = "UpdateObject"
+        self.textKey = "objectId"
+        self.pullToRefreshEnabled = true
+        self.paginationEnabled = false
+    }
+    
+    // Define the query that will provide the data for the table view
+    override func queryForTable() -> PFQuery {
+        let query = PFQuery(className: "UpdateObject")
+        return query
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
+        
+        var cell = tableView.dequeueReusableCellWithIdentifier("discoverCell") as! PFTableViewCell!
+        if cell == nil {
+            cell = PFTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "discoverCell")
+        }
+        
+        // Extract values from the PFObject to display in the table cell
+        if let eventName = object?["eventName"] as? String {
+            cell?.textLabel?.text = eventName
+        }
+        if let eventDescription = object?["eventDescription"] as? String {
+            cell?.detailTextLabel?.text = eventDescription
+        }
+        
+        return cell
+>>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
     }
     
     
