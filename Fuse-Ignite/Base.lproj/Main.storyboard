@@ -2283,8 +2283,13 @@
         <scene sceneID="fwZ-ad-12e">
             <objects>
                 <tableViewController storyboardIdentifier="EventFeedTableViewController" id="jPq-0H-LvC" customClass="EventFeedTableViewController" customModule="Fuse_Ignite" customModuleProvider="target" sceneMemberID="viewController">
+<<<<<<< HEAD
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="280" sectionHeaderHeight="28" sectionFooterHeight="28" id="KJw-4P-HE9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="700"/>
+=======
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="261" sectionHeaderHeight="28" sectionFooterHeight="28" id="KJw-4P-HE9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+>>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="uCD-IA-PDX">
@@ -2349,6 +2354,7 @@
                                 </mask>
                             </variation>
                         </view>
+<<<<<<< HEAD
                         <sections>
                             <tableViewSection id="iH0-QK-qVc">
                                 <cells>
@@ -2757,6 +2763,87 @@
                                 </cells>
                             </tableViewSection>
                         </sections>
+=======
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="eventFeedCell" rowHeight="261" id="XFo-5R-dIm" customClass="EventFeedTableViewCell" customModule="Fuse_Ignite" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="244" width="320" height="261"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XFo-5R-dIm" id="iAP-yr-qFb">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="260"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="6Ye-Sv-zYF">
+                                            <rect key="frame" x="8" y="8" width="50" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="fRP-Ou-9TN"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z2Z-AP-inG">
+                                            <rect key="frame" x="71" y="13" width="231" height="21"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QhW-By-RAM">
+                                            <rect key="frame" x="71" y="32" width="231" height="18"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                            <state key="normal" title="@username">
+                                                <color key="titleColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="129w" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLf-e7-5Kq">
+                                            <rect key="frame" x="265" y="24" width="37" height="17"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="17" id="6aC-1P-Uj0"/>
+                                                <constraint firstAttribute="width" constant="37" id="728-HG-5l4"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YGY-rm-thv">
+                                            <rect key="frame" x="40" y="91" width="240" height="128"/>
+                                            <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post Title and Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bT-XN-qV8">
+                                            <rect key="frame" x="8" y="66" width="304" height="17"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="6Ye-Sv-zYF" firstAttribute="leading" secondItem="5bT-XN-qV8" secondAttribute="leading" id="2cB-Zx-cOI"/>
+                                        <constraint firstItem="Z2Z-AP-inG" firstAttribute="leading" secondItem="QhW-By-RAM" secondAttribute="leading" id="9eO-DW-jJd"/>
+                                        <constraint firstItem="5bT-XN-qV8" firstAttribute="top" secondItem="QhW-By-RAM" secondAttribute="bottom" constant="16" id="C1o-pK-Dfn"/>
+                                        <constraint firstItem="YGY-rm-thv" firstAttribute="top" secondItem="5bT-XN-qV8" secondAttribute="bottom" constant="8" symbolic="YES" id="Dgc-BS-aVy"/>
+                                        <constraint firstItem="Z2Z-AP-inG" firstAttribute="trailing" secondItem="eLf-e7-5Kq" secondAttribute="trailing" id="El1-hf-e1d"/>
+                                        <constraint firstItem="5bT-XN-qV8" firstAttribute="trailing" secondItem="iAP-yr-qFb" secondAttribute="trailingMargin" id="HRe-3B-cIf"/>
+                                        <constraint firstItem="QhW-By-RAM" firstAttribute="top" secondItem="iAP-yr-qFb" secondAttribute="topMargin" constant="24" id="Ke8-50-ows"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Z2Z-AP-inG" secondAttribute="trailing" constant="10" id="LeL-XO-A0H"/>
+                                        <constraint firstItem="5bT-XN-qV8" firstAttribute="top" secondItem="eLf-e7-5Kq" secondAttribute="bottom" constant="25" id="MfR-9v-hxe"/>
+                                        <constraint firstItem="Z2Z-AP-inG" firstAttribute="leading" secondItem="6Ye-Sv-zYF" secondAttribute="trailing" constant="13" id="aqe-Ug-RXx"/>
+                                        <constraint firstItem="5bT-XN-qV8" firstAttribute="top" secondItem="Z2Z-AP-inG" secondAttribute="bottom" constant="32" id="j67-dJ-sPX"/>
+                                        <constraint firstItem="YGY-rm-thv" firstAttribute="leading" secondItem="iAP-yr-qFb" secondAttribute="leadingMargin" constant="32" id="jAd-jL-u6J"/>
+                                        <constraint firstItem="6Ye-Sv-zYF" firstAttribute="top" secondItem="iAP-yr-qFb" secondAttribute="topMargin" id="kGk-Ze-O47"/>
+                                        <constraint firstItem="6Ye-Sv-zYF" firstAttribute="leading" secondItem="iAP-yr-qFb" secondAttribute="leadingMargin" id="kLJ-3T-seh"/>
+                                        <constraint firstItem="eLf-e7-5Kq" firstAttribute="trailing" secondItem="QhW-By-RAM" secondAttribute="trailing" id="lbq-Hg-jv8"/>
+                                        <constraint firstItem="5bT-XN-qV8" firstAttribute="top" secondItem="6Ye-Sv-zYF" secondAttribute="bottom" constant="8" symbolic="YES" id="q8E-2w-Len"/>
+                                        <constraint firstItem="6Ye-Sv-zYF" firstAttribute="centerY" secondItem="eLf-e7-5Kq" secondAttribute="centerY" id="rUZ-ab-cft"/>
+                                        <constraint firstItem="5bT-XN-qV8" firstAttribute="centerX" secondItem="YGY-rm-thv" secondAttribute="centerX" id="rde-Id-XRR"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="YGY-rm-thv" secondAttribute="bottom" constant="33" id="vKK-hz-71f"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="avatarImageView" destination="6Ye-Sv-zYF" id="7ge-lJ-vUc"/>
+                                    <outlet property="postTitleImageView" destination="5bT-XN-qV8" id="Rl1-us-rSm"/>
+                                    <outlet property="timeSincePostLabel" destination="eLf-e7-5Kq" id="3ua-ge-ep0"/>
+                                    <outlet property="userFullNameLabel" destination="Z2Z-AP-inG" id="q5U-bh-g1F"/>
+                                    <outlet property="usernameButton" destination="QhW-By-RAM" id="EWT-gv-Jmc"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+>>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
                         <connections>
                             <outlet property="dataSource" destination="jPq-0H-LvC" id="ray-XJ-5EE"/>
                             <outlet property="delegate" destination="jPq-0H-LvC" id="v9Q-uw-C93"/>
@@ -2975,13 +3062,14 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ocd-OX-Ktu">
+<<<<<<< HEAD
                                             <frame key="frameInset" minX="66" minY="27" width="198" height="16"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+=======
+                                            <rect key="frame" x="66" y="25" width="198" height="16"/>
+>>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                             <state key="normal" title="Button"/>
-                                            <connections>
-                                                <action selector="clickedUsernameButton:" destination="qBK-H2-Hf0" eventType="touchUpInside" id="K7I-II-zkt"/>
-                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2h" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q47-nR-WeS">
                                             <frame key="frameInset" minX="298" minY="26" width="14" height="17"/>
@@ -3033,6 +3121,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="commentButton"/>
                                         </button>
+<<<<<<< HEAD
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSV-1x-v5J">
                                             <frame key="frameInset" minX="66" minY="8" width="231" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3040,6 +3129,8 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+=======
+>>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
@@ -3064,7 +3155,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yG7-Gu-Bi0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3156" y="1564"/>
+            <point key="canvasLocation" x="3168" y="1564"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="CZR-mF-DeC">
@@ -3347,6 +3438,7 @@
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+<<<<<<< HEAD
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Und-Il-ksF">
                                     <frame key="frameInset" minX="256" minY="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3354,6 +3446,8 @@
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+=======
+>>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>

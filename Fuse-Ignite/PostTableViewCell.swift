@@ -30,6 +30,7 @@ class PostTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
 <<<<<<< HEAD
+<<<<<<< HEAD
         //double tap to like 
         let likeTap = UITapGestureRecognizer(target: self, action: #selector(PostTableViewCell.likeTap))
         likeTap.numberOfTapsRequired = 2
@@ -73,6 +74,8 @@ class PostTableViewCell: UITableViewCell {
                 self.likesButton.setBackgroundImage(UIImage(named: "unlikeButton"), for: UIControlState())
             })
         }
+=======
+>>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
 =======
 >>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
     }

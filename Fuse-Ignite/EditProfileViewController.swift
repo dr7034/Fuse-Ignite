@@ -167,7 +167,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         //FIELD NAME MAY NOT BE CORRECT
         userObject.setObject(userBio, forKey: "userBio")
         
-        //set user networking objective
+        //set user networking objectives
         let networkingObjectives = userNetworkingObjectivesTextView.text!
         userObject.setObject(networkingObjectives, forKey: "networkingObjectives")
         
@@ -186,22 +186,22 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         //set Twitter handle
         let twitterHandle = userTwitterHandleTextField.text!
         userObject.setObject(twitterHandle, forKey: "twitterHandle")
-    
-//        //set user interets
-//        let userInterests = userInterestsTextField.text!
-//        userObject.setObject("[" + userInterests + "]", forKey: "userInterests")
-//        
-//        //set event objectives
-//        let eventObjectives = userEventObjectivesTextField.text!
-//        userObject.setObject("[" + eventObjectives + "]", forKey: "eventObjectives")
-//        
-//        //set motivations
-//        let motivations = userMotivationsTextField.text!
-//        userObject.setObject("[" + motivations + "]", forKey: "motivations")
-//        
-//        //set conversation Topics
-//        let conversationTopics = userConversationTopicsTextField.text!
-//        userObject.setObject("[" + conversationTopics + "]", forKey: "conversationTopics")
+        
+        //set user interets
+        let userInterests = userInterestsTextField.text!
+        userObject.setObject("[" + userInterests + "]", forKey: "userInterests")
+        
+        //set event objectives
+        let eventObjectives = userEventObjectivesTextField.text!
+        userObject.setObject("[" + eventObjectives + "]", forKey: "eventObjectives")
+        
+        //set motivations
+        let motivations = userMotivationsTextField.text!
+        userObject.setObject("[" + motivations + "]", forKey: "motivations")
+        
+        //set conversation Topics
+        let conversationTopics = userConversationTopicsTextField.text!
+        userObject.setObject("[" + conversationTopics + "]", forKey: "conversationTopics")
         
         //set binary contact info sharing request
         

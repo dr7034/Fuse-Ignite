@@ -31,6 +31,13 @@ typedef NS_ENUM(NSUInteger, ESTNearableSettingsManagerError)
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+/**
+ *  ESTDeviceSettingsManager allows to manage device settings interaction
+ *  like writing to peripheral and saving to the Estimote Cloud.
+ */
+@interface ESTNearableSettingsManager : NSObject <ESTPeripheralNearableDelegate>
+
 /**
  *  Flat key-value settings container.
  */
