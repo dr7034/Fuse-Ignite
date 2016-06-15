@@ -8,7 +8,7 @@ import CoreBluetooth
 import ParseUI
 
 class RelevantUsersCustomCell: PFTableViewCell
- {
+{
     @IBOutlet var userFullName: UILabel!
     @IBOutlet var userInterests: UILabel!
     @IBOutlet weak var userProfilePicture: UIImageView!
@@ -48,9 +48,19 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         self.userJoinEventButton.layer.cornerRadius = self.userJoinEventButton.frame.size.width / 2;
         self.userJoinEventButton.clipsToBounds = true;
         
+//        let idQuery = PFQuery(className: "EventObject")
+//        idQuery.whereKey("objectId", equalTo: eventObjectId.last!)
+//        idQuery.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) in
+//            if(error == nil) {
+//                if objects!.isEmpty {
+//                    print("User not registered")
+//                }
+//            }
+//        }
+//        
         // Unwrap the current object object
         if let object = currentObject {
-            eventObjectLabel.text = object.objectId
+            eventObjectLabel.text = object.objectId!
             eventNameLabel.text = object["eventName"] as? String
             eventLocationNameLabel.text = object["eventLocationName"] as? String
             eventLocationAddress1Label.text = object["eventAddress1"] as? String
@@ -58,11 +68,15 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
             eventLocationCountryLabel.text = object["eventCountry"] as? String
             eventDescriptionLabel.text = object["eventDescription"] as? String
             self.eventDescriptionLabel.sizeToFit()
-            
         }
         
         // Return to table view
+<<<<<<< HEAD
         self.navigationController?.popViewController(animated: true)
+=======
+        self.navigationController?.popViewControllerAnimated(true)
+        
+>>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
         loadProfilePicture()
     }
     
@@ -121,14 +135,28 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         return 1
     }
     
+<<<<<<< HEAD
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+=======
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+>>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
         let header1: String = "Relevant Users"
+
         return header1
     }
     
+<<<<<<< HEAD
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //recall cell to call cells data
         let cell = tableView.cellForRow(at: indexPath) as! RelevantUsersCustomCell
+=======
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        //recall cell to call cells data
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! RelevantUsersCustomCell
+        
+>>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
         //if user tapped on themselves, go home else go visitor
         if cell.usernameLabel.text! == PFUser.current()!.username! {
             let myProfile = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
@@ -140,6 +168,7 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         }
     }
     
+<<<<<<< HEAD
     @IBAction func leftSideButtonTapped(_ sender: AnyObject) {
         let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
         appDelegate.drawerContainer?.toggle(MMDrawerSide.left, animated: true, completion: nil)
@@ -148,16 +177,37 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     @IBAction func rightSideButtonTapped(_ sender: AnyObject) {
         let appDelegate:AppDelegate = UIApplication.shared().delegate as! AppDelegate
         appDelegate.drawerContainer?.toggle(MMDrawerSide.right, animated: true, completion: nil)
+=======
+    @IBAction func leftSideButtonTapped(sender: AnyObject) {
+        
+        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func rightSideButtonTapped(sender: AnyObject) {
+        
+        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
+        
+>>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
     }
     
     func loadProfilePicture(){
         
+<<<<<<< HEAD
         let profilePictureObject = PFUser.current()?.object(forKey: "profile_picture") as! PFFile
         profilePictureObject.getDataInBackground { (imageData: Data?, error: NSError?) -> Void in
+=======
+        let profilePictureObject = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
+        
+        profilePictureObject.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+>>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
             
             if(imageData != nil)
             {
                 self.userProfilePictureImage.image = UIImage(data: imageData!)
+                
             }
         }
         self.userProfilePictureImage.layer.cornerRadius = self.userProfilePictureImage.frame.size.width / 2;
@@ -168,6 +218,7 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+<<<<<<< HEAD
     @IBAction func userJoinEvent(_ sender: UIButton, forEvent event: UIEvent) {
         //When user attending username matches && event objectId match button must be disabled to prevent duplicate entries on database
             let eventAttendees = PFObject(className: "UserAttending")
@@ -176,6 +227,18 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
                 eventAttendees.saveInBackground({ (success:Bool, error:NSError?) in
                     if(success) {
                         self.userJoinEventButton.isEnabled = false
+=======
+    @IBAction func userJoinEvent(sender: UIButton, forEvent event: UIEvent) {
+        
+            let eventAttendees = PFObject(className: "UserAttending")
+        
+            eventAttendees["attendee"] = PFUser.currentUser()!.username!
+            eventAttendees["eventId"] = eventObjectId
+                
+                eventAttendees.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+                    if(success) {
+                        self.userJoinEventButton.imageForState(UIControlState.Disabled)
+>>>>>>> parent of d32cc6b... User attending event button now works and have disabled the save fields for arrays as these present an error message which is expected as the list is comma separated but not an array of strings. Added outlets for the event feed fields and added in new buttons for like, comment etc. This does not yet show as I haven't yet amended it for viewing all following. No uuid is present so it presents a runtime error since that is the main view. Added like button in the post table view and removed unnecessary whitespace.
                     } else {
                         print(error?.localizedDescription)
                     }
