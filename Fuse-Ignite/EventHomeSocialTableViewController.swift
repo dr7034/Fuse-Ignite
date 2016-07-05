@@ -93,12 +93,20 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         if cell == nil {
             cell = RelevantUsersCustomCell(style: UITableViewCellStyle.Default, reuseIdentifier: "RelevantUsersCell")
         }
-    // Extract values from the PFObject to display in the table cell
+
         
-//        let profilePicFile: PFFile = (object?.objectForKey("profile_picture") as? PFFile)!
-//        profilePicFile.getDataInBackgroundWithBlock({ (data: NSData?, error:NSError?) in
-//            cell?.userProfilePicture.image = UIImage(data: data!)
-//        })
+        if let avatar = object?.objectForKey("profile_picture") as? PFFile {
+            avatar.getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) -> Void in
+                    if(error == nil && data != nil) {
+                        if let image = UIImage(data: data!)
+                        {
+                                cell?.userProfilePicture.image = image
+                            cell?.userProfilePicture.layer.cornerRadius = (cell?.userProfilePicture.frame.size.width)! / 2;
+                            cell?.userProfilePicture.clipsToBounds = true;
+                        }
+                }
+            }
+        }
 
         if let relevantUsers = object?["fullName"] as? String {
             cell?.userFullName?.text = relevantUsers
@@ -109,7 +117,7 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         }
         
         if let userInterests = object?["userInterests"] as? NSArray {
-            cell?.userInterests?.text = "#" + userInterests.componentsJoinedByString(", ")
+            cell?.userInterests?.text = userInterests.componentsJoinedByString(", ")
         } else {
             cell?.userInterests?.text = "No interests yet Entered"
         }
@@ -158,27 +166,17 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
             if(imageData != nil)
             {
                 self.userProfilePictureImage.image = UIImage(data: imageData!)
+                self.userProfilePictureImage.layer.cornerRadius = self.userProfilePictureImage.frame.size.width / 2;
+                self.userProfilePictureImage.clipsToBounds = true;
             }
         }
-        self.userProfilePictureImage.layer.cornerRadius = self.userProfilePictureImage.frame.size.width / 2;
-        self.userProfilePictureImage.clipsToBounds = true;
     }
     
     @IBAction func doneButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func userJoinEvent(sender: UIButton, forEvent event: UIEvent) {
-        //When user attending username matches && event objectId match button must be disabled to prevent duplicate entries on database
-            let eventAttendees = PFObject(className: "UserAttending")
-            eventAttendees["attendee"] = PFUser.currentUser()!.username!
-            eventAttendees["eventAttendingId"] = eventObjectLabel.text
-                eventAttendees.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
-                    if(success) {
-                        self.userJoinEventButton.enabled = false
-                    } else {
-                        print(error?.localizedDescription)
-                    }
-                })
-            }
-    }
+    @IBAction func userJoinEvent(sender: UIButton) {
+
+        }
+}

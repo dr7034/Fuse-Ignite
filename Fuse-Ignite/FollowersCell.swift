@@ -25,7 +25,6 @@ class FollowersCell: UITableViewCell {
             let object = PFObject(className: "Followers")
             object["follower"] = PFUser.currentUser()?.username
             object["following"] = usernameLabel.text
-            
             object.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
                 if(success) {
                     self.userFollowingButton.setTitle("FOLLOWING", forState: UIControlState.Normal)
@@ -34,8 +33,6 @@ class FollowersCell: UITableViewCell {
                     print(error?.localizedDescription)
                 }
             })
-            
-            
         } else {
             let query = PFQuery(className: "Followers")
             query.whereKey("follower", equalTo: (PFUser.currentUser()?.username)!)

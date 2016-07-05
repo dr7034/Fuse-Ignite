@@ -13,7 +13,6 @@ import Parse
 import Bolts
 import ParseFacebookUtilsV4
 import Fabric
-import TwitterKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate {
@@ -59,9 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
         ESTConfig.enableRangingAnalytics(true)
         ESTConfig.enableMonitoringAnalytics(true)
         
-//        //setup twitter kit
-        Twitter.sharedInstance().startWithConsumerKey("XKY3bzOvp7GMF2RVDcTJcrFPD", consumerSecret: "YzveyN2QrflvPJ3hauIRNf9eSA9Xi2CMqdwhjQhJ3QQ262xxBQ")
-        Fabric.with([Twitter.sharedInstance()])
         
         UIApplication.sharedApplication().registerUserNotificationSettings(
             UIUserNotificationSettings(forTypes: .Alert, categories: nil))

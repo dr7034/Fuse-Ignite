@@ -119,10 +119,8 @@ class PostViewController: UITableViewController {
         didLike.countObjectsInBackgroundWithBlock { (count: Int32, error: NSError?) in
             //if no likes are found, else found likes
             if (count == 0) {
-//                cell.likesButton.setTitle("unlike", forState: .Normal)
                 cell.likesButton.setBackgroundImage(UIImage(named: "unlikeButton"), forState: .Normal)
             } else {
-//                cell.likesButton.setTitle("like", forState: .Normal)
                 cell.likesButton.setBackgroundImage(UIImage(named: "likeButton"), forState: .Normal)
             }
         }

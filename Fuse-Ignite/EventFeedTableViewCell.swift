@@ -8,14 +8,13 @@
 
 import UIKit
 
-class EventFeedTableViewCell: UITableViewCell {
+class EventFeedTableViewCell: PFTableViewCell {
     @IBOutlet weak var userFullNameLabel: UILabel!
     @IBOutlet weak var usernameButton: UIButton!
     @IBOutlet weak var timeSincePostLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var postTitleLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
-    @IBOutlet weak var hiddenUUIDLabel: UILabel!
     @IBOutlet weak var likesButton: UIButton!
     @IBOutlet weak var likeLabel: UILabel!
     
