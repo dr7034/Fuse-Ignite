@@ -45,32 +45,49 @@ class EventFeedTableViewController: PFQueryTableViewController {
             cell = EventFeedTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "eventFeedCell")
         }
         
-//        if let usernameObject = object?.objectForKey("username") as? String {
-//            cell?.usernameButton?.setTitle(usernameObject, forState: .Normal)
-//        }
+        if let usernameObject = object?.objectForKey("username") as? String {
+            cell?.usernameButton?.setTitle(usernameObject, forState: .Normal)
+        }
         
-//        if let userFullName = object?.objectForKey("fullName") as? String {
-//            cell.textLabel?.text = userFullName
-//        }
+        if let userFullName = object?.objectForKey("fullName") as? String {
+            cell.userFullNameLabel?.text = userFullName
+        }
         
-//        if let postImageView = object?.objectForKey("avatar") as? PFFile {
-//            
-//            postImageView.getDataInBackgroundWithBlock
-//                { (data: NSData?, error: NSError?) -> Void in
-//                    
-//                    if(error == nil && data != nil)
-//                    {
-//                        if let image = UIImage(data: data!)
-//                        {
-//                            cell.avatarImageView.image = image
-//                        }
-//                    }
-//            }
-//        }
+        if let avatarImage = object?.objectForKey("avatar") as? PFFile
+        {
+            avatarImage.getDataInBackgroundWithBlock
+            {
+                (data: NSData?, error: NSError?) -> Void in
+                    if(error == nil && data != nil)
+                {
+                        if let image = UIImage(data: data!)
+                    {
+                        cell.avatarImageView.image = image
+                        cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.frame.size.width / 2;
+                        cell.avatarImageView.clipsToBounds = true;
+                    }
+                }
+            }
+        }
         
-//        if let postTitleLabel = object?.objectForKey("caption") as? String {
-//            cell.detailTextLabel?.text = postTitleLabel
-//        }
+        if let postImage = object?.objectForKey("postImage") as? PFFile
+        {
+            postImage.getDataInBackgroundWithBlock
+                {
+                    (data: NSData?, error: NSError?) -> Void in
+                    if(error == nil && data != nil)
+                    {
+                        if let image = UIImage(data: data!)
+                        {
+                            cell.postImageView.image = image
+                        }
+                    }
+            }
+        }
+        
+        if let postTitle = object?.objectForKey("caption") as? String {
+            cell.postTitleLabel?.text = postTitle
+        }
         
 //        tableView.reloadData()
         

@@ -17,8 +17,10 @@ class RelevantUsersCustomCell: PFTableViewCell
 }
 
 var eventObjectId = String()
+var currentUserInterests = [String]()
+let currentDeviceBeaconUUID = NSUUID()
 
-class EventHomeSocialTableViewController: PFQueryTableViewController {
+class EventHomeSocialTableViewController: PFQueryTableViewController, ESTBeaconManagerDelegate {
     
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventLocationNameLabel: UILabel!
@@ -31,15 +33,17 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     @IBOutlet weak var eventObjectLabel: UILabel!
     
     var window: UIWindow?
-    var drawerContainer: MMDrawerController?
+    var localBeacon: CLBeaconRegion!
+    var beaconPeripheralData: NSDictionary!
     
     // Container to store the view table selected object
     var currentObject : PFObject?
     
     var usernameArray = [String]()
     var profilePictureArray = [PFFile]()
-    
     var followArray = [String]()
+    
+    var currentUserInterestsArray = [String]()
     
     
     override func viewDidLoad() {
@@ -49,7 +53,8 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
         self.userJoinEventButton.clipsToBounds = true;
         
         // Unwrap the current object object
-        if let object = currentObject {
+        if let object = currentObject
+        {
             eventObjectLabel.text = object.objectId
             eventNameLabel.text = object["eventName"] as? String
             eventLocationNameLabel.text = object["eventLocationName"] as? String
@@ -58,14 +63,18 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
             eventLocationCountryLabel.text = object["eventCountry"] as? String
             eventDescriptionLabel.text = object["eventDescription"] as? String
             self.eventDescriptionLabel.sizeToFit()
-            
+        }
+        
+        if let currentUser = PFUser.currentUser()
+        {
+            currentUserInterestsArray = currentUser["userInterests"] as! [String]
         }
         
         // Return to table view
         self.navigationController?.popViewControllerAnimated(true)
         loadProfilePicture()
     }
-    
+
     //Init the PFQueryTable tableview
     override init(style: UITableViewStyle, className: String!) {
         super.init(style: style, className: className)
@@ -84,7 +93,8 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
         let query = PFQuery(className: "_User")
-        query.orderByAscending("userInterests")
+        query.orderByDescending("userInterests")
+//        query.whereKey("userInterests", containedIn: currentUserInterests)
         return query
     }
     
@@ -146,16 +156,6 @@ class EventHomeSocialTableViewController: PFQueryTableViewController {
             let visitor = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVisitorViewController") as! ProfileVisitorViewController
             self.navigationController?.pushViewController(visitor, animated: true)
         }
-    }
-    
-    @IBAction func leftSideButtonTapped(sender: AnyObject) {
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
-    }
-    
-    @IBAction func rightSideButtonTapped(sender: AnyObject) {
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.drawerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
     }
     
     func loadProfilePicture(){

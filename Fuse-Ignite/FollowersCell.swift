@@ -19,7 +19,7 @@ class FollowersCell: UITableViewCell {
     @IBAction func followButtonTapped(sender: AnyObject) {
         
         let title = userFollowingButton.titleForState(.Normal)
-        
+               
         //follow user
         if(title == "FOLLOW") {
             let object = PFObject(className: "Followers")
