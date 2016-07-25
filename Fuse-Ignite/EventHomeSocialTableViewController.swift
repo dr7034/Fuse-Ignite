@@ -17,7 +17,12 @@ class RelevantUsersCustomCell: PFTableViewCell
 }
 
 var eventObjectId = String()
-var currentUserInterests = [String]()
+
+var currentUserInterestsArray = [String]()
+var matchedUsersArray = [String]()
+var boolArray = [Bool]()
+var boolValue = Bool()
+
 let currentDeviceBeaconUUID = NSUUID()
 
 class EventHomeSocialTableViewController: PFQueryTableViewController, ESTBeaconManagerDelegate {
@@ -43,7 +48,8 @@ class EventHomeSocialTableViewController: PFQueryTableViewController, ESTBeaconM
     var profilePictureArray = [PFFile]()
     var followArray = [String]()
     
-    var currentUserInterestsArray = [String]()
+    
+
     
     
     override func viewDidLoad() {
@@ -70,6 +76,19 @@ class EventHomeSocialTableViewController: PFQueryTableViewController, ESTBeaconM
             currentUserInterestsArray = currentUser["userInterests"] as! [String]
         }
         
+        for y in currentUserInterestsArray {
+            boolValue = false
+            for z in matchedUsersArray {
+                if y == z {
+                    boolValue = true
+                }
+            }
+            boolArray.append(boolValue)
+            print(currentUserInterestsArray)
+            print(boolArray)
+            print(matchedUsersArray)
+        }
+        
         // Return to table view
         self.navigationController?.popViewControllerAnimated(true)
         loadProfilePicture()
@@ -94,7 +113,6 @@ class EventHomeSocialTableViewController: PFQueryTableViewController, ESTBeaconM
     override func queryForTable() -> PFQuery {
         let query = PFQuery(className: "_User")
         query.orderByDescending("userInterests")
-//        query.whereKey("userInterests", containedIn: currentUserInterests)
         return query
     }
     
@@ -110,7 +128,7 @@ class EventHomeSocialTableViewController: PFQueryTableViewController, ESTBeaconM
                     if(error == nil && data != nil) {
                         if let image = UIImage(data: data!)
                         {
-                                cell?.userProfilePicture.image = image
+                            cell?.userProfilePicture.image = image
                             cell?.userProfilePicture.layer.cornerRadius = (cell?.userProfilePicture.frame.size.width)! / 2;
                             cell?.userProfilePicture.clipsToBounds = true;
                         }
@@ -177,6 +195,6 @@ class EventHomeSocialTableViewController: PFQueryTableViewController, ESTBeaconM
     }
     
     @IBAction func userJoinEvent(sender: UIButton) {
-
+        
         }
 }

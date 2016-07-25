@@ -13,13 +13,31 @@ import Parse
 import Bolts
 import ParseFacebookUtilsV4
 import Fabric
+import PubNub
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate, PNObjectEventListener {
     
     var window: UIWindow?
     var drawerContainer: MMDrawerController?
     let beaconNotificationsManager = BeaconNotificationsManager()
+    
+    var client : PubNub
+    var config : PNConfiguration
+    
+    override init() {
+        config = PNConfiguration(publishKey: "pub-c-fc159592-ec82-4455-9f68-c5c54c9ce194", subscribeKey: "sub-c-7e58050c-5297-11e6-9236-02ee2ddab7fe")
+        client = PubNub.clientWithConfiguration(config)
+        client.subscribeToChannels(["Channel-k6wanlbcq"], withPresence: false)
+        client.publish("Swift+PubNub!", toChannel: "Channel-k6wanlbcq", compressed: false, withCompletion: nil)
+        
+        super.init()
+        client.addListener(self)
+    }
+    
+    func client(client: PubNub!, didReceiveMessage message: PNMessageResult!) {
+        print(message)
+    }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         

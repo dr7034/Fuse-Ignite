@@ -63,7 +63,7 @@ class LeftSideViewController: UIViewController, UITableViewDataSource, UITableVi
             case 1:
             
             //open discover page
-                let discoverTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DiscoverTableViewController") as! DiscoverTableViewController
+                let discoverTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DiscoverViewController") as! DiscoverViewController
                 
                 let discoverPageNav = UINavigationController(rootViewController: discoverTableViewController)
                 

@@ -9,3 +9,4 @@
 #import <EstimoteSDK/EstimoteSDK.h>
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+#import <PubNub/PubNub.h>

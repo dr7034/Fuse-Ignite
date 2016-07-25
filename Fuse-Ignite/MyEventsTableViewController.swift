@@ -38,7 +38,7 @@ class MyEventsTableViewController: PFQueryTableViewController {
         
         var cell = tableView.dequeueReusableCellWithIdentifier("myEventsCell") as! PFTableViewCell!
         if cell == nil {
-            cell = PFTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "discoverCell")
+            cell = PFTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "myEventsCell")
         }
         
         // Extract values from the PFObject to display in the table cell
@@ -50,6 +50,21 @@ class MyEventsTableViewController: PFQueryTableViewController {
         }
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("showEvent", sender: tableView)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        let nav = segue.destinationViewController as! UINavigationController
+        let eventViewController = nav.topViewController as! EventHomeSocialTableViewController
+        
+        if let indexPath = self.tableView.indexPathForSelectedRow {
+            let row = Int(indexPath.row)
+            eventViewController.currentObject = (objects?[row]) as? PFObject
+        }
     }
 
 
